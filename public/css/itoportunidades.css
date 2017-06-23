@@ -1,0 +1,12 @@
+.logo-title{
+	color: #2078d3;
+	display: inline-block;
+	line-height: 45px;
+	margin-top: 24px;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.showbiz .overflowholder ul li img {
+	max-height: 80px;
+}
