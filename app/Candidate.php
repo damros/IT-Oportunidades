@@ -46,13 +46,13 @@ class Candidate extends Model
     }*/
     
     public function setPhotoAttribute( $photo ) {
-		$name = Carbon::now()->timestamp.$photo->getClientOriginalName();
+		$name = $this->attributes["id"].Carbon::now()->timestamp.".".$photo->getClientOriginalExtension();
 		$this->attributes["photo"] = $name;
 		\Storage::disk('candidatephoto')->put($name, \File::get($photo));
     }
 
     public function setResumeFileAttribute( $resume ) {
-		$name = Carbon::now()->timestamp.$resume->getClientOriginalName();
+		$name = $this->attributes["id"].Carbon::now()->timestamp.".".$resume->getClientOriginalExtension();
 		$this->attributes["resume_file"] = $name;            
 		\Storage::disk('candidateresume')->put($name, \File::get($resume));
     }
