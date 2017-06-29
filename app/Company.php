@@ -17,7 +17,7 @@ class Company extends Model
     }
 	
     public function setLogoAttribute( $logo ) {
-		$name = Carbon::now()->timestamp.$logo->getClientOriginalName();
+		$name = $this->attributes["id"].Carbon::now()->timestamp.".".$logo->getClientOriginalExtension();
         $this->attributes["logo"] = $name;
 		\Storage::disk('companylogo')->put($name, \File::get($logo));
     }	
