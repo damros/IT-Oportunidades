@@ -27,9 +27,9 @@
 			</p>
 		</div>
 				
-		<!--<p class="lost_password">
-			<a href="password-recover" >{{ trans('labels.Lost_Your_Password') }}?</a>
-		</p>-->
+		<p class="lost_password">
+			<a href="{!!URL::to('password')!!}" >{{ trans('labels.Lost_Your_Password') }}?</a>
+		</p>
 		
 	{!!Form::close()!!}
 	

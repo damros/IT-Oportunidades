@@ -34,7 +34,7 @@
 
 			<p class="form-row form-row-wide">
 				<label for="reg_password2">{{trans('labels.Repeat_Password')}}:</label>
-				<input type="password" class="input-text" name="password" id="ca_reg_password2" />
+				<input type="password" class="input-text" name="password_confirmation" id="ca_reg_password2" />
 			</p>
 
 			<p class="form-row">

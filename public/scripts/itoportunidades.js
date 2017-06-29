@@ -4,7 +4,7 @@
 
 	$(document).ready(function () {
 
-		$('form.tooltips input[type="text"],form.tooltips input[type="email"],form.tooltips textarea').tooltipster({
+		$('form.tooltips input[type="text"],form.tooltips input[type="password"],form.tooltips input[type="email"],form.tooltips textarea').tooltipster({
 			trigger: 'custom', // default is 'hover' which is no good here
 			onlyOne: false, // allow multiple tips to be open at a time
 			position: 'right', // display the tips to the right of the element
@@ -44,6 +44,8 @@
 				$message_delay = ($form.attr("message-delay"))?$form.attr('message-delay'):3000;
 
 			$form.find('.tooltipstered').tooltipster('hide');
+			
+			$('.notification').hide();
 
 			var token = $form.find($("#token")).val();
 

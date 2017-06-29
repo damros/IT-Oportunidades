@@ -2,10 +2,12 @@
 
 namespace ITOportunidades\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use ITOportunidades\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
-class PasswordController extends Controller
+
+class WebsitePasswordController extends Controller
 {
     /*
     |--------------------------------------------------------------------------
@@ -18,13 +20,13 @@ class PasswordController extends Controller
     |
     */
 
-    use ResetsPasswords;
+    use ResetsPasswords;	
 	
-    protected function resetPassword($user, $password){
-            $user->password = $password;
-            $user->save();
-            Auth::login($user);
-    }	
+	protected $linkRequestView = "website.auth.password";
+	protected $resetView = "website.auth.reset";
+	protected $subject = "IT-Oportunidades - Cambio de contraseña";
+	protected $redirectPath = "/";
+	
 
     /**
      * Create a new password controller instance.
@@ -35,16 +37,5 @@ class PasswordController extends Controller
     {
         $this->middleware('guest');
     }
-	
-	public function getRecoverWebsitePassword()
-    {
-        if (view()->exists('website.auth.password')) {
-            return view('website.auth.password');
-        }
-    }
-	
-	public function postRecoverWebsitePassword()
-    {
-        return postEmail();
-    }
+
 }

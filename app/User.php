@@ -35,13 +35,6 @@ class User extends Authenticatable
 	
 	protected $dates = ['deleted_at'];
 	
-	public function setPasswordAttribute($valor) 
-	{
-        if( ! empty( $valor ) ){
-            $this->attributes['password'] = \Hash::make($valor);
-        }
-    }
-	
 	public function profile()
     {
         return $this->belongsTo('ITOportunidades\Profile');

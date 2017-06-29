@@ -2,11 +2,8 @@
 
 namespace ITOportunidades\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Auth;
-use Session;
 use Redirect;
-use ITOportunidades\Http\Requests;
 use ITOportunidades\Http\Requests\LoginRequest;
 
 class LogController extends Controller

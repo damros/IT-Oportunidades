@@ -62,6 +62,12 @@ class UserController extends Controller
 	public function candidateRegister(UserCreateRequest $request)
     {
 	
+		if (!is_null($request->password)) {
+			$this->validate($request, [
+				'password' => 'required|confirmed|min:6'
+			]);	
+        }
+		
 		try {
 			
 			if ( ( $user = $this->userFactory->createUser($request, 'ca') ) ) {
@@ -95,6 +101,13 @@ class UserController extends Controller
 	
 	public function companyRegister(UserCreateRequest $request)
     {
+		
+		if (!is_null($request->password)) {
+			$this->validate($request, [
+				'password' => 'required|confirmed|min:6'
+			]);	
+        }
+		
 		if ( ( $user = $this->userFactory->createUser($request, 'co') ) ) {		
 		
 			$cdata = array(	"user_id" => $user->id,

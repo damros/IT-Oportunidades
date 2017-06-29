@@ -124,10 +124,10 @@ Route::resource('user','UserController');
 Route::resource('mail','MailController');
 Route::resource('message','MessageController');
 
-Route::get('password-recover','Auth\PasswordController@getRecoverWebsitePassword');
-Route::post('password-recover','Auth\PasswordController@postRecoverWebsitePassword');
+Route::get('password','Auth\WebsitePasswordController@getEmail');
+Route::post('password','Auth\WebsitePasswordController@postEmail');
 
-Route::get('password/reset/{token}','Auth\PasswordController@getReset');
-Route::post('password/reset','Auth\PasswordController@postReset');
+Route::get('password/reset/{token}','Auth\WebsitePasswordController@getReset');
+Route::post('password/reset','Auth\WebsitePasswordController@postReset');
 
 /**** END WEBSITE ****/

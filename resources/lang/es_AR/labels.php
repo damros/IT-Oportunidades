@@ -149,6 +149,7 @@ return [
     'Name' => 'Nombre',
     'name' => 'nombre',	
     'NameAndSurname' => 'Nombre y Apellido',	
+    'New_Password' => 'Nueva Contraseña',	
     'Next' => 'Siguiente',	
     'No_file_selected' => 'Ningún archivo seleccionado',
     'optional' => 'opcional',	
