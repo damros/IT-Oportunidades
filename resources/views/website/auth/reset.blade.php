@@ -33,6 +33,11 @@
 				@endif
 
 				<div class="form">
+					<h5>{{ trans('labels.Email_Address') }}</h5>
+					<input type="email" name="email">
+				</div>
+
+				<div class="form">
 					<h5>{{ trans('labels.New_Password') }}</h5>
 					<input type="password" name="password">
 				</div>
