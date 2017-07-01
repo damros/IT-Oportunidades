@@ -1,1 +1,0 @@
-link: {{ url('password/reset/'.$token)}}
