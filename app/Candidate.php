@@ -63,6 +63,7 @@ class Candidate extends Model
 
 		if ( $this->save() ) {		
 				$this->save_categorys($request);
+				$this->save_preferred_categorys($request);
 				$this->save_urls($request);
 				$this->save_education($request);
 				$this->save_experience($request);
@@ -158,7 +159,7 @@ class Candidate extends Model
 
 		$id = $this->id;
 
-		CandidateCategory::where('candidate_id', $id)->delete();
+		CandidateCategory::where('candidate_id', $id)->where('preferred',0)->delete();
 
 		$categorys = $request->category;
 
@@ -168,6 +169,26 @@ class Candidate extends Model
 
 				$candidate_category->candidate_id = $id;
 				$candidate_category->category_id = $categorys[$i];
+
+				$candidate_category->save();
+		}		
+    }
+
+	public function save_preferred_categorys( $request ) {
+
+		$id = $this->id;
+
+		CandidateCategory::where('candidate_id', $id)->where('preferred',true)->delete();
+
+		$categorys = $request->preferred_category;
+
+		for ($i = 0; $i < sizeof($categorys); ++$i) {
+
+				$candidate_category = new CandidateCategory();
+
+				$candidate_category->candidate_id = $id;
+				$candidate_category->category_id = $categorys[$i];
+				$candidate_category->preferred = true;
 
 				$candidate_category->save();
 		}		

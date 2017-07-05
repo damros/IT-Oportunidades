@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
                   ->onUpdate('cascade');
             $table->string('password');
             $table->rememberToken();
+			$table->boolean('activated')->default(false);
             $table->timestamps();
         });
     }

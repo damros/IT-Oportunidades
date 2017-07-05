@@ -134,6 +134,7 @@
 						if (response.status === "success") {
 							$form[0].reset();
 							container.unblock();
+							window.location.replace("/resume");
 						}
 					});
 				},

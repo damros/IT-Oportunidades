@@ -10,7 +10,6 @@ use ITOportunidades\Candidate;
 use ITOportunidades\ApplicationStatus;
 use Auth;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class FrontController extends Controller
 {
@@ -47,16 +46,21 @@ class FrontController extends Controller
 	   
 		$categorys = Category::with('group')->get();
 	
+		$pref_cats = array();
 		$cats = array();
 		
 		if (Auth::check()) {
 			$catu = currentUser()->candidate->categorys;		
 			foreach ($catu as $cat) {
-				$cats[] = $cat->category_id;
+				if ($cat->preferred) {
+					$pref_cats[] = $cat->category_id;
+				} else {
+					$cats[] = $cat->category_id;
+				}
 			}
 		}
 	
-		return view('website.candidates.resume.index',compact('categorys','cats')); 
+		return view('website.candidates.resume.index',compact('categorys','cats','pref_cats')); 
 		
    }
    

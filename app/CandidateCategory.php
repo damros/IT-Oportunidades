@@ -8,5 +8,5 @@ class CandidateCategory extends Model
 {
     protected $table = "candidates_categorys";
 	
-	protected $fillable = ['candidate_id','category_id'];
+	protected $fillable = ['candidate_id','category_id','preferred'];
 }
