@@ -70,7 +70,7 @@ class FrontController extends Controller
 	   $jobtypes = JobType::all();
 	   $categorys = Category::with('group')->get();
 	   $cats = array();
-	   $princ_cat = array();
+	   $princ_cat = null;
 	   
 	   return view('website.company.jobs.add',compact('job','jobtypes','categorys','cats','princ_cat'));
    }
@@ -91,12 +91,12 @@ class FrontController extends Controller
 		$categorys = Category::with('group')->get();
 	   
 		$cats = array();
-		$princ_cat = array();
+		$princ_cat = null;
 		
 		$catj = $job->categorys;		
 		foreach ($catj as $cat) {
 			if ($cat->principal) {
-				$princ_cat[] = $cat->category_id;			
+				$princ_cat = $cat->category_id;			
 			} else {
 				$cats[] = $cat->category_id;
 			}
