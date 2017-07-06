@@ -34,11 +34,23 @@
 				</select>				
 			</div>
 
-			<!-- Choose Category -->
+			<!-- Choose Principal Category -->
 			<div class="form">
 				<div class="select">
-					<h5>{{ trans('labels.Categorys') }}</h5>
-						<select name="category[]" data-placeholder="{{trans('labels.Categorys_Placeholder')}}" class="chosen-select" multiple>							
+					<h5>{{ trans('labels.Principal_Category') }}</h5>
+						<select name="principal_category" data-placeholder="{{trans('labels.Principal_Category_Placeholder')}}" class="chosen-select">							
+							@foreach ($categorys as $category)
+								<option value="{{$category->id}}" <?php echo ((in_array($category->id, $princ_cat) ? " selected='selected'" : "")) ?> >{{(isset($category->group) ? $category->group->name.' ' : '').$category->name}}</option>
+							@endforeach							
+						</select>
+				</div>
+			</div>
+
+			<!-- Choose Additional Categorys -->
+			<div class="form">
+				<div class="select">
+					<h5>{{ trans('labels.Additional_Categorys') }}</h5>
+						<select name="category[]" data-placeholder="{{trans('labels.Additional_Categorys_Placeholder')}}" class="chosen-select" multiple>							
 							@foreach ($categorys as $category)
 								<option value="{{$category->id}}" <?php echo ((in_array($category->id, $cats) ? " selected='selected'" : "")) ?> >{{(isset($category->group) ? $category->group->name.' ' : '').$category->name}}</option>
 							@endforeach							

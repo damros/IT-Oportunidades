@@ -70,8 +70,9 @@ class FrontController extends Controller
 	   $jobtypes = JobType::all();
 	   $categorys = Category::with('group')->get();
 	   $cats = array();
+	   $princ_cat = array();
 	   
-	   return view('website.company.jobs.add',compact('job','jobtypes','categorys','cats'));
+	   return view('website.company.jobs.add',compact('job','jobtypes','categorys','cats','princ_cat'));
    }
    
    public function manageJobs() {
@@ -85,19 +86,24 @@ class FrontController extends Controller
    
    public function editJob( $id ) {
 	   
-	   $job = Job::find($id);
-	   $jobtypes = JobType::all();
-	   $categorys = Category::with('group')->get();
+		$job = Job::find($id);
+		$jobtypes = JobType::all();
+		$categorys = Category::with('group')->get();
 	   
 		$cats = array();
+		$princ_cat = array();
 		
 		$catj = $job->categorys;		
 		foreach ($catj as $cat) {
-			$cats[] = $cat->category_id;
+			if ($cat->principal) {
+				$princ_cat[] = $cat->category_id;			
+			} else {
+				$cats[] = $cat->category_id;
+			}
 		}
   
 	   
-	   return view('website.company.jobs.edit',compact('job','jobtypes','categorys','cats')); 	
+	   return view('website.company.jobs.edit',compact('job','jobtypes','categorys','cats','princ_cat')); 	
 	   
    }
    

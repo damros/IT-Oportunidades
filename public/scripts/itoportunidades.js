@@ -201,6 +201,7 @@
 						if (response.status === "success") {
 							$form[0].reset();
 							container.unblock();
+							window.location.replace("/jobs/manage");
 						}
 					});
 				},
@@ -264,6 +265,7 @@
 						if (response.status === "success") {
 							$form[0].reset();
 							$container.unblock();
+							window.location.replace("/company/profile");
 						}
 					});
 				},

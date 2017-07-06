@@ -77,7 +77,7 @@ class Job extends Model
 		
 		$id = $this->id;
 		
-		JobCategory::where('job_id', $id)->delete();
+		JobCategory::where('job_id', $id)->where('principal',false)->delete();
 		
 		$categorys = $request->category;
 
@@ -87,9 +87,27 @@ class Job extends Model
 
 			$job_category->job_id = $id;
 			$job_category->category_id = $categorys[$i];
+			$job_category->principal = false;
 
 			$job_category->save();
 		}		
+		
+	}
+
+	public function save_principal_category( $request ) {
+		
+		$id = $this->id;
+		
+		JobCategory::where('job_id', $id)->where('principal',true)->delete();
+
+		$job_category = new JobCategory();
+
+		$job_category->job_id = $id;
+		$job_category->category_id = $request->principal_category;
+		$job_category->principal = true;
+
+		$job_category->save();
+
 		
 	}
 	

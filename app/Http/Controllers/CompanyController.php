@@ -142,6 +142,7 @@ class CompanyController extends Controller
 		$job->save();
 		
 		$job->save_categories( $request );
+		$job->save_principal_category( $request );
 		
 		return response()->json(array(	"status"=>	"success",
 										"message"=> trans("messages.save_success") ) );
@@ -160,6 +161,7 @@ class CompanyController extends Controller
 		$job->save();
 		
 		$job->save_categories( $request );
+		$job->save_principal_category( $request );		
 		
 		return response()->json(array(	"status"=>	"success",
 										"message"=> trans("messages.save_success") ) );		

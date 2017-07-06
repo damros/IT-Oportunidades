@@ -21,7 +21,8 @@ class CreateJobsCategorysTable extends Migration
             $table->integer('category_id')->unsigned(); 
             $table->foreign('category_id')
                   ->references('id')->on('categorys')
-                  ->onUpdate('cascade');                                    
+                  ->onUpdate('cascade');
+			$table->boolean('principal')->default(false);				  
             $table->timestamps();
         });
     }
