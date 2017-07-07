@@ -15,6 +15,7 @@
 				<span><i class="fa fa-map-marker"></i> {{$job->location}}</span>
 				<span><i class="fa fa-clock-o"></i> {{$job->created_at->diffForHumans()}}</span>
 			</div>
+			<p>{{trans('labels.Tags')}}: {{$job->tags}}</p>
 		</div>
 		</a>
 		<div class="clearfix"></div>

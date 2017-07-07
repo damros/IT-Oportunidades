@@ -141,8 +141,13 @@ class Job extends Model
 		
 		$q = $request->q;
 		
-		$jobs = Job::whereNull('fill_date')
-			->where('title','like','%'.$q.'%')
+		$jobs = Job::join('companys', 'companys.id', '=', 'company_id')
+			->whereNull('fill_date')
+            ->where(function ($query) use ($q) {
+            $query->where('title','like','%'.$q.'%')
+                  ->orWhere('tags','like','%'.$q.'%')
+				  ->orWhere('companys.name','like','%'.$q.'%');
+            })
             ->where(function ($query) {
             $query->where('end_date', '>', Carbon::now())
                   ->orWhereNull('end_date');

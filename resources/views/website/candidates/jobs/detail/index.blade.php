@@ -28,14 +28,15 @@
 		<!-- Company Info -->
 		<div class="company-info">
 			@if ( $job->company->logo )
-				<img src="/images/companylogo/{{$job->company->logo}}" title="{{$job->company->name}}" style="width: 90px; height: 90px; margin-right: 10px;"/>
+				<img src="/images/companylogo/{{$job->company->logo}}" title="{{$job->company->name}}"/>
 			@else
-				<img src="/images/job-list-logo-01.png" alt="" style="width: 90px; height: 90px; margin-right: 10px;"/>
+				<img src="/images/job-list-logo-01.png" alt=""/>
 			@endif	
 			<div class="content">
 				<h4>{{$job->company->name}}</h4>
 				<span><a href="#"><i class="fa fa-link"></i> {{$job->company->website}}</a></span>
 				<span><a href="#"><i class="fa fa-twitter"></i> {{$job->company->twitter}}</a></span>
+				<p>{{trans('labels.Tags')}}: {{$job->tags}}</p>
 			</div>
 			<div class="clearfix"></div>
 		</div>
@@ -63,6 +64,15 @@
 							<span>{{$job->location}}</span>
 						</div>
 					</li>
+					@if ($job->salary)
+					<li>
+						<i class="fa fa-money"></i>
+						<div>
+							<strong>{{trans('labels.Salary')}}:</strong>
+							<span>{{$job->salary}}</span>
+						</div>
+					</li>
+					@endif
 					<li>
 						<i class="fa fa-calendar"></i>
 						<div>
