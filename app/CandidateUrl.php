@@ -8,5 +8,5 @@ class CandidateUrl extends Model
 {
     protected $table = "candidates_urls";
 	
-	protected $fillable = ['candidate_id','name','url'];
+    protected $fillable = ['candidate_id','name','url'];
 }

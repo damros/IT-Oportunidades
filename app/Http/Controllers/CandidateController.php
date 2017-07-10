@@ -26,6 +26,9 @@ class CandidateController extends Controller
      */
     public function index() {
         //
+        $candidates = Candidate::paginate(10);
+
+        return view('admin.candidate.index',compact('candidates'));  
     }
 
     /**
@@ -65,6 +68,9 @@ class CandidateController extends Controller
      */
     public function edit($id) {
         //
+        $candidate = Candidate::find($id);
+		
+        return view('admin.candidate.detail',['candidate'=>$candidate]);
     }
 
     /**

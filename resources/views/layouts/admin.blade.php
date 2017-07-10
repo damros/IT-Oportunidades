@@ -243,7 +243,20 @@
 								<a href="{!!URL::to('/admin/users')!!}"><i class='fa fa-list-ol fa-fw'></i> Usuarios</a>
 							</li>							
 						</ul>
-					</li>			
+					</li>	
+                                        <li class="treeview">
+						<a href="#">
+						  <i class="fa fa-share"></i> <span> Candidatos</span>
+						  <span class="pull-right-container">
+							<i class="fa fa-angle-left pull-right"></i>
+						  </span>
+						</a>
+						<ul class="treeview-menu">						
+							<li>
+								<a href="{!!URL::to('/admin/candidates')!!}"><i class='fa fa-list-ol fa-fw'></i> Candidatos</a>
+							</li>							
+						</ul>
+					</li>		
 				</ul>
 			</section>
 			<!-- /.sidebar -->

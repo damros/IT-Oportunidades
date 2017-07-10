@@ -26,6 +26,8 @@ Route::group(['prefix' => 'admin'], function () {
 		
 		Route::get('','AdminController@dashboard');
 		Route::get('adminLogout','LogController@adminLogout');
+                
+                
 		
 		Route::resource('job-types','JobTypeController');		
 		Route::resource('application-status','ApplicationStatusController');		
@@ -34,7 +36,7 @@ Route::group(['prefix' => 'admin'], function () {
 		Route::resource('category-groups','CategoryGroupController');
 		Route::resource('categorys','CategoryController');
 		Route::resource('permissions','PermissionController');
-		
+		Route::resource('candidates','CandidateController');
 	});		
 	
 });
