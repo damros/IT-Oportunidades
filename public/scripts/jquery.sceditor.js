@@ -10,6 +10,12 @@
 			width: "100%"
 		});
 
+		$(".WYSIWYG_min").sceditor({
+			plugins: "bbcode",
+			toolbar: "",
+			width: "100%"
+		});
+
 		function addIng() {
 			var newElem = $('tr.ingredients-cont.ing:first').clone();
 			newElem.find('input').val('');

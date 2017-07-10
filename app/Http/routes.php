@@ -119,6 +119,8 @@ Route::get('jobs/{id}','FrontController@viewJob');
 Route::get('company/profile','FrontController@editCompany');
 Route::get('terms','FrontController@termsOfService');
 Route::get('about-us','FrontController@aboutUs');
+Route::get('jobs/candidates/find/{id}','FrontController@candidatesByJob');
+Route::get('jobs/candidates/detail/{id}','FrontController@candidateDetail');
 
 Route::get('user/activation/{token}', 'UserController@userActivation');
 

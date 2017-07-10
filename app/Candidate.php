@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 use ITOportunidades\CandidateUrl;
 use ITOportunidades\CandidateEducation;
 use ITOportunidades\CandidateExperience;
+use ITOportunidades\CandidateCategory;
+use ITOportunidades\JobCategory;
 use Carbon\Carbon;
 
 class Candidate extends Model
@@ -193,5 +195,23 @@ class Candidate extends Model
 				$candidate_category->save();
 		}		
     }
+	
+	static function candidatesByJob( $id ) {
+		
+		$jobc = JobCategory::where('job_id',$id)
+							->where('principal',true)
+							->firstOrFail();
+		
+		$candidates = CandidateCategory::where('category_id',$jobc->category_id)
+							->where('preferred',true)
+							->distinct()
+							->pluck('candidate_id');
+		
+		$ca = Candidate::whereIn('id',$candidates)
+						->get();
+		
+		return $ca;
+		
+	}
 
 }

@@ -10,8 +10,7 @@ class Category extends Model
 
     protected $fillable = ['name','category_group_id'];
     
-	public function group()
-    {
+	public function group() {
         return $this->belongsTo('ITOportunidades\CategoryGroup', 'category_group_id');
     }
 }

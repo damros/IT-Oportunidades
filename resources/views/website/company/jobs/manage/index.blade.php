@@ -40,17 +40,19 @@
 				<th><i class="fa fa-calendar"></i> {{ trans('labels.Date_Posted') }}</th>
 				<th><i class="fa fa-calendar"></i> {{ trans('labels.Date_Expires') }}</th>
 				<th><i class="fa fa-user"></i> {{ trans('labels.Applications') }}</th>
+				<th><i class="fa fa-user"></i> {{ trans('labels.Job_Matching_Candidates') }}</th>
 				<th></th>
 			</tr>
 			
 			@foreach ($jobs as $job)
 			<!-- Item #1 -->
 			<tr>
-				<td class="title"><a href="#">{{$job->title}}</a></td>
+				<td class="title">{{$job->title}}</td>
 				<td class="centered">{{ ($job->fill_date?: '-')}}</td>
 				<td>{{$job->start_date}}</td>
 				<td>{{$job->end_date}}</td>
 				<td class="centered"><a href="{!!URL::to('applications/manage/'.$job->id.'')!!}" class="button">{{ trans('labels.Show') }} ({{$job->applications->count()}})</a></td>
+				<td class="centered"><a href="{!!URL::to('jobs/candidates/find/'.$job->id.'')!!}" class="button">{{ trans('labels.Show') }} ({{$job->applications->count()}})</a></td>				
 				<td class="action">
 					<a href="{!!URL::to('jobs/edit/'.$job->id.'')!!}"><i class="fa fa-pencil"></i> {{ trans('labels.Edit') }}</a>
 				</td>

@@ -33,7 +33,7 @@ class FrontController extends Controller
 	   
 		if ( Auth::check() ) {
 			return redirect()->to('/');
-		};
+		}
     
         return view('website.my-account.index');
    }
@@ -80,7 +80,7 @@ class FrontController extends Controller
 		$id = currentUser()->company->id;
 		$jobs = Company::jobsByCompany($id);
 		
-		return view('website.company.jobs.manage',compact('jobs')); 	   
+		return view('website.company.jobs.manage.index',compact('jobs')); 	   
 	   
    }
    
@@ -119,7 +119,7 @@ class FrontController extends Controller
 	   
    }
    
-   public function applicationManage( $id, Request $request ){
+   public function applicationManage( $id, Request $request ) {
        
 		$job = Job::find($id);
 		$status = $request->input('status');
@@ -181,6 +181,23 @@ class FrontController extends Controller
 									);			
 		}	   
 	   
-   }
+   } 
+   
+   public function candidatesByJob( $id, Request $request ) {
+       
+		$candidates = Candidate::candidatesByJob($id);
+		$job = Job::find($id);
+		
+		return view('website.company.jobs.manage.candidates.index',compact('candidates','job'));
+           
+   }   
+
+   public function candidateDetail( $id ) {
+       
+		$candidate = Candidate::find($id);
+		
+		return view('website.company.jobs.manage.candidates.detail',compact('candidate'));
+           
+   }   
 
 }
