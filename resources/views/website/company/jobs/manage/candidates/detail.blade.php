@@ -9,7 +9,7 @@
 ================================================== -->
 <div id="titlebar" class="resume">
 	<div class="container">
-		<div class="ten columns">
+		<div class="sixteen columns">
 			<div class="resume-titlebar">
 				@if ($candidate->photo)
 				<img src="/images/candidatephoto/{{$candidate->photo}}" />
@@ -23,9 +23,12 @@
 					<span class="icons"><a href="{{$candidate->website}}"><i class="fa fa-link"></i> {{$candidate->website}}</a></span>
 					@endif
 					<span class="icons"><i class="fa fa-envelope"></i> {{$candidate->user->email}}</span>
+					@if ($candidate->resume_file)
+					<span class="icons"><a href="/documents/resumes/{{$candidate->resume_file}}" target="_blank"><i class="fa fa-download"></i> {{trans('labels.Donwload_Resume_File')}}</a></span>
+					@endif					
 					<div class="skills">
 						@foreach ($candidate->categorys as $candidate_category)
-						<span>{{$candidate_category->category->name}}</span>
+						<span>{{($candidate_category->category->group ? $candidate_category->category->group->name : '').' '.$candidate_category->category->name}}</span>
 						@endforeach						
 					</div>
 					<div class="clearfix"></div>
@@ -33,11 +36,11 @@
 				</div>
 			</div>
 		</div>
-
+		<!--
 		<div class="six columns">
 			<a href="#" class="button dark"><i class="fa fa-star"></i> Bookmark This Resume</a>
 		</div>
-
+		-->
 	</div>
 </div>
 
@@ -47,61 +50,69 @@
 <div class="container">
 	<!-- Recent Jobs -->
 	<div class="eight columns">
-	<div class="padding-right">
+		<div class="padding-right">
 
-		<h3 class="margin-bottom-15">About Me</h3>
-		
-		<div class="margin-reset">
-			{!!$candidate->resume_content!!}
+			<p><strong>{{trans('words.Identification')}}:</strong> {{$candidate->identification}}</p>
+			<p><strong>{{trans('words.Phone')}}:</strong> {{$candidate->phone}}</p>
+			@if ($candidate->video)
+			<p><strong>{{trans('words.Video')}}:</strong> {{$candidate->video}}</p>
+			@endif
+
+			@if ($candidate->urls->count())
+			<p><strong>{{trans('words.Urls')}}</strong></p>
+
+			<ul class="list-1">
+				@foreach ($candidate->urls as $url)
+				<li><strong>{{$url->name}}</strong>: {{$url->url}}</li>
+				@endforeach
+			</ul>
+			@endif
+
+			<br>
+
+			<h3 class="margin-bottom-15">{{trans('labels.Resume_Detail')}}</h3>
+
+			<div class="margin-reset">
+				{!!$candidate->resume_content!!}
+			</div>		
+
 		</div>
-
-		<br>
-
-		<p>The <strong>Food Service Specialist</strong> will have responsibilities that include:</p>
-
-		<ul class="list-1">
-			<li>Excellent customer service skills, communication skills, and a happy, smiling attitude are essential.</li>
-			<li>Must be available to work required shifts including weekends, evenings and holidays.</li>
-			<li>Must be able to perform repeated bending, standing and reaching.</li>
-			<li>Must be able to occasionally lift up to 50 pounds</li>
-		</ul>
-
-	</div>
 	</div>
 
 
 	<!-- Widgets -->
 	<div class="eight columns">
 
-		<h3 class="margin-bottom-20">Education</h3>
+		<h3 class="margin-bottom-20">{{trans('words.Education')}}</h3>
 
 		<!-- Resume Table -->
 		<dl class="resume-table">
+			@foreach ($candidate->educations as $education)
 			<dt>
-				<small class="date">2012 - 2015</small>
-				<strong>Bsc Computing at College of West Anglia</strong>
+				<small class="date">{{$education->edates}}</small>
+				<strong>{{$education->school_name}}</strong>
 			</dt>
 			<dd>
-				<p>Captain, why are we out here chasing comets? Maybe we better talk out here; the observation lounge has turned into a swamp. Ensign Babyface!</p>
+				<p>{{$education->notes}}</p>
 			</dd>
+			@endforeach
 
+		</dl>
 		
+		<h3 class="margin-bottom-20">{{trans('words.Experience')}}</h3>		
+
+		<!-- Resume Table -->
+		<dl class="resume-table">
+			@foreach ($candidate->experiences as $experience)
 			<dt>
-				<small class="date">2006 - 2010</small>
-				<strong>GCSE something at King Edward 7th</strong>
+				<small class="date">{{$experience->edates}}</small>
+				<strong>{{$experience->employeer}}</strong>
 			</dt>
 			<dd>
-				<p>Captain, why are we out here chasing comets? Maybe we better talk out here; the observation lounge has turned into a swamp. Ensign Babyface!</p>
+				<p>{{$experience->job_title}}</p>
+				<p>{{$experience->notes}}</p>
 			</dd>
-
-
-			<dt>
-				<small class="date">2004 - 2006</small>
-				<strong>Test 2 at Test</strong>
-			</dt>
-			<dd>
-				<p>Phasellus vestibulum metus orci, ut facilisis dolor interdum eget. Pellentesque magna sem, hendrerit nec elit sit amet, ornare efficitur est.</p>
-			</dd>
+			@endforeach
 
 		</dl>
 
@@ -114,14 +125,5 @@
 
 
 <div class="margin-top-60"></div>
-
-@endsection
-
-@section('scripts')
-
-<!-- WYSIWYG Editor -->
-{!!Html::script('scripts/jquery.sceditor.xhtml.min.js')!!}
-{!!Html::script('scripts/jquery.sceditor.js')!!}
-
 
 @endsection

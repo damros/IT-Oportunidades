@@ -186,6 +186,7 @@ return [
     'resume' => 'currículum',
     'Resume' => 'Currículum',
     'Resume_Content' => 'Detalle del Currículum',
+    'Resume_Detail' => 'Detalle del Currículum',
     'Resume_File' => 'Archivo de tu Currículum',
     'Upload_your_CV' => 'Adjuntá tu CV',
     'username' => 'usuario',

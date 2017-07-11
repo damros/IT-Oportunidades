@@ -19,6 +19,5 @@
 				@endforeach
 			</tbody>
 		</table>
-		{{$users->render()}}
 	</div>
 	@endsection

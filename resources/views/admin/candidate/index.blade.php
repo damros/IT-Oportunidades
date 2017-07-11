@@ -30,7 +30,6 @@
 				@endforeach
 			</tbody>
 		</table>
-		{{$candidates->render()}}
 	</div>
     
     @endsection

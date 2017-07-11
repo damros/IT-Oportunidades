@@ -3,11 +3,9 @@
 namespace ITOportunidades\Http\Controllers;
 
 use Illuminate\Http\Request;
-use ITOportunidades\Http\Requests;
 use ITOportunidades\JobType;
 use Session;
 use Redirect;
-use Illuminate\Routing\Route;
 
 class JobTypeController extends Controller
 {
@@ -19,7 +17,7 @@ class JobTypeController extends Controller
      */
     public function index()
     {
-        $jobtypes = JobType::paginate(10);
+        $jobtypes = JobType::all();
 
         return view('admin.job-type.index',compact('jobtypes'));        
     }

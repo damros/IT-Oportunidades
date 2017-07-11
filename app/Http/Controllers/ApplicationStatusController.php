@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use ITOportunidades\ApplicationStatus;
 use Session;
 use Redirect;
-use ITOportunidades\Http\Requests;
 
 class ApplicationStatusController extends Controller
 {
@@ -17,7 +16,7 @@ class ApplicationStatusController extends Controller
      */
     public function index()
     {
-        $apstatus = ApplicationStatus::paginate(10);
+        $apstatus = ApplicationStatus::all();
 
         return view('admin.application-status.index',compact('apstatus'));  
     }

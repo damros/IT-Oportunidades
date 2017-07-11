@@ -52,7 +52,7 @@
 				<td>{{$job->start_date}}</td>
 				<td>{{$job->end_date}}</td>
 				<td class="centered"><a href="{!!URL::to('applications/manage/'.$job->id.'')!!}" class="button">{{ trans('labels.Show') }} ({{$job->applications->count()}})</a></td>
-				<td class="centered"><a href="{!!URL::to('jobs/candidates/find/'.$job->id.'')!!}" class="button">{{ trans('labels.Show') }} ({{$job->applications->count()}})</a></td>				
+				<td class="centered"><a href="{!!URL::to('jobs/candidates/find/'.$job->id.'')!!}" class="button">{{ trans('labels.Show') }}</a></td>				
 				<td class="action">
 					<a href="{!!URL::to('jobs/edit/'.$job->id.'')!!}"><i class="fa fa-pencil"></i> {{ trans('labels.Edit') }}</a>
 				</td>

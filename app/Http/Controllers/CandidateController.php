@@ -26,7 +26,7 @@ class CandidateController extends Controller
      */
     public function index() {
         //
-        $candidates = Candidate::paginate(10);
+        $candidates = Candidate::all();
 
         return view('admin.candidate.index',compact('candidates'));  
     }

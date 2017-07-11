@@ -17,6 +17,5 @@
 				@endforeach
 			</tbody>
 		</table>
-		{!!$apstatus->render()!!}
 	</div>
 	@endsection

@@ -17,7 +17,7 @@ class CategoryGroupController extends Controller
      */
     public function index()
     {
-        $catgroups = CategoryGroup::paginate(10);
+        $catgroups = CategoryGroup::all();
 
         return view('admin.category-group.index',compact('catgroups'));  
     }

@@ -44,7 +44,7 @@ class FrontController extends Controller
 
    public function resume(){
 	   
-		$categorys = Category::with('group')->get();
+		$categorys = Category::all();
 	
 		$pref_cats = array();
 		$cats = array();
