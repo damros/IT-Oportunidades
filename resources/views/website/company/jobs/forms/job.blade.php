@@ -41,7 +41,7 @@
 						<select name="principal_category" data-placeholder="{{trans('labels.Principal_Category_Placeholder')}}" class="chosen-select">
 							<option value="">{{trans('labels.Principal_Category_Placeholder')}}</option>							
 							@foreach ($categorys as $category)
-								<option value="{{$category->id}}" <?php echo (($category->id == intval($princ_cat)) ? " selected='selected'" : "") ?> >{{(isset($category->group) ? $category->group->name.' ' : '').$category->name}}</option>
+								<option value="{{$category->id}}" <?php echo (($category->id == intval($princ_cat)) ? " selected='selected'" : "") ?> >{{$category->full_name}}</option>
 							@endforeach							
 						</select>
 				</div>
@@ -53,7 +53,7 @@
 					<h5>{{ trans('labels.Additional_Categorys') }}</h5>
 						<select name="category[]" data-placeholder="{{trans('labels.Additional_Categorys_Placeholder')}}" class="chosen-select" multiple>							
 							@foreach ($categorys as $category)
-								<option value="{{$category->id}}" <?php echo ((in_array($category->id, $cats) ? " selected='selected'" : "")) ?> >{{(isset($category->group) ? $category->group->name.' ' : '').$category->name}}</option>
+								<option value="{{$category->id}}" <?php echo ((in_array($category->id, $cats) ? " selected='selected'" : "")) ?> >{{$category->full_name}}</option>
 							@endforeach							
 						</select>
 				</div>

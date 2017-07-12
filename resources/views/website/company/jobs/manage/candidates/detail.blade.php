@@ -28,7 +28,7 @@
 					@endif					
 					<div class="skills">
 						@foreach ($candidate->categorys as $candidate_category)
-						<span>{{($candidate_category->category->group ? $candidate_category->category->group->name : '').' '.$candidate_category->category->name}}</span>
+						<span>{{$candidate_category->category->full_name}}</span>
 						@endforeach						
 					</div>
 					<div class="clearfix"></div>

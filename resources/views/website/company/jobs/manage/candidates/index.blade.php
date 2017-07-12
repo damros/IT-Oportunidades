@@ -46,8 +46,7 @@
 				<th><i class="fa fa-user"></i> {{ trans('labels.Candidate_Name') }}</th>
 				<th><i class="fa fa-info-circle"></i> {{ trans('labels.Candidate_Professional_Title') }}</th>
 				<th><i class="fa fa-envelope"></i> {{ trans('labels.Email_Address') }}</th>
-				<th><i class="fa fa-user"></i> {{ trans('labels.Actions') }}</th>
-				<th></th>
+				<th><i class="fa fa-align-justify"></i> {{ trans('labels.Actions') }}</th>
 			</tr>
 			
 			@foreach ($candidates as $candidate)

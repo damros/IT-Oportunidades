@@ -43,9 +43,9 @@ class FrontController extends Controller
    }
 
    public function resume(){
-	   
-		$categorys = Category::all();
 	
+		$categorys = Category::all()->sortBy("full_name");
+
 		$pref_cats = array();
 		$cats = array();
 		
@@ -66,13 +66,14 @@ class FrontController extends Controller
    
    public function addJob() {
 	   
-	   $job = new Job;
-	   $jobtypes = JobType::all();
-	   $categorys = Category::with('group')->get();
-	   $cats = array();
-	   $princ_cat = null;
+		$job = new Job;
+		$jobtypes = JobType::all();
+		$categorys = Category::all()->sortBy("full_name");
+
+		$cats = array();
+		$princ_cat = null;
 	   
-	   return view('website.company.jobs.add',compact('job','jobtypes','categorys','cats','princ_cat'));
+		return view('website.company.jobs.add',compact('job','jobtypes','categorys','cats','princ_cat'));
    }
    
    public function manageJobs() {
@@ -88,7 +89,7 @@ class FrontController extends Controller
 	   
 		$job = Job::find($id);
 		$jobtypes = JobType::all();
-		$categorys = Category::with('group')->get();
+		$categorys = Category::all()->sortBy("full_name");
 	   
 		$cats = array();
 		$princ_cat = null;

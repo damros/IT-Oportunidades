@@ -71,8 +71,8 @@
 				<div class="select">
 					<h5>{{ trans('labels.Candidate_Preferred_Categorys') }}</h5>
 					<select name="preferred_category[]" data-placeholder="{{trans('labels.Candidate_Preferred_Categorys_Placeholder')}}" class="chosen-select" multiple>							
-						@foreach ($categorys as $category)
-						<option value="{{$category->id}}" <?php echo ((in_array($category->id, $pref_cats) ? " selected='selected'" : "")) ?> >{{(isset($category->group) ? $category->group->name.' ' : '').$category->name}}</option>
+						@foreach ($categorys as $category)						
+						<option value="{{$category->id}}" <?php echo ((in_array($category->id, $pref_cats) ? " selected='selected'" : "")) ?> >{{$category->full_name}}</option>
 						@endforeach							
 					</select>
 				</div>
@@ -84,7 +84,7 @@
 					<h5>{{ trans('labels.Candidate_Categorys') }}</h5>
 					<select name="category[]" data-placeholder="{{trans('labels.Candidate_Categorys_Placeholder')}}" class="chosen-select" multiple>							
 						@foreach ($categorys as $category)
-						<option value="{{$category->id}}" <?php echo ((in_array($category->id, $cats) ? " selected='selected'" : "")) ?> >{{(isset($category->group) ? $category->group->name.' ' : '').$category->name}}</option>
+						<option value="{{$category->id}}" <?php echo ((in_array($category->id, $cats) ? " selected='selected'" : "")) ?> >{{$category->full_name}}</option>
 						@endforeach							
 					</select>
 				</div>

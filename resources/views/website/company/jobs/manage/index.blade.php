@@ -41,7 +41,7 @@
 				<th><i class="fa fa-calendar"></i> {{ trans('labels.Date_Expires') }}</th>
 				<th><i class="fa fa-user"></i> {{ trans('labels.Applications') }}</th>
 				<th><i class="fa fa-user"></i> {{ trans('labels.Job_Matching_Candidates') }}</th>
-				<th></th>
+				<th><i class="fa fa-align-justify"></i> {{ trans('labels.Actions') }}</th>
 			</tr>
 			
 			@foreach ($jobs as $job)
