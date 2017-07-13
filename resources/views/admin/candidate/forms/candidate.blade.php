@@ -1,22 +1,22 @@
-<div class="form-group">
+<div class="col-xs-6">
 	{!!Form::label('Nombre','Nombre:')!!}
 	{!!Form::text('name',$candidate->name,['class'=>'form-control'])!!}
 </div>
-<div class="form-group">
+<div class="col-xs-6">
 	{!!Form::label('dni','DNI:')!!}
 	{!!Form::text('dni',$candidate->identification,['class'=>'form-control'])!!}
 </div>
 
-<div class="form-group">
+<div class="col-xs-6">
 	{!!Form::label('telefono','Teléfono:')!!}
 	{!!Form::text('telefono',$candidate->phone,['class'=>'form-control'])!!}
 </div>
 
-<div class="form-group">
+<div class="col-xs-6">
 	{!!Form::label('tituloProfesional','Titulo Profesional:')!!}
 	{!!Form::text('tituloProfesional',$candidate->profesional_title,['class'=>'form-control'])!!}
 </div>
-<div class="form-group">
+<div class="col-xs-6">
 	{!!Form::label('categoriasPreferidas','Categorias Preferidas:')!!}
 	<?php $categoriesPrefer = ''; ?>
 
@@ -32,7 +32,7 @@
 
 </div>
 
-<div class="form-group">
+<div class="col-xs-6">
 	{!!Form::label('categoriasAdicionales','Categorias Adicionales:')!!}
 <?php $categoriesAditional = ''; ?>
 
@@ -47,26 +47,27 @@
 	{!!Form::text('categoriasPreferidas', $categoriesAditional ,['class'=>'form-control'])!!}					
 
 </div>
-<div class="form-group">
+<div class="col-xs-6">
 	{!!Form::label('direccion','Domicilio:')!!}
 	{!!Form::text('direccion',$candidate->address,['class'=>'form-control'])!!}
 </div>
-
-<div class="form-group">
-	{!!Form::label('foto','Foto:')!!}
-	<img src="/images/candidatephoto/{{$candidate->photo}}" alt="" style="width: 200px; height: 200px;"/>
-
-</div>
-<div class="form-group">
+<div class="col-xs-6">
 	{!!Form::label('videoPersonal','Video:')!!}
 	{!!Form::text('videoPersonal',$candidate->video,['class'=>'form-control'])!!}
 </div>
 
-<div class="form-group">
+<div class="col-xs-12">
 	{!!Form::label('detalleCurriculum','Detalle Curriculum:')!!}
-	<div>{!!$candidate->resume_content!!}</div>
+        <div style="border: 1px solid #ccc; padding: 6px 12px; background-color: white">{!!$candidate->resume_content!!}</div>
 </div>
-<div class="form-group">
+
+<div class="col-xs-6">
+	{!!Form::label('foto','Foto:')!!}
+	<img src="/images/candidatephoto/{{$candidate->photo}}" alt="" style="width: 200px; height: 200px;"/>
+
+</div>
+
+<div class="col-xs-6">
 	{!!Form::label('archivoCurriculum','Archivo de Curriculum:')!!}
 
 	<a href="/documents/resumes/{{$candidate->resume_file}}" target="{{$candidate->id}}"  >
@@ -75,7 +76,7 @@
 
 </div>
 
-<div class="form-group">
+<div class="col-xs-12">
 	{!!Form::label('urls','URL(s):')!!}
 	<table class="table">
 		<thead>
@@ -92,7 +93,7 @@
 		</tbody>
 	</table>
 </div>
-<div class="form-group">
+<div class="col-xs-12">
 	{!!Form::label('educacion','Educacion:')!!}
 	<table class="table">
 		<thead>
@@ -114,7 +115,7 @@
 	</table>
 </div>
 
-<div class="form-group">
+<div class="col-xs-12">
 	{!!Form::label('experienciaLaboral','Experiencia Laboral:')!!}
 	<table class="table">
 		<thead>
