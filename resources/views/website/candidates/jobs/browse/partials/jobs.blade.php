@@ -14,6 +14,9 @@
 				<span><i class="fa fa-briefcase"></i> {{$job->company->name}}</span>
 				<span><i class="fa fa-map-marker"></i> {{$job->location}}</span>
 				<span><i class="fa fa-clock-o"></i> {{$job->created_at->diffForHumans()}}</span>
+				@if ($job->end_date)
+				<span><i class="fa fa-calendar-times-o"></i> {{$job->end_date}}</span>
+				@endif
 				@if ($job->salary)
 				<span><i class="fa fa-money"></i> {{$job->salary}}</span>
 				@endif

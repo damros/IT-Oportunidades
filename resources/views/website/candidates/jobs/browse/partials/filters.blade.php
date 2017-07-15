@@ -1,59 +1,56 @@
 <!-- Widgets -->
-<form action="{{URL::current()}}" method="get">	
+<form action="{{URL::current()}}" method="get" class="filter-jobs">	
 	<div class="five columns">
 
 		<!-- Sort by -->
+		<div class="widget list-search">
+			<h4>{{trans('labels.Browse_Jobs_Search_String')}}</h4>
+
+			<button class="button"><i class="fa fa-search"></i></button>
+			<input type="text" name="q" placeholder="{{trans('labels.Browse_Jobs_Search_Placeholder')}}" value="{{ app('request')->input('q') }}"/>
+			<div class="clearfix"></div>
+
+		</div>
+
 		<div class="widget">
-			<h4>Sort by</h4>
+			<h4>{{trans('labels.Sort_by')}}</h4>
 
 			<!-- Select -->
-			<select data-placeholder="Choose Category" class="chosen-select-no-single">
-				<option selected="selected" value="recent">Newest</option>
-				<option value="oldest">Oldest</option>
-				<option value="expiry">Expiring Soon</option>
-				<option value="ratehigh">Hourly Rate – Highest First</option>
-				<option value="ratelow">Hourly Rate – Lowest First</option>
+			<select data-placeholder="Choose Option" class="chosen-select-no-single" name="sort">
+				<option <?php echo ( app('request')->input('sort')=="new" ? " selected='selected'" : "") ?> value="new">{{trans('labels.Newest')}}</option>
+				<option <?php echo ( app('request')->input('sort')=="old" ? " selected='selected'" : "") ?> value="old">{{trans('labels.Oldest')}}</option>
+				<option <?php echo ( app('request')->input('sort')=="exp_asc" ? " selected='selected'" : "") ?> value="exp_asc">{{trans('labels.Expiring_Date_Asc')}}</option>
+				<option <?php echo ( app('request')->input('sort')=="exp_dsc" ? " selected='selected'" : "") ?> value="exp_dsc">{{trans('labels.Expiring_Date_Desc')}}</option>
 			</select>
 
 		</div>
 
 		<!-- Location -->
 		<div class="widget">
-			<h4>Location</h4>
-				<input type="text" placeholder="State / Province" value=""/>
-				<input type="text" placeholder="City" value=""/>				
+			<h4>{{trans('labels.Location')}}</h4>
+				<input type="text" name="loc" placeholder="{{trans('labels.Location_Search_Placeholder')}}" value="{{ app('request')->input('loc') }}"/>
 		</div>
 
 		<!-- Job Type -->
 		<div class="widget">
-			<h4>Job Type</h4>
+			<h4>{{trans('labels.Job_Type')}}</h4>
 
 			<ul class="checkboxes">
 				<li>
-					<input id="check-1" type="checkbox" name="check" value="check-1" checked>
-					<label for="check-1">Any Type</label>
+					<input id="check-1" type="checkbox" name="jobtype[]" value="-1" <?php echo ((in_array('-1', $seljobtypes[0]) ? " checked='checked'" : "")) ?>>
+					<label for="check-1">{{trans('labels.Any_Type')}}</label>
 				</li>
+				@foreach ($jobtypes as $jobtype)
 				<li>
-					<input id="check-2" type="checkbox" name="check" value="check-2">
-					<label for="check-2">Full-Time <span>(312)</span></label>
+					<input id="check-{{$jobtype->id}}" type="checkbox" name="jobtype[]" value="{{$jobtype->id}}" <?php echo ((in_array($jobtype->id, $seljobtypes[0]) ? " checked='checked'" : "")) ?>>
+					<label for="check-{{$jobtype->id}}">{{$jobtype->name}}</label>
 				</li>
-				<li>
-					<input id="check-3" type="checkbox" name="check" value="check-3">
-					<label for="check-3">Part-Time <span>(269)</span></label>
-				</li>
-				<li>
-					<input id="check-4" type="checkbox" name="check" value="check-4">
-					<label for="check-4">Internship <span>(46)</span></label>
-				</li>
-				<li>
-					<input id="check-5" type="checkbox" name="check" value="check-5">
-					<label for="check-5">Freelance <span>(119)</span></label>
-				</li>
+				@endforeach
 			</ul>
 
 		</div>
 		
-		<button class="button">Filter</button>	
+		<button class="button">{{trans('labels.Search')}}</button>	
 		
 	</div>
 

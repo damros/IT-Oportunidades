@@ -117,7 +117,8 @@ class Job extends Model
             ->where(function ($query) {
             $query->where('end_date', '>', Carbon::now())
                   ->orWhereNull('end_date');
-            });
+            })
+			->orderBy('created_at','desc');
 		
 		return $jobs;
 	}
@@ -139,7 +140,32 @@ class Job extends Model
 	
 	static function searchJobs( $request ) {
 		
-		$q = $request->q;
+		$q = $request->q;	
+		$loc = $request->loc;	
+		$jobtype = array($request->jobtype);	
+		
+		switch ($request->sort) {
+			case "new":
+				$sortB = "jobs.created_at";
+				$sortD = "desc";
+				break;
+			case "old":
+				$sortB = "jobs.created_at";
+				$sortD = "asc";				
+				break;
+			case "exp_asc":
+				$sortB = "jobs.end_date";
+				$sortD = "asc";		
+				break;
+			case "exp_dsc":
+				$sortB = "jobs.end_date";
+				$sortD = "asc";
+			default:
+				$sortB = "jobs.created_at";
+				$sortD = "desc";					
+			break;				
+		}
+		
 		
 		$jobs = Job::join('companys', 'companys.id', '=', 'company_id')
 			->whereNull('fill_date')
@@ -151,8 +177,15 @@ class Job extends Model
             ->where(function ($query) {
             $query->where('end_date', '>', Carbon::now())
                   ->orWhereNull('end_date');
-            });
-		
+            })
+			->where('jobs.location','like','%'.$loc.'%')
+			->select('jobs.*')
+			->orderBy($sortB,$sortD);
+			
+		if ($jobtype[0][0] != '-1') {
+			$jobs->whereIn('jobs.job_type_id',$jobtype[0]);
+		}
+			
 		return $jobs;
 	}	
 }

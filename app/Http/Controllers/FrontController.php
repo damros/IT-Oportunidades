@@ -110,13 +110,17 @@ class FrontController extends Controller
    
    public function browseJobs(Request $request) {
 	   
-	   if ( $request->has("q") ) {
-		   $jobs = Job::searchJobs( $request )->paginate(5)->appends($request->input());
-	   } else {
-		   $jobs = Job::activeJobs()->paginate(5);
-	   } 
+		$jobtypes = JobType::all();
+		$seljobtypes = array($request->jobtype);	
+		//return $jobtype;
 	   
-	   return view('website.candidates.jobs.browse.index',compact('jobs'));
+		if ( $request->has("q") ) {
+			$jobs = Job::searchJobs( $request )->paginate(5)->appends($request->input());
+		} else {
+		   $jobs = Job::activeJobs()->paginate(5);
+		} 
+	   
+		return view('website.candidates.jobs.browse.index',compact('jobs','jobtypes','seljobtypes'));
 	   
    }
    

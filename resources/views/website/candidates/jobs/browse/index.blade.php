@@ -20,20 +20,15 @@
 ================================================== -->
 <div class="container">
 	<!-- Recent Jobs -->
-	<div class="sixteen columns">
+	<div class="eleven columns">
 		<div class="padding-right">
-
-			{!!Form::open(['route'=>'jobs/browse', 'method'=>'GET', 'class'=>'tooltips list-search search-jobs'])!!}				
-				<button><i class="fa fa-search"></i></button>
-				<input type="text" name="q" placeholder="{{trans('labels.Browse_Jobs_Search_Placeholder')}}" value="{{ app('request')->input('q') }}"/>
-				<div class="clearfix"></div>
-			{!!Form::close()!!}
-
 			<div id="jobs-list">
 				@include('website.candidates.jobs.browse.partials.jobs')
 			</div>
 		</div>
 	</div>
+	
+	@include('website.candidates.jobs.browse.partials.filters')
 	
 </div>
 

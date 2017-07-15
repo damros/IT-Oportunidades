@@ -13,6 +13,7 @@ return [
 	'Education' => 'Educación',
 	'Experience' => 'Experiencia Laboral',
 	'Identification' => 'DNI',
+	'Location' => 'Ubicación',
 	'Phone' => 'Teléfono',
 	'Urls' => 'Urls',
 	'Video' => 'Video',
