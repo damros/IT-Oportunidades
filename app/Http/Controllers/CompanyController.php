@@ -24,7 +24,9 @@ class CompanyController extends Controller
      */
     public function index()
     {
-        //
+          $companies = Company::all();
+
+        return view('admin.company.index',compact('companies'));  
     }
 
     /**
@@ -67,7 +69,8 @@ class CompanyController extends Controller
      */
     public function edit($id)
     {
-        //
+        $company = Company::find($id);
+        return view('admin.company.detail',['company'=>$company]);
     }
 
     /**

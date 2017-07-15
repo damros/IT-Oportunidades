@@ -13,9 +13,10 @@ use Carbon\Carbon;
 class Candidate extends Model
 {
     protected $table = "candidates";
-
+    protected $appends = ['photo_candidate'];
     protected $fillable = ['name','identification','phone','address','photo','video','profesional_title','resume_content','resume_file','description','user_id'];
-	
+    
+    
 	/**
     * Get the user that owns the phone.
     */
@@ -46,6 +47,12 @@ class Candidate extends Model
     /*public function application(){
         return $this->belongsTo('ITOportunidades\CandidateApplication');
     }*/
+    
+    public function getPhotoCandidateAttribute(){
+        return ($this->photo ? $this->photo : 'avatar-placeholder.png');
+        //return \Storage::disk('candidatephoto')->getDriver()->getAdapter()->getPathPrefix(); //\Storage::disk('candidatephoto')->url('AvatarCandidato.jpg');
+    }
+            
     
     public function setPhotoAttribute( $photo ) {
 		$name = $this->attributes["id"].Carbon::now()->timestamp.".".$photo->getClientOriginalExtension();

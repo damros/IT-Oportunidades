@@ -9,7 +9,7 @@ use Carbon\Carbon;
 class Company extends Model
 {
     protected $table = "companys";
-
+    protected $appends = ['logo_company'];
     protected $fillable = ['name','identification','phone','website','tagline','logo','video','twitter','profile_detail','user_id','actived'];
 	
 	public function urls() {
@@ -20,7 +20,11 @@ class Company extends Model
 		$name = $this->attributes["id"].Carbon::now()->timestamp.".".$logo->getClientOriginalExtension();
         $this->attributes["logo"] = $name;
 		\Storage::disk('companylogo')->put($name, \File::get($logo));
-    }	
+    }
+    
+    public function getLogoCompanyAttribute(){
+        return ($this->logo ? $this->logo:'company-logo.png');
+    }
 	
 	static function jobsByCompany( $id ) {
 		

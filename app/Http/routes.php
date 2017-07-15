@@ -37,6 +37,7 @@ Route::group(['prefix' => 'admin'], function () {
 		Route::resource('categorys','CategoryController');
 		Route::resource('permissions','PermissionController');
 		Route::resource('candidates','CandidateController');
+                Route::resource('companies','CompanyController');
 	});		
 	
 });

@@ -1,20 +1,21 @@
+<div class='box'><div class='box-body'>
 <div class="col-xs-6">
 	{!!Form::label('Nombre','Nombre:')!!}
-	{!!Form::text('name',$candidate->name,['class'=>'form-control'])!!}
+	{!!Form::text('name',$candidate->name,['class'=>'form-control','readonly' => 'true', 'style'=>'cursor:default; background-color:white'])!!}
 </div>
 <div class="col-xs-6">
 	{!!Form::label('dni','DNI:')!!}
-	{!!Form::text('dni',$candidate->identification,['class'=>'form-control'])!!}
+	{!!Form::text('dni',$candidate->identification,['class'=>'form-control','readonly' => 'true', 'style'=>'cursor:default; background-color:white'])!!}
 </div>
 
 <div class="col-xs-6">
 	{!!Form::label('telefono','Teléfono:')!!}
-	{!!Form::text('telefono',$candidate->phone,['class'=>'form-control'])!!}
+	{!!Form::text('telefono',$candidate->phone,['class'=>'form-control','readonly' => 'true', 'style'=>'cursor:default; background-color:white'])!!}
 </div>
 
 <div class="col-xs-6">
 	{!!Form::label('tituloProfesional','Titulo Profesional:')!!}
-	{!!Form::text('tituloProfesional',$candidate->profesional_title,['class'=>'form-control'])!!}
+	{!!Form::text('tituloProfesional',$candidate->profesional_title,['class'=>'form-control','readonly' => 'true', 'style'=>'cursor:default; background-color:white'])!!}
 </div>
 <div class="col-xs-6">
 	{!!Form::label('categoriasPreferidas','Categorias Preferidas:')!!}
@@ -23,12 +24,12 @@
 	@foreach ($candidate->categorys as $category)
 	<?php
 	if ($category->preferred) {
-		$categoriesPrefer = $categoriesPrefer . $category->category->name . '; ';
+		$categoriesPrefer = $categoriesPrefer . $category->category->full_name . '; ';
 	}
 	?>  
 	@endforeach
 
-	{!!Form::text('categoriasPreferidas', $categoriesPrefer ,['class'=>'form-control'])!!}					
+	{!!Form::text('categoriasPreferidas', $categoriesPrefer ,['class'=>'form-control','readonly' => 'true', 'style'=>'cursor:default; background-color:white'])!!}					
 
 </div>
 
@@ -39,21 +40,21 @@
 	@foreach ($candidate->categorys as $category)
 	<?php
 	if (!$category->preferred) {
-		$categoriesAditional = $categoriesAditional . $category->category->name . '; ';
+		$categoriesAditional = $categoriesAditional . $category->category->full_name . '; ';
 	}
 	?>
 	@endforeach
 
-	{!!Form::text('categoriasPreferidas', $categoriesAditional ,['class'=>'form-control'])!!}					
+	{!!Form::text('categoriasPreferidas', $categoriesAditional ,['class'=>'form-control','readonly' => 'true', 'style'=>'cursor:default; background-color:white'])!!}					
 
 </div>
 <div class="col-xs-6">
 	{!!Form::label('direccion','Domicilio:')!!}
-	{!!Form::text('direccion',$candidate->address,['class'=>'form-control'])!!}
+	{!!Form::text('direccion',$candidate->address,['class'=>'form-control','readonly' => 'true', 'style'=>'cursor:default; background-color:white'])!!}
 </div>
 <div class="col-xs-6">
 	{!!Form::label('videoPersonal','Video:')!!}
-	{!!Form::text('videoPersonal',$candidate->video,['class'=>'form-control'])!!}
+	{!!Form::text('videoPersonal',$candidate->video,['class'=>'form-control','readonly' => 'true', 'style'=>'cursor:default; background-color:white'])!!}
 </div>
 
 <div class="col-xs-12">
@@ -61,24 +62,14 @@
         <div style="border: 1px solid #ccc; padding: 6px 12px; background-color: white">{!!$candidate->resume_content!!}</div>
 </div>
 
-<div class="col-xs-6">
-	{!!Form::label('foto','Foto:')!!}
-	<img src="/images/candidatephoto/{{$candidate->photo}}" alt="" style="width: 200px; height: 200px;"/>
-
-</div>
-
-<div class="col-xs-6">
-	{!!Form::label('archivoCurriculum','Archivo de Curriculum:')!!}
-
-	<a href="/documents/resumes/{{$candidate->resume_file}}" target="{{$candidate->id}}"  >
-		<img src="/images/download.png" style="width: 75px; height: 75px;"/>
-	</a>
-
-</div>
-
-<div class="col-xs-12">
-	{!!Form::label('urls','URL(s):')!!}
-	<table class="table">
+</div></div>
+        
+<div class="col-xs-12 box" >
+        <div class='box-header'>
+            <h3 class="box-title">{!!Form::label('urls','URL(s):')!!}</h3>
+        </div>   
+        <div class='box-body no-padding'>
+	<table class="table table-striped">
 		<thead>
 		<th>Nombre</th>
 		<th>URL</th>
@@ -91,11 +82,14 @@
 			</tr> 
 			@endforeach
 		</tbody>
-	</table>
+	</table></div>
 </div>
-<div class="col-xs-12">
-	{!!Form::label('educacion','Educacion:')!!}
-	<table class="table">
+<div class="col-xs-12 box">
+    <div class='box-header'>
+        <h3 class="box-title">{!!Form::label('educacion','Educacion:')!!}</h3>
+    </div>
+    <div class='box-body no-padding'>
+	<table class="table table-striped">
 		<thead>
 		<th>Institución</th>
 		<th>Título obtenido o Contenido del curso</th>
@@ -113,11 +107,16 @@
 			@endforeach
 		</tbody>
 	</table>
+    </div>
 </div>
 
-<div class="col-xs-12">
-	{!!Form::label('experienciaLaboral','Experiencia Laboral:')!!}
-	<table class="table">
+<div class="col-xs-12 box">
+    <div class='box-header'>
+        <h3 class="box-title">{!!Form::label('experienciaLaboral','Experiencia Laboral:')!!}</h3>
+    </div>
+    
+    <div class='box-body no-padding'>
+	<table class="table table-striped">
 		<thead>
 		<th>Empleador</th>
 		<th>Puesto</th>
@@ -135,7 +134,7 @@
 			@endforeach
 		</tbody>
 	</table>
-
+    </div>
 </div>
 
 

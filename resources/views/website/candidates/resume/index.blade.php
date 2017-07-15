@@ -107,11 +107,11 @@
 			</div>
 
 			@if ( Auth::check() )
-				@if ( currentUser()->candidate->photo )
+				
 					<div class="form">
-						<img src="/images/candidatephoto/{{currentUser()->candidate->photo}}" alt="" style="width: 200px; height: 200px;"/>
+						<img src="/images/candidatephoto/{{currentUser()->candidate->photo_candidate}}" alt="" style="width: 200px; height: 200px;"/>
 					</div>
-				@endif
+				
 			@endif
 
 			<!-- Video -->
