@@ -20,7 +20,7 @@
 ================================================== -->
 <div class="container">
 	<!-- Recent Jobs -->
-	<div class="eleven columns">
+	<div class="twelve columns">
 		<div class="padding-right">
 			<div id="jobs-list">
 				@include('website.candidates.jobs.browse.partials.jobs')
@@ -28,8 +28,9 @@
 		</div>
 	</div>
 	
-	@include('website.candidates.jobs.browse.partials.filters')
-	
+	<div class="four columns">
+		@include('website.candidates.jobs.browse.partials.filters')
+	</div>
 </div>
 
 

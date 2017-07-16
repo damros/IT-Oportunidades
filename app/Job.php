@@ -14,9 +14,12 @@ class Job extends Model
 
     protected $fillable = ['company_id','title','location','job_type_id','tags','description','salary','start_date','end_date','fill_date'];
 
-    public function company()
-        {
+    public function company() {
         return $this->belongsTo('ITOportunidades\Company');
+    }
+
+	public function type() {
+        return $this->belongsTo('ITOportunidades\JobType','job_type_id');
     }
 	
     public function categorys() {

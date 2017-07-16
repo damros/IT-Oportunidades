@@ -70,6 +70,7 @@
 			<div class="form">
 				<div class="select">
 					<h5>{{ trans('labels.Candidate_Preferred_Categorys') }}</h5>
+					<p class="note">{{trans('labels.Candidate_Preferred_Categorys_Note')}}</p>
 					<select name="preferred_category[]" data-placeholder="{{trans('labels.Candidate_Preferred_Categorys_Placeholder')}}" class="chosen-select" multiple>							
 						@foreach ($categorys as $category)						
 						<option value="{{$category->id}}" <?php echo ((in_array($category->id, $pref_cats) ? " selected='selected'" : "")) ?> >{{$category->full_name}}</option>
@@ -81,7 +82,8 @@
 			<!-- Choose Category -->
 			<div class="form">
 				<div class="select">
-					<h5>{{ trans('labels.Candidate_Categorys') }}</h5>
+					<h5>{{ trans('labels.Candidate_Additional_Categorys') }}</h5>
+					<p class="note">{{trans('labels.Candidate_Additional_Categorys_Note')}}</p>
 					<select name="category[]" data-placeholder="{{trans('labels.Candidate_Categorys_Placeholder')}}" class="chosen-select" multiple>							
 						@foreach ($categorys as $category)
 						<option value="{{$category->id}}" <?php echo ((in_array($category->id, $cats) ? " selected='selected'" : "")) ?> >{{$category->full_name}}</option>
@@ -107,11 +109,11 @@
 			</div>
 
 			@if ( Auth::check() )
-				
-					<div class="form">
-						<img src="/images/candidatephoto/{{currentUser()->candidate->photo_candidate}}" alt="" style="width: 200px; height: 200px;"/>
-					</div>
-				
+
+			<div class="form">
+				<img src="/images/candidatephoto/{{currentUser()->candidate->photo_candidate}}" alt="" style="width: 200px; height: 200px;"/>
+			</div>
+
 			@endif
 
 			<!-- Video -->
@@ -127,7 +129,6 @@
 			</div>
 
 			<!-- Resume File -->
-
 			<div class="form">
 				<h5>{{trans('labels.Resume_File')}}</h5>
 
@@ -137,29 +138,26 @@
 				</label>
 
 				<span class="fake-input candidate-resume">
-
 					@if ( Auth::check() )
-						@if ( currentUser()->candidate->resume_file )
-							{{currentUser()->candidate->resume_file}}
-						@else   
-							{{ trans('labels.No_file_selected') }}
-						@endif
+					@if ( currentUser()->candidate->resume_file )
+					{{currentUser()->candidate->resume_file}}
+					@else   
+					{{ trans('labels.No_file_selected') }}
+					@endif
 					@else
-						{{ trans('labels.No_file_selected') }}
+					{{ trans('labels.No_file_selected') }}
 					@endif
 				</span>
 				@if ( Auth::check() )
-					@if ( currentUser()->candidate->resume_file )
-						<div class="form" style="width: 75px; height: 75px;" title="Descargar Curriculum">
-							<a href="/documents/resumes/{{currentUser()->candidate->resume_file}}" target="{{currentUser()->candidate->id}}"  >
-								<img src="images/download.png" style="width: 75px; height: 75px;"/>
-							</a>
-						</div>
-					@endif
+				@if ( currentUser()->candidate->resume_file )
+				<div class="form" style="width: 75px; height: 75px;" title="Descargar Curriculum">
+					<a href="/documents/resumes/{{currentUser()->candidate->resume_file}}" target="{{currentUser()->candidate->id}}"  >
+						<img src="images/download.png" style="width: 75px; height: 75px;"/>
+					</a>
+				</div>
+				@endif
 				@endif
 			</div>
-
-
 
 
 			<!-- Add URLs -->
@@ -176,14 +174,14 @@
 					</div>					
 
 					@if (Auth::check())
-						@foreach (currentUser()->candidate->urls as $url)
-							<div class="form boxed url-box box-loaded">
-								<a href="#" class="close-form remove-box button"><i class="fa fa-close"></i></a>
-								<input name="url_name[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_URL_Name')}}" value="{{ $url->name }}"/>
-								<input name="url_path[]" class="search-field" type="text" placeholder="http://" value="{{ $url->url }}"/>
-								<input name="url_reg[]" class="search-field regfield" type="hidden" value="1"/>									
-							</div>								
-						@endforeach
+					@foreach (currentUser()->candidate->urls as $url)
+					<div class="form boxed url-box box-loaded">
+						<a href="#" class="close-form remove-box button"><i class="fa fa-close"></i></a>
+						<input name="url_name[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_URL_Name')}}" value="{{ $url->name }}"/>
+						<input name="url_path[]" class="search-field" type="text" placeholder="http://" value="{{ $url->url }}"/>
+						<input name="url_reg[]" class="search-field regfield" type="hidden" value="1"/>									
+					</div>								
+					@endforeach
 					@endif
 
 					<a href="#" class="button gray add-url add-box"><i class="fa fa-plus-circle"></i> {{trans('labels.Add_URL')}}</a>
@@ -207,16 +205,16 @@
 					</div>
 
 					@if (Auth::check())
-						@foreach (currentUser()->candidate->educations as $education)
-							<div class="form boxed box-to-clone url-box box-loaded">
-								<a href="#" class="close-form remove-box button"><i class="fa fa-close"></i></a>
-								<input name="education_name[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_Education_School_Name')}}" value="{{ $education->school_name }}"/>
-								<input name="education_qualification[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_Education_Qualifications')}}" value="{{ $education->qualifications }}"/>
-								<input name="education_dates[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_Education_Dates')}}" value="{{ $education->edates }}"/>
-								<textarea name="education_notes[]" id="desc" cols="30" rows="10" placeholder="{{trans('labels.Candidate_Education_Notes')}}">{{ $education->notes }}</textarea>
-								<input name="education_reg[]" class="search-field regfield" type="hidden" value="1"/>							
-							</div>								
-						@endforeach
+					@foreach (currentUser()->candidate->educations as $education)
+					<div class="form boxed box-to-clone url-box box-loaded">
+						<a href="#" class="close-form remove-box button"><i class="fa fa-close"></i></a>
+						<input name="education_name[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_Education_School_Name')}}" value="{{ $education->school_name }}"/>
+						<input name="education_qualification[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_Education_Qualifications')}}" value="{{ $education->qualifications }}"/>
+						<input name="education_dates[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_Education_Dates')}}" value="{{ $education->edates }}"/>
+						<textarea name="education_notes[]" id="desc" cols="30" rows="10" placeholder="{{trans('labels.Candidate_Education_Notes')}}">{{ $education->notes }}</textarea>
+						<input name="education_reg[]" class="search-field regfield" type="hidden" value="1"/>							
+					</div>								
+					@endforeach
 					@endif						
 
 					<a href="#" class="button gray add-education add-box"><i class="fa fa-plus-circle"></i> {{trans('labels.Add_Education')}}</a>
@@ -239,16 +237,16 @@
 					</div>
 
 					@if (Auth::check())
-						@foreach (currentUser()->candidate->experiences as $experience)
-							<div class="form boxed box-to-clone url-box box-loaded">
-								<a href="#" class="close-form remove-box button"><i class="fa fa-close"></i></a>
-								<input name="experience_employeer[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_Experience_Employeer')}}" value="{{ $experience->employeer }}"/>
-								<input name="experience_title[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_Experience_Job_Title')}}" value="{{ $experience->job_title }}"/>
-								<input name="experience_dates[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_Experience_Dates')}}" value="{{ $experience->edates }}"/>
-								<textarea name="experience_notes[]" id="desc1" cols="30" rows="10" placeholder="{{trans('labels.Candidate_Experience_Notes')}}">{{ $experience->notes }}</textarea>
-								<input name="experience_reg[]" class="search-field regfield" type="hidden" value="1"/>							
-							</div>								
-						@endforeach
+					@foreach (currentUser()->candidate->experiences as $experience)
+					<div class="form boxed box-to-clone url-box box-loaded">
+						<a href="#" class="close-form remove-box button"><i class="fa fa-close"></i></a>
+						<input name="experience_employeer[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_Experience_Employeer')}}" value="{{ $experience->employeer }}"/>
+						<input name="experience_title[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_Experience_Job_Title')}}" value="{{ $experience->job_title }}"/>
+						<input name="experience_dates[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_Experience_Dates')}}" value="{{ $experience->edates }}"/>
+						<textarea name="experience_notes[]" id="desc1" cols="30" rows="10" placeholder="{{trans('labels.Candidate_Experience_Notes')}}">{{ $experience->notes }}</textarea>
+						<input name="experience_reg[]" class="search-field regfield" type="hidden" value="1"/>							
+					</div>								
+					@endforeach
 					@endif
 
 					<a href="#" class="button gray add-experience add-box"><i class="fa fa-plus-circle"></i> {{trans('labels.Add_Experience')}}</a>

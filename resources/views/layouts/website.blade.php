@@ -96,13 +96,16 @@
 					<li><a href="{!!URL::to('my-account')!!}"><i class="fa fa-lock"></i>{{trans('labels.Login')}} </a></li>
 				@else
 					<li><a href="#">{{currentUser()->name}}</a>
-						@if (currentUser()->profile->code == 'co')
-							<ul>													
-								<li>
-									<a href="{!!URL::to('company/profile')!!}">{{trans('labels.Company_Profile')}}</a>
-								</li>													
-							</ul>
-						@endif
+						<ul>	
+							@if (currentUser()->profile->code == 'co')
+							<li>
+								<a href="{!!URL::to('company/profile')!!}">{{trans('labels.Company_Profile')}}</a>
+							</li>													
+							@endif							
+							<li>
+								<a href="{!!URL::to('password/change')!!}">{{trans('labels.Change_Password')}}</a>
+							</li>													
+						</ul>
 					</li>						
 					<li><a href="{{route('webLogout')}}">{{trans('labels.Logout')}}</a></li>
 				@endif				

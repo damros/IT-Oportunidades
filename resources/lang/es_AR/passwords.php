@@ -13,7 +13,11 @@ return [
     |
     */
 
+    'current_password_required' => 'Ingrese la contraseña actual',
+    'incorrect_current_password' => 'La contraseña actual es incorrecta',
+    'new_password_required' => 'Ingrese la nueva contraseña',
     'password' => 'Las contraseñas deben coincidir y contener al menos 6 caracteres',
+    'password_changed_successfully' => 'La contraseña fue modificada exitosamente!',
     'reset'    => '¡Tu contraseña ha sido restablecida!',
     'sent'     => '¡Te hemos enviado por correo el enlace para restablecer tu contraseña!',
     'token'    => 'El token de recuperación de contraseña es inválido.',

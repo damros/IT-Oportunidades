@@ -12,6 +12,9 @@ use ITOportunidades\UserActivation;
 use ITOportunidades\Factories\UserFactory;
 use Session;
 use Redirect;
+use Validator;
+use Auth;
+use Hash;
 
 class UserController extends Controller
 {	
@@ -201,5 +204,42 @@ class UserController extends Controller
 
         return redirect()->to('my-account')
                 ->with('warning',trans('messages.Token_Invalid'));
-    }	
+    }
+	
+	public function admin_credential_rules(array $data) {
+		$messages = [
+			'current-password.required' => trans('passwords.current_password_required'),
+			'password.required' => trans('passwords.new_password_required'),
+		];
+
+		$validator = Validator::make($data, [
+							'current-password' => 'required',
+							'password' => 'required|same:password|min:6',
+							'password_confirmation' => 'required|same:password',
+						], $messages);
+
+		return $validator;
+	}
+
+	public function changePassword(Request $request) {
+
+		$request_data = $request->All();
+		$validator = $this->admin_credential_rules($request_data);
+		if ($validator->fails()) {			
+			return redirect()->back()->withErrors($validator->errors());
+		} else {
+			$current_password = Auth::User()->password;
+			if (Hash::check($request_data['current-password'], $current_password)) {
+				$user_id = Auth::User()->id;
+				$obj_user = User::find($user_id);
+				$obj_user->password = Hash::make($request_data['password']);
+				$obj_user->save();
+				return redirect()->back()
+						->with('success',trans('passwords.password_changed_successfully'));
+			} else {
+				$error = array('current-password' => trans('passwords.incorrect_current_password'));
+				return redirect()->back()->withErrors($error);				
+			}
+		}
+	}	
 }

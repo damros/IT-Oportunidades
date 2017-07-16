@@ -103,26 +103,22 @@ Route::post('applications/manage/note', [
   'uses' => 'CandidateApplicationController@editNote'
 ]);
 
-Route::get('jobs/browse', [
-  'as' => 'jobs/browse', 
-  'uses' => 'FrontController@browseJobs'
-]);
 
 // El retorno de todas las vistas del website se hacen desde el frontcontroller
-Route::get('my-account','FrontController@myaccount');
-Route::get('resume','FrontController@resume');
+Route::get('about-us','FrontController@aboutUs');
+Route::get('applications/manage/{id}','FrontController@applicationManage');
+Route::get('company/profile','FrontController@editCompany');
 Route::get('contact','FrontController@contact');
+Route::get('jobs/browse','FrontController@browseJobs');
 Route::get('jobs/add','FrontController@addJob');
 Route::get('jobs/manage','FrontController@manageJobs');
-Route::get('jobs/edit/{id}','FrontController@editJob');
-Route::get('applications/manage/{id}','FrontController@applicationManage');
 Route::get('jobs/{id}','FrontController@viewJob');
-Route::get('company/profile','FrontController@editCompany');
-Route::get('terms','FrontController@termsOfService');
-Route::get('about-us','FrontController@aboutUs');
 Route::get('jobs/candidates/find/{id}','FrontController@candidatesByJob');
 Route::get('jobs/candidates/detail/{id}','FrontController@candidateDetail');
-
+Route::get('jobs/edit/{id}','FrontController@editJob');
+Route::get('my-account','FrontController@myaccount');
+Route::get('resume','FrontController@resume');
+Route::get('terms','FrontController@termsOfService');
 Route::get('user/activation/{token}', 'UserController@userActivation');
 
 Route::resource('user','UserController');
@@ -134,5 +130,8 @@ Route::post('password','Auth\WebsitePasswordController@postEmail');
 
 Route::get('password/reset/{token}','Auth\WebsitePasswordController@getReset');
 Route::post('password/reset','Auth\WebsitePasswordController@postReset');
+
+Route::get('password/change','FrontController@getChange');
+Route::post('password/change','UserController@changePassword');
 
 /**** END WEBSITE ****/
