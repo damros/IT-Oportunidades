@@ -42,19 +42,8 @@
 			<!-- Select -->
 			<select name="filter" data-placeholder="Filtrar por nivel de coincidencia" class="chosen-select-no-single">
 				<option value="">Filtrar por nivel de coincidencia</option>
-				<option value="hig">Alto</option>
-				<option value="med">Medio</option>
-				<option value="all">Todos</option>
-			</select>
-			<div class="margin-bottom-15"></div>
-		</div>
-
-		<div class="seven columns">
-			<!-- Select -->
-			<select name="order" data-placeholder="Ordenar por" class="chosen-select-no-single">
-				<option value="">Ordenar por</option>
-				<option value="name">Ordenar por nombre</option>
-				<option value="accuracy">Ordenar por nivel de coincidencia</option>
+				<option <?php echo ( app('request')->input('filter') == "hig" ? " selected='selected'" : "") ?> value="hig">Alto</option>
+				<option <?php echo ( app('request')->input('filter') == "med" ? " selected='selected'" : "") ?> value="med">Medio</option>
 			</select>
 			<div class="margin-bottom-15"></div>
 		</div>	
@@ -68,7 +57,7 @@
 	<!-- Table -->
 	<div class="sixteen columns">
 
-		<table class="manage-table responsive-table">
+		<table class="manage-table responsive-table candidates-list">
 
 			<tr>
 				<th><i class="fa fa-user"></i> {{ trans('labels.Candidate_Name') }}</th>
@@ -84,7 +73,7 @@
 				<td class="title">{{$candidate->name}}</td>
 				<td>{{$candidate->professional_title}}</td>
 				<td>{{$candidate->user->email}}</td>
-				<td>{{$candidate->job_accuracy}}</td>
+				<td class="centered"><h4><span class="{{$candidate->job_accuracy}}">{{trans('misc.'.$candidate->job_accuracy)}}</span></h4></td>
 				<td class="action">
 					@if ($candidate->resume_file)
 					<a href="/documents/resumes/{{$candidate->resume_file}}" target="_blank"><i class="fa fa-download"></i> {{trans('labels.Donwload_Resume_File')}}</a>

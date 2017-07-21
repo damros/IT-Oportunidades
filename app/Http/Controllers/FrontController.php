@@ -183,6 +183,10 @@ class FrontController extends Controller {
 		$job = Job::find($id);
 		$candidates = Candidate::candidatesByJob($job);
 		
+		if (($f = $request->filter)) {
+			$candidates = $candidates->where('job_accuracy',$f);
+		}
+		
 
 		return view('website.company.jobs.manage.candidates.index', compact('candidates', 'job'));
 	}

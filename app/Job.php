@@ -194,7 +194,7 @@ class Job extends Model
 	
 	public function getCandidateAccuracy( $c ) {
 		
-		$ac = trans('words.Medium');
+		$ac = 'med';
 		$pcc = $this->categorys()->count();
 		
 		$jcc = JobCategory::join('candidates_categorys', 'candidates_categorys.category_id', '=', 'jobs_categorys.category_id') 
@@ -209,17 +209,17 @@ class Job extends Model
 		switch ($pcc) {
 			case ($pcc <= 3):
 				if ( $acp > 0.6 ) {
-					$ac = trans('words.High');
+					$ac = 'hig';
 				}
 				break;
 			case ($pcc >= 4 && $pcc <= 7):
 				if ( $acp > 0.5 ) {
-					$ac = trans('words.High');
+					$ac = 'hig';
 				}
 				break;
 			case ($pcc >= 8):
 				if ( $acp > 0.4 ) {
-					$ac = trans('words.High');
+					$ac = 'hig';
 				}
 				break;
 			default:								

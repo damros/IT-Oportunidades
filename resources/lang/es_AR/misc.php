@@ -15,5 +15,6 @@ return [
 	'stars-3' => 'three',
 	'stars-4' => 'four',
 	'stars-5' => 'five',
-	
+	'hig' => 'Alto',
+	'med' => 'Medio'
 ];
