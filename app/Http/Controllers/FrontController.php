@@ -180,8 +180,9 @@ class FrontController extends Controller {
 
 	public function candidatesByJob($id, Request $request) {
 
-		$candidates = Candidate::candidatesByJob($id);
 		$job = Job::find($id);
+		$candidates = Candidate::candidatesByJob($job);
+		
 
 		return view('website.company.jobs.manage.candidates.index', compact('candidates', 'job'));
 	}

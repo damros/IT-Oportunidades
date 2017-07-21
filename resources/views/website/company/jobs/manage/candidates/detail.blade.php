@@ -11,11 +11,7 @@
 	<div class="container">
 		<div class="sixteen columns">
 			<div class="resume-titlebar">
-				@if ($candidate->photo)
-				<img src="/images/candidatephoto/{{$candidate->photo}}" />
-				@else
-				<img src="/images/avatar-placeholder.png" alt="">
-				@endif
+				<img src="{{$candidate->photo_candidate}}" />
 				<div class="resumes-list-content">
 					<h4>{{$candidate->name}} <span>{{$candidate->profesional_title}}</span></h4>
 					<span class="icons"><i class="fa fa-map-marker"></i> {{$candidate->address}}</span>

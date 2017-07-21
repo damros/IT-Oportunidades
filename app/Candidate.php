@@ -13,7 +13,9 @@ use Carbon\Carbon;
 class Candidate extends Model
 {
     protected $table = "candidates";
-    protected $appends = ['photo_candidate'];
+	
+    protected $appends = ['photo_candidate','job_accuracy'];
+	
     protected $fillable = ['name','identification','phone','address','photo','video','profesional_title','resume_content','resume_file','description','user_id'];
     
     
@@ -49,7 +51,7 @@ class Candidate extends Model
     }*/
     
     public function getPhotoCandidateAttribute(){
-        return ($this->photo ? $this->photo : 'avatar-placeholder.png');
+        return '/images/candidatephoto/'.($this->photo ? $this->photo : 'avatar-placeholder.png');
         //return \Storage::disk('candidatephoto')->getDriver()->getAdapter()->getPathPrefix(); //\Storage::disk('candidatephoto')->url('AvatarCandidato.jpg');
     }
             
@@ -203,9 +205,9 @@ class Candidate extends Model
 		}		
     }
 	
-	static function candidatesByJob( $id ) {
+	static function candidatesByJob( $job ) {
 		
-		$jobc = JobCategory::where('job_id',$id)
+		$jobc = JobCategory::where('job_id',$job->id)
 							->where('principal',true)
 							->firstOrFail();
 		
@@ -216,6 +218,11 @@ class Candidate extends Model
 		
 		$ca = Candidate::whereIn('id',$candidates)
 						->get();
+		
+		foreach ($ca as $c) {		
+			$ac = $job->getCandidateAccuracy($c);
+			$c->job_accuracy = $ac;
+		}
 		
 		return $ca;
 		

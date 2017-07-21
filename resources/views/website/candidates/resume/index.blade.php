@@ -111,7 +111,7 @@
 			@if ( Auth::check() )
 
 			<div class="form">
-				<img src="/images/candidatephoto/{{currentUser()->candidate->photo_candidate}}" alt="" style="width: 200px; height: 200px;"/>
+				<img src="{{currentUser()->candidate->photo_candidate}}" alt="" style="width: 200px; height: 200px;"/>
 			</div>
 
 			@endif

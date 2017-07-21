@@ -190,5 +190,42 @@ class Job extends Model
 		}
 			
 		return $jobs;
-	}	
+	}
+	
+	public function getCandidateAccuracy( $c ) {
+		
+		$ac = trans('words.Medium');
+		$pcc = $this->categorys()->count();
+		
+		$jcc = JobCategory::join('candidates_categorys', 'candidates_categorys.category_id', '=', 'jobs_categorys.category_id') 
+					->where('jobs_categorys.job_id', $this->id) 
+					->where('candidates_categorys.candidate_id', $c->id) 
+					->select('candidates_categorys.*') 
+					->get()
+					->count();
+		
+		$acp = $jcc / $pcc;
+		
+		switch ($pcc) {
+			case ($pcc <= 3):
+				if ( $acp > 0.6 ) {
+					$ac = trans('words.High');
+				}
+				break;
+			case ($pcc >= 4 && $pcc <= 7):
+				if ( $acp > 0.5 ) {
+					$ac = trans('words.High');
+				}
+				break;
+			case ($pcc >= 8):
+				if ( $acp > 0.4 ) {
+					$ac = trans('words.High');
+				}
+				break;
+			default:								
+				break;				
+		}
+
+		return $ac;
+	}
 }

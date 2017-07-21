@@ -132,6 +132,7 @@ return [
     'Home_Slide_2_Title' => 'Contratá grandes talentos',
     'Home_Slide_2_Detail' => 'IT Oportunidades es la nueva plataforma de búsqueda de talentos, que contecta <br> las mejores mentes con las empresas que los necesitan.',
     'Information' => 'Información',
+    'Job_Accuracy' => 'Coincidencia',
     'Job_Apply_Message_Placeholder' => 'Un mensaje que desees enviar a la empresa',
     'Job_Application_Begin' => 'Las solicitudes de empleo para ',
     'Job_Application_End' => 'se enumeran a continuación: ',

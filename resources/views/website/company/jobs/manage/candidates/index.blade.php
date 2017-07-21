@@ -35,7 +35,35 @@
 
 		<p class="margin-bottom-25" style="float: left;">{{ trans('labels.Job_Candidates_Heading_Begin') }} <strong><a target='{{$job->id}}' href="{!!URL::to('jobs/edit/'.$job->id.'')!!}">{{$job->title}} </a></strong>{{ trans('labels.Job_Candidates_Heading_End') }} </p>
 
-	</div>	
+	</div>
+
+	<form action="{!!URL::current()!!}" method="GET">
+		<div class="seven columns">
+			<!-- Select -->
+			<select name="filter" data-placeholder="Filtrar por nivel de coincidencia" class="chosen-select-no-single">
+				<option value="">Filtrar por nivel de coincidencia</option>
+				<option value="hig">Alto</option>
+				<option value="med">Medio</option>
+				<option value="all">Todos</option>
+			</select>
+			<div class="margin-bottom-15"></div>
+		</div>
+
+		<div class="seven columns">
+			<!-- Select -->
+			<select name="order" data-placeholder="Ordenar por" class="chosen-select-no-single">
+				<option value="">Ordenar por</option>
+				<option value="name">Ordenar por nombre</option>
+				<option value="accuracy">Ordenar por nivel de coincidencia</option>
+			</select>
+			<div class="margin-bottom-15"></div>
+		</div>	
+		
+		<div class="two columns">
+			<button class="button">{{ trans('labels.Search') }}</button>
+			<div class="margin-bottom-15"></div>
+		</div>
+	</form>
 	
 	<!-- Table -->
 	<div class="sixteen columns">
@@ -46,6 +74,7 @@
 				<th><i class="fa fa-user"></i> {{ trans('labels.Candidate_Name') }}</th>
 				<th><i class="fa fa-info-circle"></i> {{ trans('labels.Candidate_Professional_Title') }}</th>
 				<th><i class="fa fa-envelope"></i> {{ trans('labels.Email_Address') }}</th>
+				<th><i class="fa fa-bullseye"></i> {{ trans('labels.Job_Accuracy') }}</th>
 				<th><i class="fa fa-align-justify"></i> {{ trans('labels.Actions') }}</th>
 			</tr>
 			
@@ -55,6 +84,7 @@
 				<td class="title">{{$candidate->name}}</td>
 				<td>{{$candidate->professional_title}}</td>
 				<td>{{$candidate->user->email}}</td>
+				<td>{{$candidate->job_accuracy}}</td>
 				<td class="action">
 					@if ($candidate->resume_file)
 					<a href="/documents/resumes/{{$candidate->resume_file}}" target="_blank"><i class="fa fa-download"></i> {{trans('labels.Donwload_Resume_File')}}</a>
