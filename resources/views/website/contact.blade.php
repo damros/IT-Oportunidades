@@ -130,7 +130,7 @@
 
 @section('scripts')
 <!-- Google Maps -->
-<script src="scripts/jquery.gmaps.min.js"></script>
+{!!Html::script('js/jquery.gmaps.min.js')!!}
 
 <script type="text/javascript">
 	(function($){

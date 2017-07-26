@@ -10,3 +10,14 @@
 .showbiz .overflowholder ul li img {
 	max-height: 80px;
 }
+
+.form .mid-fields.left {
+	width: 49%;
+	display: inline;
+	float: left;
+}
+.form .mid-fields.right {
+	width: 49%;
+	display: inline;
+    float: right;	
+}

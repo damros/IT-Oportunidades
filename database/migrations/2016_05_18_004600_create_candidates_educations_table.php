@@ -20,7 +20,8 @@ class CreateCandidatesEducationsTable extends Migration
                   ->onUpdate('cascade');            
             $table->string('school_name');
             $table->string('qualifications')->nullable();
-            $table->string('edates');
+            $table->string('date_from');
+            $table->string('date_to')->nullable();
             $table->string('notes')->nullable();                        
             $table->timestamps();
         });

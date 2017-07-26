@@ -50,12 +50,3 @@
 <div class="margin-top-60"></div>
 
 @endsection
-
-@section('scripts')
-
-<!-- WYSIWYG Editor -->
-{!!Html::script('scripts/jquery.sceditor.xhtml.min.js')!!}
-{!!Html::script('scripts/jquery.sceditor.js')!!}
-
-
-@endsection

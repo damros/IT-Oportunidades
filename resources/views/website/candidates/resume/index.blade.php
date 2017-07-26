@@ -197,10 +197,15 @@
 					<!-- Add Education -->
 					<div class="form boxed box-to-clone education-box">
 						<a href="#" class="close-form remove-box button"><i class="fa fa-close"></i></a>
-						<input name="education_name[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_Education_School_Name')}}" value=""/>
-						<input name="education_qualification[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_Education_Qualifications')}}" value=""/>
-						<input name="education_dates[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_Education_Dates')}}" value=""/>
-						<textarea name="education_notes[]" id="desc" cols="30" rows="10" placeholder="{{trans('labels.Candidate_Education_Notes')}}"></textarea>
+						<label>{{trans('labels.Candidate_Education_School_Name')}}</label>
+						<input name="education_name[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_Education_School_Name_Placeholder')}}" value=""/>
+						<label>{{trans('labels.Candidate_Education_Qualifications')}}</label>						
+						<input name="education_qualification[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_Education_Qualifications_Placeholder')}}" value=""/>
+						<label>{{trans('labels.Candidate_Education_Period')}}</label>						
+						<input name="education_date_from[]" class="search-field mid-fields left" type="text" placeholder="{{trans('labels.Candidate_Education_Date_From')}}" value=""/>
+						<input name="education_date_to[]" class="search-field mid-fields right" type="text" placeholder="{{trans('labels.Candidate_Education_Date_To')}}" value=""/>
+						<label>{{trans('labels.Candidate_Education_Notes')}}</label>						
+						<textarea name="education_notes[]" id="desc" cols="30" rows="10" placeholder="{{trans('labels.Candidate_Education_Notes_Placeholder')}}"></textarea>
 						<input name="education_reg[]" class="search-field regfield" type="hidden" value="0"/>							
 					</div>
 
@@ -210,7 +215,8 @@
 						<a href="#" class="close-form remove-box button"><i class="fa fa-close"></i></a>
 						<input name="education_name[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_Education_School_Name')}}" value="{{ $education->school_name }}"/>
 						<input name="education_qualification[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_Education_Qualifications')}}" value="{{ $education->qualifications }}"/>
-						<input name="education_dates[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_Education_Dates')}}" value="{{ $education->edates }}"/>
+						<input name="education_date_from[]" class="search-field mid-fields left" type="text" placeholder="{{trans('labels.Candidate_Education_Date_From')}}" value="{{ $education->date_from }}"/>
+						<input name="education_date_to[]" class="search-field mid-fields right" type="text" placeholder="{{trans('labels.Candidate_Education_Date_To')}}" value="{{ $education->date_to }}"/>						
 						<textarea name="education_notes[]" id="desc" cols="30" rows="10" placeholder="{{trans('labels.Candidate_Education_Notes')}}">{{ $education->notes }}</textarea>
 						<input name="education_reg[]" class="search-field regfield" type="hidden" value="1"/>							
 					</div>								
@@ -229,10 +235,15 @@
 					<!-- Add Experience -->
 					<div class="form boxed box-to-clone experience-box">
 						<a href="#" class="close-form remove-box button"><i class="fa fa-close"></i></a>
-						<input name="experience_employeer[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_Experience_Employeer')}}" value=""/>
-						<input name="experience_title[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_Experience_Job_Title')}}" value=""/>
-						<input name="experience_dates[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_Experience_Dates')}}" value=""/>
-						<textarea name="experience_notes[]" id="desc1" cols="30" rows="10" placeholder="{{trans('labels.Candidate_Experience_Notes')}}"></textarea>
+						<label>{{trans('labels.Candidate_Experience_Employeer')}}</label>						
+						<input name="experience_employeer[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_Experience_Employeer_Placeholder')}}" value=""/>
+						<label>{{trans('labels.Candidate_Experience_Job_Title')}}</label>						
+						<input name="experience_title[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_Experience_Job_Title_Placeholder')}}" value=""/>
+						<label>{{trans('labels.Candidate_Experience_Period')}}</label>												
+						<input name="experience_date_from[]" class="search-field mid-fields left" type="text" placeholder="{{trans('labels.Candidate_Experience_Date_From')}}" value=""/>
+						<input name="experience_date_to[]" class="search-field mid-fields right" type="text" placeholder="{{trans('labels.Candidate_Experience_Date_To')}}" value=""/>						
+						<label>{{trans('labels.Candidate_Experience_Notes')}}</label>						
+						<textarea name="experience_notes[]" id="desc1" cols="30" rows="10" placeholder="{{trans('labels.Candidate_Experience_Notes_Placeholder')}}"></textarea>
 						<input name="experience_reg[]" class="search-field regfield" type="hidden" value="0"/>							
 					</div>
 
@@ -240,10 +251,15 @@
 					@foreach (currentUser()->candidate->experiences as $experience)
 					<div class="form boxed box-to-clone url-box box-loaded">
 						<a href="#" class="close-form remove-box button"><i class="fa fa-close"></i></a>
+						<label>{{trans('labels.Candidate_Experience_Employeer')}}</label>												
 						<input name="experience_employeer[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_Experience_Employeer')}}" value="{{ $experience->employeer }}"/>
+						<label>{{trans('labels.Candidate_Experience_Job_Title')}}</label>												
 						<input name="experience_title[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_Experience_Job_Title')}}" value="{{ $experience->job_title }}"/>
-						<input name="experience_dates[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_Experience_Dates')}}" value="{{ $experience->edates }}"/>
-						<textarea name="experience_notes[]" id="desc1" cols="30" rows="10" placeholder="{{trans('labels.Candidate_Experience_Notes')}}">{{ $experience->notes }}</textarea>
+						<label>{{trans('labels.Candidate_Experience_Period')}}</label>																		
+						<input name="experience_date_from[]" class="search-field mid-fields left" type="text" placeholder="{{trans('labels.Candidate_Experience_Date_From')}}" value="{{ $experience->date_from }}"/>
+						<input name="experience_date_to[]" class="search-field mid-fields right" type="text" placeholder="{{trans('labels.Candidate_Experience_Date_To')}}" value="{{ $experience->date_to }}"/>						
+						<label>{{trans('labels.Candidate_Experience_Notes')}}</label>																								
+						<textarea name="experience_notes[]" id="desc1" cols="30" rows="10" placeholder="{{trans('labels.Candidate_Experience_Notes_Placeholder')}}">{{ $experience->notes }}</textarea>
 						<input name="experience_reg[]" class="search-field regfield" type="hidden" value="1"/>							
 					</div>								
 					@endforeach
@@ -269,14 +285,5 @@
 </div>
 
 <div class="margin-top-60"></div>
-
-@endsection
-
-@section('scripts')
-
-<!-- WYSIWYG Editor -->
-{!!Html::script('scripts/jquery.sceditor.xhtml.min.js')!!}
-{!!Html::script('scripts/jquery.sceditor.js')!!}
-
 
 @endsection

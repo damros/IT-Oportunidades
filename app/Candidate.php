@@ -118,7 +118,8 @@ class Candidate extends Model
 
 		$education_name = $request->education_name;
 		$education_qualification = $request->education_qualification;
-		$education_dates = $request->education_dates;
+		$education_date_from = $request->education_date_from;
+		$education_date_to = $request->education_date_to;
 		$education_notes = $request->education_notes;
 		$education_reg = $request->education_reg;
 
@@ -130,7 +131,8 @@ class Candidate extends Model
 						$candidate_education->candidate_id = $id;
 						$candidate_education->school_name = $education_name[$i];
 						$candidate_education->qualifications = $education_qualification[$i];
-						$candidate_education->edates = $education_dates[$i];
+						$candidate_education->date_from = $education_date_from[$i];
+						$candidate_education->date_to = $education_date_to[$i];
 						$candidate_education->notes = $education_notes[$i];
 
 						$candidate_education->save();
@@ -146,7 +148,8 @@ class Candidate extends Model
 
 		$experience_employeer = $request->experience_employeer;
 		$experience_title = $request->experience_title;
-		$experience_dates = $request->experience_dates;
+		$experience_date_from = $request->experience_date_from;
+		$experience_date_to = $request->experience_date_to;
 		$experience_notes = $request->experience_notes;
 		$experience_reg = $request->experience_reg;
 
@@ -158,7 +161,8 @@ class Candidate extends Model
 						$candidate_experience->candidate_id = $id;
 						$candidate_experience->employeer = $experience_employeer[$i];
 						$candidate_experience->job_title = $experience_title[$i];
-						$candidate_experience->edates = $experience_dates[$i];
+						$candidate_experience->date_from = $experience_date_from[$i];
+						$candidate_experience->date_to = $experience_date_to[$i];
 						$candidate_experience->notes = $experience_notes[$i];
 
 						$candidate_experience->save();

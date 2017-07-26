@@ -20,7 +20,8 @@ class CreateCandidatesExperiencesTable extends Migration
                   ->onUpdate('cascade');             
             $table->string('employeer');
             $table->string('job_title');
-            $table->string('edates');
+            $table->string('date_from');
+            $table->string('date_to')->nullable();
             $table->string('notes')->nullable();                                    
             $table->timestamps();
         });
