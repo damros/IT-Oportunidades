@@ -22,7 +22,6 @@ class UserFactory {
 
 		// crear el usuario
 		$cdata = array( "name" => $request->name,
-						"username" => ( $request->username ?: $request->email ),
 						"email" => $request->email,
 						"profile_id" => ( $profile ? $profile->id : "null" ),
 						"password" => bcrypt( $request->password ?: str_random(10) ) );

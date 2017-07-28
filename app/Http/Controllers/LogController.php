@@ -4,7 +4,9 @@ namespace ITOportunidades\Http\Controllers;
 
 use Auth;
 use Redirect;
+use Session;
 use ITOportunidades\Http\Requests\LoginRequest;
+use ITOportunidades\Profile;
 
 class LogController extends Controller
 {
@@ -29,15 +31,16 @@ class LogController extends Controller
 
 	public function adminLogin(LoginRequest $request)
     {
-		$field = filter_var($request->input('login'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-		$request->merge([$field => $request->input('login')]);
+		$profile = Profile::where('code', 'ad')->first();
+		$email = $request->input('email');
+		$password = $request->input('password');
 		
-		if (Auth::attempt($request->only($field, 'password')))
-		{
+		if (Auth::attempt(['email' => $email, 'password' => $password, 'profile_id' => $profile->id])) {
 			return redirect('/admin');
-		}		
-
-        return Redirect::to('/admin/login');
+		} else {
+			return Redirect::to('/admin/login')->withErrors("Datos incorrectos");
+		}
+		
     }
 
 	public function adminLogout()
@@ -49,11 +52,18 @@ class LogController extends Controller
 	
 	public function webLogin(LoginRequest $request)
     {
-		$field = filter_var($request->input('login'), FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
-		$request->merge([$field => $request->input('login')]);
+		$profile = Profile::where('code', 'ad')->first();
+		$email = $request->input('email');
+		$password = $request->input('password');
+			
 		
-		if (Auth::attempt($request->only($field, 'password')))
+		if (Auth::attempt(['email' => $email, 'password' => $password]))
 		{
+			
+			if (auth()->user()->profile_id == $profile->id){
+				Auth::logout();
+				return response()->json(array(	"status"=>"error", "message"=>"Datos incorrectos"));	
+			}
 			
 			if(auth()->user()->activated == '0'){
 				Auth::logout();
@@ -62,12 +72,10 @@ class LogController extends Controller
 												"redirect"=>""));
 			}
 						
-			return response()->json(array(	"status"=>"success",
-											"message"=>"Bienvenido ".auth()->user()->name."!"));
+			return response()->json(array(	"status"=>"success", "message"=>"Bienvenido ".auth()->user()->name."!"));
 		}		
 
-		return response()->json(array(	"status"=>"error",
-										"message"=>"Datos incorrectos"));
+		return response()->json(array(	"status"=>"error", "message"=>"Datos incorrectos"));
     }	
 
 	public function webLogout()

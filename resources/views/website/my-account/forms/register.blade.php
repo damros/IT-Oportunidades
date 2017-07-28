@@ -23,11 +23,6 @@
 			</p>
 
 			<p class="form-row form-row-wide">
-				<label for="reg_username">{{trans('labels.Username')}}:</label>
-				<input type="text" class="input-text" name="username" id="ca_reg_username" value="" />
-			</p>
-
-			<p class="form-row form-row-wide">
 				<label for="reg_password">{{trans('labels.Password')}}:</label>
 				<input type="password" class="input-text" name="password" id="ca_reg_password" />
 			</p>
@@ -61,11 +56,6 @@
 			<p class="form-row form-row-wide">
 				<label for="reg_email">{{trans('labels.Email_Address')}}:</label>
 				<input type="email" class="input-text" name="email" id="co_reg_email" value="" />
-			</p>
-
-			<p class="form-row form-row-wide">
-				<label for="reg_username">{{trans('labels.Username')}}:</label>
-				<input type="text" class="input-text" name="username" id="co_reg_email" value="" />
 			</p>
 
 			<p class="form-row form-row-wide">

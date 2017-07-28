@@ -85,7 +85,7 @@
 		<dl class="resume-table">
 			@foreach ($candidate->educations as $education)
 			<dt>
-				<small class="date">{{$education->edates}}</small>
+				<small class="date">{{$education->date_from}} - {{$education->date_to}}</small>
 				<strong>{{$education->school_name}}</strong>
 			</dt>
 			<dd>
@@ -101,7 +101,7 @@
 		<dl class="resume-table">
 			@foreach ($candidate->experiences as $experience)
 			<dt>
-				<small class="date">{{$experience->edates}}</small>
+				<small class="date">{{$experience->date_from}} - {{$experience->date_to}}</small>
 				<strong>{{$experience->employeer}}</strong>
 			</dt>
 			<dd>

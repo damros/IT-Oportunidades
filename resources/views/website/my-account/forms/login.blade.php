@@ -8,8 +8,8 @@
 		
 		<div class="form-container">
 			<p class="form-row form-row-wide">
-				<label for="login">{{ trans('labels.Username_or_Email_Address') }}:</label>
-				<input type="text" class="input-text" name="login" id="username" value="" />
+				<label for="login">{{ trans('labels.Email_Address') }}:</label>
+				<input type="email" class="input-text" name="email" id="email" value="" />
 			</p>
 
 			<p class="form-row form-row-wide">

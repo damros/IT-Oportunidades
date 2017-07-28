@@ -31,11 +31,11 @@ class Candidate extends Model
     }
 
     public function educations() {
-        return $this->hasMany('ITOportunidades\CandidateEducation');
+        return $this->hasMany('ITOportunidades\CandidateEducation')->orderBy('date_from');
     }
 	
     public function experiences() {
-        return $this->hasMany('ITOportunidades\CandidateExperience');
+        return $this->hasMany('ITOportunidades\CandidateExperience')->orderBy('date_from');
     }
 
     public function categorys() {
