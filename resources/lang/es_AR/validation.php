@@ -75,6 +75,7 @@ return [
         'array'   => ':attribute debe contener :size elementos.',
     ],
     'string'               => 'El campo :attribute debe ser una cadena de caracteres.',
+    'select_without_repeat' => 'No debe haber coincidencias con las categorías adicionales',
     'timezone'             => 'El :attribute debe ser una zona válida.',
     'unique'               => 'El :attribute ya ha sido registrado.',
     'url'                  => 'El formato :attribute es inválido.',
@@ -93,7 +94,7 @@ return [
     'custom'               => [
         'attribute-name' => [
             'rule-name' => 'custom-message',
-        ],
+        ]
     ],
 
     /*
