@@ -111,7 +111,8 @@ class CompanyController extends Controller
 	public function addJob( Request $request ) {
 		
 		$this->validate($request, [
-			'title' => 'required|max:255'
+			'title' => 'required|max:255',
+                        'principal_category' => 'select_without_repeat:' . implode(',',$request->category)
 		]);
 		
 		if ( ! Auth::check() ) {
@@ -155,9 +156,10 @@ class CompanyController extends Controller
 	public function editJob( Request $request ) {
 		
 		$this->validate($request, [
-			'title' => 'required|max:255'
+                    'title' => 'required|max:255',
+                    'principal_category' => 'select_without_repeat:' . implode(',',$request->category)
 		]);		
-		
+		//
 		$job = Job::find($request->id);
 		
 		$job->fill($request->all());

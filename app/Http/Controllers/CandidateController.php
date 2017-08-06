@@ -96,9 +96,9 @@ class CandidateController extends Controller
 	
 	public function resume(Request $request )
 	{	
-		
 		$this->validate($request, [
-			'name' => 'required|max:255'
+			'name' => 'required|max:255',
+                        'preferred_category' => 'select_without_repeat:' . implode(',',$request->category) 
 		]);
 		
 		$candidate = $this->getCandidate( $request );		

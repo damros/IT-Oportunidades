@@ -3236,7 +3236,7 @@ c.find(".button").click(function(a){var d=c.find("#image").val(),e=c.find("#widt
 
 	$(document).ready(function () {
 
-		$('form.tooltips input[type="text"],form.tooltips input[type="password"],form.tooltips input[type="email"],form.tooltips textarea').tooltipster({
+		$('form.tooltips input[type="text"],form.tooltips input[type="password"],form.tooltips input[type="email"],form.tooltips textarea,form.tooltips select,form.tooltips div.chosen-container').tooltipster({
 			trigger: 'custom', // default is 'hover' which is no good here
 			onlyOne: false, // allow multiple tips to be open at a time
 			position: 'right', // display the tips to the right of the element
@@ -3315,8 +3315,13 @@ c.find(".button").click(function(a){var d=c.find("#image").val(),e=c.find("#widt
 					if (response.status === 422) {
 						var errors = response.responseJSON;
 						$.each(errors, function (key, value) {
+                                                   
 							$form.find(':input[name="' + key + '"]').tooltipster('content', value);
 							$form.find(':input[name="' + key + '"]').tooltipster('show');
+							$form.find('select[name="' + key + '"]').closest('div').find('.chosen-container').tooltipster('content', value);
+							$form.find('select[name="' + key + '"]').closest('div').find('.chosen-container').tooltipster('show');
+							$form.find('select[name="' + key + '[]"]').closest('div').find('.chosen-container').tooltipster('content', value);
+							$form.find('select[name="' + key + '[]"]').closest('div').find('.chosen-container').tooltipster('show');                                                        
 						});
 						msg = "Revise los campos con error";
 					} else {
@@ -3381,6 +3386,8 @@ c.find(".button").click(function(a){var d=c.find("#image").val(),e=c.find("#widt
 						$.each(errors, function (key, value) {
 							$form.find(':input[name="' + key + '"]').tooltipster('content', value);
 							$form.find(':input[name="' + key + '"]').tooltipster('show');
+							$form.find('select[name="' + key + '[]"]').closest('div').find('.chosen-container').tooltipster('content', value);
+							$form.find('select[name="' + key + '[]"]').closest('div').find('.chosen-container').tooltipster('show');                                                        
 						});
 						msg = "Revise los campos con error";
 					} else {
@@ -3445,9 +3452,14 @@ c.find(".button").click(function(a){var d=c.find("#image").val(),e=c.find("#widt
 
 					if (response.status === 422) {
 						var errors = response.responseJSON;
+                                                
 						$.each(errors, function (key, value) {
-							$form.find(':input[name="' + key + '"]').tooltipster('content', value);
-							$form.find(':input[name="' + key + '"]').tooltipster('show');
+                                                   
+							$form.find('input[name="' + key + '"]').tooltipster('content', value);
+							$form.find('input[name="' + key + '"]').tooltipster('show');
+							$form.find('select[name="' + key + '"]').closest('div').find('.chosen-container').tooltipster('content', value);
+							$form.find('select[name="' + key + '"]').closest('div').find('.chosen-container').tooltipster('show');
+							                                             
 						});
 						msg = "Revise los campos con error";
 					} else {
@@ -3510,8 +3522,10 @@ c.find(".button").click(function(a){var d=c.find("#image").val(),e=c.find("#widt
 					if (response.status === 422) {
 						var errors = response.responseJSON;
 						$.each(errors, function (key, value) {
-							$form.find(':input[name="' + key + '"]').tooltipster('content', value);
-							$form.find(':input[name="' + key + '"]').tooltipster('show');
+							$form.find('input[name="' + key + '"]').tooltipster('content', value);
+							$form.find('input[name="' + key + '"]').tooltipster('show');
+                                                        $form.find('select[name="' + key + '"]').closest('div').find('.chosen-container').tooltipster('content', value);
+							$form.find('select[name="' + key + '"]').closest('div').find('.chosen-container').tooltipster('show');
 						});
 						msg = "Revise los campos con error";
 					} else {
