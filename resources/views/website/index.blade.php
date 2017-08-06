@@ -3,8 +3,8 @@
 <title>IT Oportunidades</title>
 @endsection
 @section('content')
-	
-	
+
+
 <!-- Slider
 ================================================== -->
 <div class="fullwidthbanner-container">

@@ -4,7 +4,6 @@ namespace ITOportunidades\Http\Controllers;
 
 use Auth;
 use Redirect;
-use Session;
 use ITOportunidades\Http\Requests\LoginRequest;
 use ITOportunidades\Profile;
 
@@ -55,11 +54,10 @@ class LogController extends Controller
 		$profile = Profile::where('code', 'ad')->first();
 		$email = $request->input('email');
 		$password = $request->input('password');
-			
 		
 		if (Auth::attempt(['email' => $email, 'password' => $password]))
 		{
-			
+		
 			if (auth()->user()->profile_id == $profile->id){
 				Auth::logout();
 				return response()->json(array(	"status"=>"error", "message"=>"Datos incorrectos"));	

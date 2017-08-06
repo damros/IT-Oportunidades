@@ -120,6 +120,23 @@
 			</header>
 			<div class="clearfix"></div>
 
+			@if ($message = Session::get('success'))
+				<div class="notification closeable success">
+					<p>{{ $message }}</p>
+				</div>
+			@endif
+
+			@if ($message = Session::get('warning'))
+				<div class="notification closeable warning">
+					<p>{{ $message }}</p>
+				</div>
+			@endif			
+
+			@if ($message = Session::get('error'))
+				<div class="notification closeable error">
+					<p>{{ $message }}</p>
+				</div>
+			@endif			
 
 			@yield('content')
 

@@ -14,9 +14,10 @@ function can( $tag ) {
 	
 	foreach ( $p as $item => $key) {
 		if ($key->name == $tag) {
-				return true;
+			return true;
 		}		
 	}
+	
 	return false;
 	
 }
@@ -50,4 +51,13 @@ function ratingStar( $rating ) {
 	}
 	
 	return $ret;
+}
+
+function checkProfile( $code ) {
+	
+	if ( ! auth()->user() ) {
+		return false;
+	}
+	
+    return auth()->user()->profile->code == $code;
 }

@@ -9,6 +9,7 @@ return [
     |
     */
 
+    'no_records_found' => 'No hay resultados',
     'save_error' => 'Ocurrió un error, por favor intente nuevamente',
     'save_success' => 'La transacción fue realizada con éxito',
     'User_Already_Activated' => 'El usuario ya ha sido activado',

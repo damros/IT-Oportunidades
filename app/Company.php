@@ -30,6 +30,15 @@ class Company extends Model
         return ($this->logo ? $this->logo:'company-logo.png');
     }
 	
+	public function getJob( $id ) {
+		
+		$job = Job::where('company_id', $this->id)
+					->where('id', $id)
+					->first();
+		
+		return $job;
+	}	
+	
 	static function jobsByCompany( $id ) {
 		
 		$jobs = Job::where('company_id', $id)->get();

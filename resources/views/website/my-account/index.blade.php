@@ -37,18 +37,6 @@
 			<li><a href="#register">Registro</a></li>			
 		</ul>
 		
-		@if ($message = Session::get('success'))
-			<div class="notification closeable success">
-				<p>{{ $message }}</p>
-			</div>
-		@endif
-
-		@if ($message = Session::get('warning'))
-			<div class="notification closeable error">
-				<p>{{ $message }}</p>
-			</div>
-		@endif
-		
 		<div class="tabs-container mi-cuenta">
 			
 			<!-- Login -->

@@ -10,6 +10,7 @@ use ITOportunidades\Candidate;
 use ITOportunidades\ApplicationStatus;
 use Auth;
 use Illuminate\Http\Request;
+use Redirect;
 
 class FrontController extends Controller {
 
@@ -43,6 +44,10 @@ class FrontController extends Controller {
 	}
 
 	public function resume() {
+		
+		if ( ! ( can('resume-view') ) && Auth::check() ) {
+			return Redirect::to('/');
+		}		
 
 		$categorys = Category::all()->sortBy("full_name");
 
@@ -64,6 +69,10 @@ class FrontController extends Controller {
 	}
 
 	public function addJob() {
+		
+		if ( ! ( can('jobs-add') ) && Auth::check() ) {
+			return Redirect::to('/');
+		}		
 
 		$job = new Job;
 		$jobtypes = JobType::all();
@@ -76,6 +85,10 @@ class FrontController extends Controller {
 	}
 
 	public function manageJobs() {
+		
+		if ( ! can('jobs-manage') ) {
+			return Redirect::to('/');
+		}		
 
 		$id = currentUser()->company->id;
 		$jobs = Company::jobsByCompany($id);
@@ -84,8 +97,15 @@ class FrontController extends Controller {
 	}
 
 	public function editJob($id) {
+		
+		if ( ! can('jobs-edit') ) {
+			return Redirect::to('/');
+		}		
 
-		$job = Job::find($id);
+		if ( ! ( $job = currentUser()->company->getJob($id) ) ) {
+			return redirect()->back()->with('error',trans('messages.no_records_found'));
+		}
+		
 		$jobtypes = JobType::all();
 		$categorys = Category::all()->sortBy("full_name");
 
@@ -100,7 +120,6 @@ class FrontController extends Controller {
 				$cats[] = $cat->category_id;
 			}
 		}
-
 
 		return view('website.company.jobs.edit', compact('job', 'jobtypes', 'categorys', 'cats', 'princ_cat'));
 	}
@@ -121,8 +140,15 @@ class FrontController extends Controller {
 	}
 
 	public function applicationManage($id, Request $request) {
+		
+		if ( ! can('applications-manage') ) {
+			return Redirect::to('/');
+		}		
 
-		$job = Job::find($id);
+		if ( ! ( $job = currentUser()->company->getJob($id) ) ) {
+			return redirect()->back()->with('error',trans('messages.no_records_found'));
+		}
+		
 		$status = $request->input('status');
 
 		if ($request->has("status")) {
@@ -130,6 +156,7 @@ class FrontController extends Controller {
 		} else {
 			$applications = $job->applications;
 		}
+		
 		$applicationStatus = ApplicationStatus::lists('name', 'id');
 
 		return view('website.company.applications.manage.index', compact('applications', 'applicationStatus', 'job'));
@@ -143,10 +170,13 @@ class FrontController extends Controller {
 	}
 
 	public function editCompany() {
+		
+		if ( ! can('company-edit-profile') ) {
+			return Redirect::to('/');
+		}		
 
-		if (!( $company = Company::find(( currentUser()->company ? currentUser()->company->id : 0)) )) {
-			return response()->json(array("status" => "error",
-						"message" => trans("messages.save_error")));
+		if ( ! ( $company = Company::find(( currentUser()->company ? currentUser()->company->id : 0)) )) {
+			return response()->json(array("status" => "error","message" => trans("messages.save_error")));
 		}
 
 		return view('website.company.profile.edit', compact('company'));
@@ -180,18 +210,28 @@ class FrontController extends Controller {
 
 	public function candidatesByJob($id, Request $request) {
 
-		$job = Job::find($id);
+		if ( ! can('candidates-by-job') ) {
+			return Redirect::to('/');
+		}
+		
+		if ( ! ( $job = currentUser()->company->getJob($id) ) ) {
+			return redirect()->back()->with('error',trans('messages.no_records_found'));
+		}
+		
 		$candidates = Candidate::candidatesByJob($job);
 		
-		if (($f = $request->filter)) {
+		if ( ($f = $request->filter) ) {
 			$candidates = $candidates->where('job_accuracy',$f);
 		}
 		
-
 		return view('website.company.jobs.manage.candidates.index', compact('candidates', 'job'));
 	}
 
 	public function candidateDetail($id) {
+		
+		if ( ! can('candidate-detail') ) {
+			return Redirect::to('/');
+		}		
 
 		$candidate = Candidate::find($id);
 
