@@ -79,6 +79,8 @@ return [
     'Candidate_Video' => 'Video Personal',
     'Candidate_Video_Placeholder' => 'Un link a un video sobre vos',
     'Candidate_URL_Name' => 'Nombre',
+    'Candidate_URL_Name_Placeholder' => 'Linkedin',
+    'Candidate_URL_Path' => 'URL',
     'Candidate_URLs_Note' => 'Opcionalmente agrega links a websites o perfiles de redes sociales',
     'Candidates' => 'Candidatos',	
     'Categorys' => 'Categorías',

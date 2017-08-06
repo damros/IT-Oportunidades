@@ -16,6 +16,10 @@ class Company extends Model
         return $this->hasMany('ITOportunidades\Job');
     }
 	
+    public function user() {
+        return $this->belongsTo('ITOportunidades\User');
+    }
+	
     public function setLogoAttribute( $logo ) {
 		$name = $this->attributes["id"].Carbon::now()->timestamp.".".$logo->getClientOriginalExtension();
         $this->attributes["logo"] = $name;

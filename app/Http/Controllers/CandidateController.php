@@ -6,8 +6,10 @@ use Illuminate\Http\Request;
 use ITOportunidades\Candidate;
 use ITOportunidades\CandidateApplication;
 use ITOportunidades\ApplicationStatus;
+use ITOportunidades\Job;
 use ITOportunidades\Factories\UserFactory;
 use Auth;
+use Mail;
 
 
 class CandidateController extends Controller
@@ -121,8 +123,7 @@ class CandidateController extends Controller
 			$candidate->fill($request->all());
 
 			if ( ! $candidate->save() ) {
-				return response()->json(array(	"status" =>	"error",
-												"message"=> trans("messages.save_error") ) );	
+				return response()->json(array(	"status" =>	"error", "message"=> trans("messages.save_error") ) );	
 			}				
 		}
 		
@@ -137,6 +138,9 @@ class CandidateController extends Controller
 		$cap->application_status_id = $sta->id;
 		
 		if ( $cap->save() ) {
+			
+			$this->sendApplyNotification($cap);
+			
 			return response()->json(array(	"status"=>	"success",
 											"message"=> trans("messages.save_success") ) );		
 		} else {
@@ -171,5 +175,25 @@ class CandidateController extends Controller
 		}
 		
 		return $candidate;
+	}
+	
+	private function sendApplyNotification( $cap ) {
+		
+		$ca = Candidate::find( $cap->candidate_id );
+		$job = Job::find( $cap->job_id );
+		$co = $job->company;
+
+		$cdata = array(	"name" => $co->name,
+						"job" => $job->title,
+						"candidate" => $ca->name,
+						"notes" => $cap->message,
+						"email" => $co->user->email);		
+		
+		Mail::later(5,'website.emails.application', ['cdata'=>$cdata], function($msj) use ($cdata) {
+
+			$msj->from('info@it-oportunidades.com', 'IT-Oportunidades');
+
+			$msj->to($cdata["email"])->subject('Se ha registrado una nueva aplicación');
+		});		
 	}
 }

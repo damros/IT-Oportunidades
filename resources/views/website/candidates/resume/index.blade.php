@@ -139,23 +139,23 @@
 
 				<span class="fake-input candidate-resume">
 					@if ( Auth::check() )
-					@if ( currentUser()->candidate->resume_file )
-					{{currentUser()->candidate->resume_file}}
-					@else   
-					{{ trans('labels.No_file_selected') }}
-					@endif
+						@if ( currentUser()->candidate->resume_file )
+						{{currentUser()->candidate->resume_file}}
+						@else   
+						{{ trans('labels.No_file_selected') }}
+						@endif
 					@else
-					{{ trans('labels.No_file_selected') }}
+						{{ trans('labels.No_file_selected') }}
 					@endif
 				</span>
 				@if ( Auth::check() )
-				@if ( currentUser()->candidate->resume_file )
-				<div class="form" style="width: 75px; height: 75px;" title="Descargar Curriculum">
-					<a href="/documents/resumes/{{currentUser()->candidate->resume_file}}" target="{{currentUser()->candidate->id}}"  >
-						<img src="images/download.png" style="width: 75px; height: 75px;"/>
-					</a>
-				</div>
-				@endif
+					@if ( currentUser()->candidate->resume_file )
+					<div class="form" style="width: 75px; height: 75px;" title="Descargar Curriculum">
+						<a href="/documents/resumes/{{currentUser()->candidate->resume_file}}" target="{{currentUser()->candidate->id}}"  >
+							<img src="images/download.png" style="width: 75px; height: 75px;"/>
+						</a>
+					</div>
+					@endif
 				@endif
 			</div>
 
@@ -168,7 +168,9 @@
 					<!-- Adding URL(s) -->
 					<div class="form boxed box-to-clone url-box">
 						<a href="#" class="close-form remove-box button"><i class="fa fa-close"></i></a>
-						<input name="url_name[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_URL_Name')}}" value=""/>
+						<label>{{trans('labels.Candidate_URL_Name')}}</label>						
+						<input name="url_name[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_URL_Name_Placeholder')}}" value=""/>
+						<label>{{trans('labels.Candidate_URL_Path')}}</label>						
 						<input name="url_path[]" class="search-field" type="text" placeholder="http://" value=""/>
 						<input name="url_reg[]" class="search-field regfield" type="hidden" value="0"/>
 					</div>					
@@ -177,7 +179,9 @@
 					@foreach (currentUser()->candidate->urls as $url)
 					<div class="form boxed url-box box-loaded">
 						<a href="#" class="close-form remove-box button"><i class="fa fa-close"></i></a>
-						<input name="url_name[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_URL_Name')}}" value="{{ $url->name }}"/>
+						<label>{{trans('labels.Candidate_URL_Name')}}</label>						
+						<input name="url_name[]" class="search-field" type="text" placeholder="{{trans('labels.Candidate_URL_Name_Placeholder')}}" value="{{ $url->name }}"/>
+						<label>{{trans('labels.Candidate_URL_Path')}}</label>												
 						<input name="url_path[]" class="search-field" type="text" placeholder="http://" value="{{ $url->url }}"/>
 						<input name="url_reg[]" class="search-field regfield" type="hidden" value="1"/>									
 					</div>								

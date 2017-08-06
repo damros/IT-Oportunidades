@@ -7,11 +7,14 @@
 			</div>
 			<!-- /.login-logo -->
 			<div class="login-box-body">
+				@include('admin.alerts.success')
+				@include('admin.alerts.errors')
+				@include('admin.alerts.request')				
 				<p class="login-box-msg">Ingrese sus datos para iniciar sesión</p>
 
 				{!!Form::open(['route'=>'adminlogin', 'id'=>'loginform', 'method'=>'POST', 'role'=>'form', 'class'=>'form-horizontal'])!!}	
 				<div class="form-group has-feedback">
-					{!!Form::text('login',null,['id'=>'login-username','class'=>'form-control','placeholder'=>'Usuario o E-Mail'])!!}
+					{!!Form::text('email',null,['id'=>'login-email','class'=>'form-control','placeholder'=>'E-Mail'])!!}
 					<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
 				</div>
 				<div class="form-group has-feedback">
