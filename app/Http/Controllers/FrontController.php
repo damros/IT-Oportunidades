@@ -45,7 +45,7 @@ class FrontController extends Controller {
 
 	public function resume() {
 		
-		if ( ! ( can('resume-view') ) && Auth::check() ) {
+		if ( ! ( can('candidate-resume') ) && Auth::check() ) {
 			return Redirect::to('/');
 		}		
 
@@ -70,7 +70,7 @@ class FrontController extends Controller {
 
 	public function addJob() {
 		
-		if ( ! ( can('jobs-add') ) && Auth::check() ) {
+		if ( ! ( can('company-jobs-add') ) && Auth::check() ) {
 			return Redirect::to('/');
 		}		
 
@@ -86,7 +86,7 @@ class FrontController extends Controller {
 
 	public function manageJobs() {
 		
-		if ( ! can('jobs-manage') ) {
+		if ( ! can('company-jobs-manage') ) {
 			return Redirect::to('/');
 		}		
 
@@ -98,7 +98,7 @@ class FrontController extends Controller {
 
 	public function editJob($id) {
 		
-		if ( ! can('jobs-edit') ) {
+		if ( ! can('company-jobs-edit') ) {
 			return Redirect::to('/');
 		}		
 
@@ -141,7 +141,7 @@ class FrontController extends Controller {
 
 	public function applicationManage($id, Request $request) {
 		
-		if ( ! can('applications-manage') ) {
+		if ( ! can('company-applications') ) {
 			return Redirect::to('/');
 		}		
 
