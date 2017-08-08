@@ -1,14 +1,14 @@
 vendor/
 node_modules/
-public/css/
-public/js/
-public/rev-manifest.json
 
 # Laravel 4 specific
 bootstrap/compiled.php
 app/storage/
 
 # Laravel 5 & Lumen specific
+public/css/
+public/js/
+public/rev-manifest.json
 bootstrap/cache/
 storage/
 .env.*.php
