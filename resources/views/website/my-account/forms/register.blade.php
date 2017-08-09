@@ -69,7 +69,7 @@
 			</p>
 
 			<p class="form-row">
-				<input type="submit" class="button" name="register" value="Register" />
+				<input type="submit" class="button" name="register" value="{{trans('labels.Register')}}" />
 			</p>
 		</div>
 	
