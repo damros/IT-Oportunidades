@@ -392,7 +392,7 @@
 							<h3>Sus credenciales para iniciar sesión son:</h3>
 							<p>Nombre: {{ $cdata["name"]}}</p>
 							<p>E-Mail: {{ $cdata["email"]}}</p>
-							<p>Password: {{ $cdata["password"]}}</p>
+							<p>Password: {{ $cdata["ppassword"]}}</p>
 						</div>
 						
 					</div>
