@@ -28,7 +28,7 @@ class CreateCandidatesApplicationsTable extends Migration
                   ->references('id')->on('application_status')
                   ->onUpdate('cascade');             
             $table->integer('rating')->unsigned()->nullable();
-            $table->string('notes')->nullable();            
+            $table->string('message')->nullable();            
             $table->timestamps();
         });
     }

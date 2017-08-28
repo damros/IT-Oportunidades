@@ -6,6 +6,8 @@ bootstrap/compiled.php
 app/storage/
 
 # Laravel 5 & Lumen specific
+public/images/candidatephoto/
+public/images/companylogo/
 public/css/
 public/js/
 public/rev-manifest.json

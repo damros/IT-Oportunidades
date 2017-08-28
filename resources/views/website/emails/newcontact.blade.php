@@ -3,7 +3,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>IT-Oportunidades :: Activación de Cuenta</title>
+        <title>IT-Oportunidades :: Mensaje de Contacto</title>
 
         <style type="text/css">
             /* Take care of image borders and formatting, client hacks */
@@ -252,49 +252,14 @@
                 </td>
             </tr>
             <tr>
-                <td align="center" valign="top" width="100%" style="background-color: #f7f7f7;" class="content-padding">
-                    <center>
-                        <table cellspacing="0" cellpadding="0" width="600" class="w320">
-                            <tr>
-                                <td class="header-lg">
-                                    Hola {{ $cdata["name"] }}
-                                </td>
-                            </tr>          
-                            <tr>
-                                <td class="header-lg">
-                                    Bienvenido a IT-Oportunidades!
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="free-text">
-                                    Estamos felices de que te hayas sumado a nuestra comunidad. Estas a solo un clic de distancia de activar tu cuenta.
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="button">
-                                    <div><!--[if mso]>
-                                      <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="{{ url('user/activation', $cdata["link"])}}" style="height:45px;v-text-anchor:middle;width:155px;" arcsize="15%" strokecolor="#ffffff" fillcolor="#ff6f6f">
-                                        <w:anchorlock/>
-                                        <center style="color:#ffffff;font-family:Helvetica, Arial, sans-serif;font-size:14px;font-weight:regular;">Activar Cuenta</center>
-                                      </v:roundrect>
-                                    <![endif]--><a class="button-mobile" href="{{ url('user/activation', $cdata["link"])}}"
-                                                       style="background-color:#58ba2b;border-radius:5px;color:#ffffff;display:inline-block;font-family:'Cabin', Helvetica, Arial, sans-serif;font-size:14px;font-weight:regular;line-height:45px;text-align:center;text-decoration:none;width:155px;-webkit-text-size-adjust:none;mso-hide:all;">Activar Cuenta</a></div>
-                                </td>
-                            </tr>
-                        </table>
-                    </center>
-                </td>
-            </tr>
-            <tr>
                 <td align="center" valign="top" width="100%" style="background-color: #ffffff;" class="content-padding">
                     <center>
                         <table cellspacing="0" cellpadding="0" width="600" class="w320">
                             <tr>
-                                <td class="header-md">
-                                    Sus datos de inicio de sesión son:
+                                <td class="header-sm">
+                                    Se ha registrado un nuevo mensaje de contacto.
                                 </td>
-                            </tr>          
-
+                            </tr>
                             <tr>
                                 <td>
                                     <b>Nombre:</b> {{ $cdata["name"]}}
@@ -307,10 +272,9 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <b>Password:</b> {{ $cdata["ppassword"]}}
+                                    <b>Mensaje:</b> {{ $cdata["message"]}}
                                 </td>
-                            </tr> 
-
+                            </tr>
                         </table>
                     </center>
                 </td>  
