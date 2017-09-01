@@ -112,8 +112,10 @@ class CompanyController extends Controller
 		
 		$this->validate($request, [
 			'title' => 'required|max:255',
-                        'principal_category' => 'select_without_repeat:' . implode(',',$request->category)
+			'start_date' => 'required',
+                        'principal_category' => 'select_without_repeat:' . implode(',',($request->category?: array()))
 		]);
+               
 		
 		if ( ! Auth::check() ) {
 			
@@ -157,7 +159,8 @@ class CompanyController extends Controller
 		
 		$this->validate($request, [
                     'title' => 'required|max:255',
-                    'principal_category' => 'select_without_repeat:' . implode(',',$request->category)
+                    'start_date' => 'required',
+                    'principal_category' => 'select_without_repeat:' . implode(',',($request->category?: array()))
 		]);		
 		//
 		$job = Job::find($request->id);

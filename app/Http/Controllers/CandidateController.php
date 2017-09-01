@@ -11,13 +11,11 @@ use ITOportunidades\Factories\UserFactory;
 use Auth;
 use Mail;
 
+class CandidateController extends Controller {
 
-class CandidateController extends Controller
-{
     protected $userFactory;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->userFactory = new UserFactory();
     }
 
@@ -30,7 +28,7 @@ class CandidateController extends Controller
         //
         $candidates = Candidate::all();
 
-        return view('admin.candidate.index',compact('candidates'));  
+        return view('admin.candidate.index', compact('candidates'));
     }
 
     /**
@@ -71,8 +69,8 @@ class CandidateController extends Controller
     public function edit($id) {
         //
         $candidate = Candidate::find($id);
-		
-        return view('admin.candidate.detail',['candidate'=>$candidate]);
+
+        return view('admin.candidate.detail', ['candidate' => $candidate]);
     }
 
     /**
@@ -95,105 +93,102 @@ class CandidateController extends Controller
     public function destroy($id) {
         
     }
-	
-	public function resume(Request $request )
-	{	
-		$this->validate($request, [
-			'name' => 'required|max:255',
-                        'preferred_category' => 'select_without_repeat:' . implode(',',$request->category) 
-		]);
-		
-		$candidate = $this->getCandidate( $request );		
-		
-		if ( $candidate->save_resume( $request ) ) {
-			return response()->json(array(	"status"=>	"success",
-											"message"=> trans("messages.save_success") ) );		
-		} else {
-			return response()->json(array(	"status" =>	"error",
-											"message"=> trans("messages.save_error") ) );			
-		}
-	}
-	
-	public function jobApply (Request $request) {
-		
-		$candidate = $this->getCandidate( $request );		
-		
-		if ( ! Auth::check() ) {
-			
-			$candidate->fill($request->all());
 
-			if ( ! $candidate->save() ) {
-				return response()->json(array(	"status" =>	"error", "message"=> trans("messages.save_error") ) );	
-			}				
-		}
-		
-		//status
-		$sta = ApplicationStatus::where('code', 'new')->first();		
-		
-		$cap = new CandidateApplication();
-		
-		$cap->candidate_id = $candidate->id;
-		$cap->job_id = $request->job_id;
-		$cap->message = $request->message;
-		$cap->application_status_id = $sta->id;
-		
-		if ( $cap->save() ) {
-			
-			$this->sendApplyNotification($cap);
-			
-			return response()->json(array(	"status"=>	"success",
-											"message"=> trans("messages.save_success") ) );		
-		} else {
-			return response()->json(array(	"status" =>	"error",
-											"message"=> trans("messages.save_error") ) );			
-		}		
-		
-	}
-	
-	private function getCandidate ( Request $request ) {
-			
-		if ( ! Auth::check() ) {
+    public function resume(Request $request) {
+        $this->validate($request, [
+            'name' => 'required|max:255',
+            'preferred_category' => 'select_without_repeat:' . implode(',', ($request->category?: array()))
+        ]);
 
-			$this->validate($request, [
-				'name' => 'required|max:255',
-				'email' => 'required|email|unique:users',
-			]);
-		
-			$user = $this->userFactory->createUser($request, 'ca');
-			
-			$candidate = new Candidate;
-			
-			$candidate->user_id = $user->id;
-			
-		} else {		
-			
-			if ( ! ( $candidate = Candidate::find( ( currentUser()->candidate ? currentUser()->candidate->id : 0 ) ) ) ) {
-				return response()->json(array(	"status" =>	"error",
-												"message"=> trans("messages.save_error") ) );			
-			}
-			
-		}
-		
-		return $candidate;
-	}
-	
-	private function sendApplyNotification( $cap ) {
-		
-		$ca = Candidate::find( $cap->candidate_id );
-		$job = Job::find( $cap->job_id );
-		$co = $job->company;
+        $candidate = $this->getCandidate($request);
 
-		$cdata = array(	"name" => $co->name,
-						"job" => $job->title,
-						"candidate" => $ca->name,
-						"notes" => $cap->message,
-						"email" => $co->user->email);		
-		
-		Mail::later(5,'website.emails.application', ['cdata'=>$cdata], function($msj) use ($cdata) {
+        if ($candidate->save_resume($request)) {
+            return response()->json(array("status" => "success",
+                        "message" => trans("messages.save_success")));
+        } else {
+            return response()->json(array("status" => "error",
+                        "message" => trans("messages.save_error")));
+        }
+    }
 
-			$msj->from('info@it-oportunidades.com', 'IT-Oportunidades');
+    public function jobApply(Request $request) {
 
-			$msj->to($cdata["email"])->subject('Se ha registrado una nueva aplicación');
-		});		
-	}
+        $candidate = $this->getCandidate($request);
+
+        if (!Auth::check()) {
+
+            $candidate->fill($request->all());
+
+            if (!$candidate->save()) {
+                return response()->json(array("status" => "error", "message" => trans("messages.save_error")));
+            }
+        }
+
+        //status
+        $sta = ApplicationStatus::where('code', 'new')->first();
+
+        $cap = new CandidateApplication();
+
+        $cap->candidate_id = $candidate->id;
+        $cap->job_id = $request->job_id;
+        $cap->message = $request->message;
+        $cap->application_status_id = $sta->id;
+
+        if ($cap->save()) {
+
+            $this->sendApplyNotification($cap);
+
+            return response()->json(array("status" => "success",
+                        "message" => trans("messages.save_success")));
+        } else {
+            return response()->json(array("status" => "error",
+                        "message" => trans("messages.save_error")));
+        }
+    }
+
+    private function getCandidate(Request $request) {
+
+        if (!Auth::check()) {
+
+            $this->validate($request, [
+                'name' => 'required|max:255',
+                'email' => 'required|email|unique:users',
+            ]);
+
+            $user = $this->userFactory->createUser($request, 'ca');
+
+            $candidate = new Candidate;
+
+            $candidate->user_id = $user->id;
+        } else {
+
+            if (!( $candidate = Candidate::find(( currentUser()->candidate ? currentUser()->candidate->id : 0)) )) {
+                return response()->json(array("status" => "error",
+                            "message" => trans("messages.save_error")));
+            }
+        }
+
+        return $candidate;
+    }
+
+    private function sendApplyNotification($cap) {
+
+        $ca = Candidate::find($cap->candidate_id);
+        $job = Job::find($cap->job_id);
+        $co = $job->company;
+
+        $cdata = array("name" => $co->name,
+            "job" => $job->title,
+            "candidate" => $ca->name,
+            "notes" => $cap->message,
+            "email" => $co->user->email);
+
+        Mail::later(5, 'website.emails.application', ['cdata' => $cdata], function($msj) use ($cdata) {
+
+            $msj->from('info@it-oportunidades.com', 'IT-Oportunidades');
+
+            $msj->to($cdata["email"])->subject('Se ha registrado una nueva aplicación');
+        });
+    }
+
 }

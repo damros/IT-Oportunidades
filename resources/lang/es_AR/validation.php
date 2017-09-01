@@ -140,6 +140,7 @@ return [
         'message'               => 'mensaje',
         'candidate_name'        => 'nombre',
         'candidate_email'       => 'email',
+        'start_date'            => 'fecha de inicio',
     ],
 
 ];

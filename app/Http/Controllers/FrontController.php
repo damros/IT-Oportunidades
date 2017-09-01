@@ -14,234 +14,233 @@ use Redirect;
 
 class FrontController extends Controller {
 
-	/**
-	 * Display the web home Page.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function index() {
+    /**
+     * Display the web home Page.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index() {
 
-		$recentjobs = Job::recentJobs();
-		$jobcount = Job::activeJobs()->count();
-		$candidatecount = Candidate::all()->count();
-		$companycount = Company::all()->count();
-		$logos = Company::logos();
+        $recentjobs = Job::recentJobs();
+        $jobcount = Job::activeJobs()->count();
+        $candidatecount = Candidate::all()->count();
+        $companycount = Company::all()->count();
+        $logos = Company::logos();
 
-		return view('website.index', compact('jobcount', 'candidatecount', 'companycount', 'recentjobs', 'logos'));
-	}
+        return view('website.index', compact('jobcount', 'candidatecount', 'companycount', 'recentjobs', 'logos'));
+    }
 
-	public function myaccount() {
+    public function myaccount() {
 
-		if (Auth::check()) {
-			return redirect()->to('/');
-		}
+        if (Auth::check()) {
+            return redirect()->to('/');
+        }
 
-		return view('website.my-account.index');
-	}
+        return view('website.my-account.index');
+    }
 
-	public function contact() {
-		return view('website.contact');
-	}
+    public function contact() {
+        return view('website.contact');
+    }
 
-	public function resume() {
-		
-		if ( ! ( can('candidate-resume') ) && Auth::check() ) {
-			return Redirect::to('/');
-		}		
+    public function resume() {
 
-		$categorys = Category::all()->sortBy("full_name");
+        if (!( can('candidate-resume') ) && Auth::check()) {
+            return Redirect::to('/');
+        }
 
-		$pref_cats = array();
-		$cats = array();
+        $categorys = Category::all()->sortBy("full_name");
 
-		if (Auth::check()) {
-			$catu = currentUser()->candidate->categorys;
-			foreach ($catu as $cat) {
-				if ($cat->preferred) {
-					$pref_cats[] = $cat->category_id;
-				} else {
-					$cats[] = $cat->category_id;
-				}
-			}
-		}
+        $pref_cats = array();
+        $cats = array();
 
-		return view('website.candidates.resume.index', compact('categorys', 'cats', 'pref_cats'));
-	}
+        if (Auth::check()) {
+            $catu = currentUser()->candidate->categorys;
+            foreach ($catu as $cat) {
+                if ($cat->preferred) {
+                    $pref_cats[] = $cat->category_id;
+                } else {
+                    $cats[] = $cat->category_id;
+                }
+            }
+        }
 
-	public function addJob() {
-		
-		if ( ! ( can('company-jobs-add') ) && Auth::check() ) {
-			return Redirect::to('/');
-		}		
+        return view('website.candidates.resume.index', compact('categorys', 'cats', 'pref_cats'));
+    }
 
-		$job = new Job;
-		$jobtypes = JobType::all();
-		$categorys = Category::all()->sortBy("full_name");
+    public function addJob() {
 
-		$cats = array();
-		$princ_cat = null;
+        if (!( can('company-jobs-add') ) && Auth::check()) {
+            return Redirect::to('/');
+        }
 
-		return view('website.company.jobs.add', compact('job', 'jobtypes', 'categorys', 'cats', 'princ_cat'));
-	}
+        $job = new Job;
+        $jobtypes = JobType::all();
+        $categorys = Category::all()->sortBy("full_name");
 
-	public function manageJobs() {
-		
-		if ( ! can('company-jobs-manage') ) {
-			return Redirect::to('/');
-		}		
+        $cats = array();
+        $princ_cat = null;
 
-		$id = currentUser()->company->id;
-		$jobs = Company::jobsByCompany($id);
+        return view('website.company.jobs.add', compact('job', 'jobtypes', 'categorys', 'cats', 'princ_cat'));
+    }
 
-		return view('website.company.jobs.manage.index', compact('jobs'));
-	}
+    public function manageJobs() {
 
-	public function editJob($id) {
-		
-		if ( ! can('company-jobs-edit') ) {
-			return Redirect::to('/');
-		}		
+        if (!can('company-jobs-manage')) {
+            return Redirect::to('/');
+        }
 
-		if ( ! ( $job = currentUser()->company->getJob($id) ) ) {
-			return redirect()->back()->with('error',trans('messages.no_records_found'));
-		}
-		
-		$jobtypes = JobType::all();
-		$categorys = Category::all()->sortBy("full_name");
+        $id = currentUser()->company->id;
+        $jobs = Company::jobsByCompany($id);
 
-		$cats = array();
-		$princ_cat = null;
+        return view('website.company.jobs.manage.index', compact('jobs'));
+    }
 
-		$catj = $job->categorys;
-		foreach ($catj as $cat) {
-			if ($cat->principal) {
-				$princ_cat = $cat->category_id;
-			} else {
-				$cats[] = $cat->category_id;
-			}
-		}
+    public function editJob($id) {
 
-		return view('website.company.jobs.edit', compact('job', 'jobtypes', 'categorys', 'cats', 'princ_cat'));
-	}
+        if (!can('company-jobs-edit')) {
+            return Redirect::to('/');
+        }
 
-	public function browseJobs(Request $request) {
+        if (!( $job = currentUser()->company->getJob($id) )) {
+            return redirect()->back()->with('error', trans('messages.no_records_found'));
+        }
 
-		$jobtypes = JobType::all();
+        $jobtypes = JobType::all();
+        $categorys = Category::all()->sortBy("full_name");
 
-		if ($request->has("sort")) {
-			$seljobtypes = array($request->jobtype);
-			$jobs = Job::searchJobs($request)->paginate(5)->appends($request->input());
-		} else {
-			$seljobtypes[0] = array('-1');
-			$jobs = Job::activeJobs()->paginate(5);
-		}
+        $cats = array();
+        $princ_cat = null;
 
-		return view('website.candidates.jobs.browse.index', compact('jobs', 'jobtypes', 'seljobtypes'));
-	}
+        $catj = $job->categorys;
+        foreach ($catj as $cat) {
+            if ($cat->principal) {
+                $princ_cat = $cat->category_id;
+            } else {
+                $cats[] = $cat->category_id;
+            }
+        }
 
-	public function applicationManage($id, Request $request) {
-		
-		if ( ! can('company-applications') ) {
-			return Redirect::to('/');
-		}		
+        return view('website.company.jobs.edit', compact('job', 'jobtypes', 'categorys', 'cats', 'princ_cat'));
+    }
 
-		if ( ! ( $job = currentUser()->company->getJob($id) ) ) {
-			return redirect()->back()->with('error',trans('messages.no_records_found'));
-		}
-		
-		$status = $request->input('status');
+    public function browseJobs(Request $request) {
 
-		if ($request->has("status")) {
-			$applications = $job->applications->where('application_status_id', intval($status));
-		} else {
-			$applications = $job->applications;
-		}
-		
-		$applicationStatus = ApplicationStatus::lists('name', 'id');
+        $jobtypes = JobType::all();
 
-		return view('website.company.applications.manage.index', compact('applications', 'applicationStatus', 'job'));
-	}
+        if ($request->has("sort")) {
+            $seljobtypes = array($request->jobtype);
+            $jobs = Job::searchJobs($request)->paginate(5)->appends($request->input());
+        } else {
+            $seljobtypes[0] = array('-1');
+            $jobs = Job::activeJobs()->paginate(5);
+        }
 
-	public function viewJob($id) {
+        return view('website.candidates.jobs.browse.index', compact('jobs', 'jobtypes', 'seljobtypes'));
+    }
 
-		$job = Job::find($id);
+    public function applicationManage($id, Request $request) {
 
-		return view('website.candidates.jobs.detail.index', compact('job'));
-	}
+        if (!can('company-applications')) {
+            return Redirect::to('/');
+        }
 
-	public function editCompany() {
-		
-		if ( ! can('company-edit-profile') ) {
-			return Redirect::to('/');
-		}		
+        if (!( $job = currentUser()->company->getJob($id) )) {
+            return redirect()->back()->with('error', trans('messages.no_records_found'));
+        }
 
-		if ( ! ( $company = Company::find(( currentUser()->company ? currentUser()->company->id : 0)) )) {
-			return response()->json(array("status" => "error","message" => trans("messages.save_error")));
-		}
+        $status = $request->input('status');
 
-		return view('website.company.profile.edit', compact('company'));
-	}
+        if ($request->has("status")) {
+            $applications = $job->applications->where('application_status_id', intval($status));
+        } else {
+            $applications = $job->applications;
+        }
 
-	public function termsOfService() {
+        $applicationStatus = ApplicationStatus::lists('name', 'id');
 
-		return view('website.terms');
-	}
+        return view('website.company.applications.manage.index', compact('applications', 'applicationStatus', 'job'));
+    }
 
-	public function aboutUs() {
+    public function viewJob($id) {
 
-		return view('website.about-us');
-	}
+        $job = Job::find($id);
 
-	public function searchJobs(Request $request) {
+        return view('website.candidates.jobs.detail.index', compact('job'));
+    }
 
-		$jobs = Job::searchJobs($request)->paginate(5);
-		$view = view('website.candidates.jobs.browse.partials.jobs', compact('jobs'));
+    public function editCompany() {
 
-		if ($request->ajax()) {
+        if (!can('company-edit-profile')) {
+            return Redirect::to('/');
+        }
 
-			$view = $view->render();
+        if (!( $company = Company::find(( currentUser()->company ? currentUser()->company->id : 0)) )) {
+            return response()->json(array("status" => "error", "message" => trans("messages.save_error")));
+        }
 
-			return response()->json(array("status" => "success",
-						"message" => trans("messages.save_success"),
-						"data" => $view)
-			);
-		}
-	}
+        return view('website.company.profile.edit', compact('company'));
+    }
 
-	public function candidatesByJob($id, Request $request) {
+    public function termsOfService() {
 
-		if ( ! can('candidates-by-job') ) {
-			return Redirect::to('/');
-		}
-		
-		if ( ! ( $job = currentUser()->company->getJob($id) ) ) {
-			return redirect()->back()->with('error',trans('messages.no_records_found'));
-		}
-		
-		$candidates = Candidate::candidatesByJob($job);
-		
-		if ( ($f = $request->filter) ) {
-			$candidates = $candidates->where('job_accuracy',$f);
-		}
-		
-		return view('website.company.jobs.manage.candidates.index', compact('candidates', 'job'));
-	}
+        return view('website.terms');
+    }
 
-	public function candidateDetail($id) {
-		
-		if ( ! can('candidate-detail') ) {
-			return Redirect::to('/');
-		}		
+    public function aboutUs() {
 
-		$candidate = Candidate::find($id);
+        return view('website.about-us');
+    }
 
-		return view('website.company.jobs.manage.candidates.detail', compact('candidate'));
-	}
+    public function searchJobs(Request $request) {
 
-	public function getChange() {
-		
-		return view('website.auth.change');
-		
-	}
+        $jobs = Job::searchJobs($request)->paginate(5);
+        $view = view('website.candidates.jobs.browse.partials.jobs', compact('jobs'));
+
+        if ($request->ajax()) {
+
+            $view = $view->render();
+
+            return response()->json(array("status" => "success",
+                        "message" => trans("messages.save_success"),
+                        "data" => $view)
+            );
+        }
+    }
+
+    public function candidatesByJob($id, Request $request) {
+
+        if (!can('candidates-by-job')) {
+            return Redirect::to('/');
+        }
+
+        if (!( $job = currentUser()->company->getJob($id) )) {
+            return redirect()->back()->with('error', trans('messages.no_records_found'));
+        }
+
+        $candidates = Candidate::candidatesByJob($job);
+
+        if (($f = $request->filter)) {
+            $candidates = $candidates->where('job_accuracy', $f);
+        }
+
+        return view('website.company.jobs.manage.candidates.index', compact('candidates', 'job'));
+    }
+
+    public function candidateDetail($id) {
+
+        if (!can('candidate-detail')) {
+            return Redirect::to('/');
+        }
+
+        $candidate = Candidate::find($id);
+
+        return view('website.company.jobs.manage.candidates.detail', compact('candidate'));
+    }
+
+    public function getChange() {
+
+        return view('website.auth.change');
+    }
 
 }
