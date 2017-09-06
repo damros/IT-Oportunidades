@@ -24,6 +24,10 @@ class PermissionsTableSeeder extends Seeder
             ['id' => 8, 'name' => 'company-applications', 'description' => 'Permite ver los postulantes a las búsquedas de una empresa'],
             ['id' => 9, 'name' => 'candidate-job-detail', 'description' => 'Permite ver el detalle de una búsqueda a un candidato'],
             ['id' => 10, 'name' => 'company-resumes-browse', 'description' => 'Permite ver los curriculums de los postulantes de una emrpesa'],
+            ['id' => 11, 'name' => 'company-jobs-edit', 'description' => 'Permite ver la pantalla de edición de requerimientos'],
+            ['id' => 12, 'name' => 'company-edit-profile', 'description' => 'Permite ver la pantalla de editar perfil de empresa'],
+            ['id' => 13, 'name' => 'candidates-by-job', 'description' => 'Permite ver los candidatos de un requerimiento'],
+            ['id' => 14, 'name' => 'candidate-detail', 'description' => 'Permite ver el detalle de un candidato'],
         ];
 		
 		DB::table('permissions')->insert($permissions);

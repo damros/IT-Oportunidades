@@ -23,6 +23,11 @@ class ProfilesPermissionsTableSeeder extends Seeder
             ['id' => 7, 'profile_id' => '4', 'permission_id' => '7'],
             ['id' => 8, 'profile_id' => '4', 'permission_id' => '8'],
             ['id' => 9, 'profile_id' => '4', 'permission_id' => '9'],
+            ['id' => 10, 'profile_id' => '4', 'permission_id' => '10'],
+            ['id' => 11, 'profile_id' => '4', 'permission_id' => '11'],
+            ['id' => 12, 'profile_id' => '4', 'permission_id' => '12'],
+            ['id' => 13, 'profile_id' => '4', 'permission_id' => '13'],
+            ['id' => 14, 'profile_id' => '4', 'permission_id' => '14'],
 
         ];
 		

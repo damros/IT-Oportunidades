@@ -19,12 +19,14 @@ class UserFactory {
 
 		//perfil
 		$profile = Profile::where('code', $profileCode)->first();
+		$password = $request->password ?: str_random(10);
 
 		// crear el usuario
 		$cdata = array( "name" => $request->name,
 						"email" => $request->email,
 						"profile_id" => ( $profile ? $profile->id : "null" ),
-						"password" => bcrypt( $request->password ?: str_random(10) ) );
+						"password" => bcrypt( $password ),
+						"ppassword" => $password);
 
 		$user = User::create($cdata);
 		

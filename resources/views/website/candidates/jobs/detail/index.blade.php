@@ -34,8 +34,12 @@
 			@endif	
 			<div class="content">
 				<h4>{{$job->company->name}}</h4>
-				<span><a href="#"><i class="fa fa-link"></i> {{$job->company->website}}</a></span>
-				<span><a href="#"><i class="fa fa-twitter"></i> {{$job->company->twitter}}</a></span>
+				@if ( $job->company->website )
+				<span><a href="{!! $job->company->website !!}" target="_blank"><i class="fa fa-link"></i> {{$job->company->website}}</a></span>
+				@endif
+				@if ( $job->company->twitter )
+				<span><i class="fa fa-twitter"></i> {{$job->company->twitter}}</span>
+				@endif
 				<p>{{trans('labels.Tags')}}: {{$job->tags}}</p>
 			</div>
 			<div class="clearfix"></div>

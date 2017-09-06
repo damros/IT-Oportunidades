@@ -50,7 +50,7 @@ class MessageController extends Controller
 							"email" => $request["email"],
 							"message" => $request["message"] );
 			
-				Mail::later(5,'website.emails.contact', ['cdata'=>$cdata], function($msj) {
+				Mail::later(5,'website.emails.newcontact', ['cdata'=>$cdata], function($msj) {
 					
 					$msj->from('info@it-oportunidades.com', 'IT-Oportunidades :: Contacto');
 					
