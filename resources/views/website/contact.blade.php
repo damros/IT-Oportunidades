@@ -110,13 +110,13 @@
 	<div class="widget-box">
 
 		<ul class="contact-informations">
-			<li>Av Presidente Roque Sáenz Peña 628 </li>
-			<li>Ciudad Autónoma de Buenos Aires </li>
+			<li>{{$organization->address}} </li>
+			<li>{{$organization->location}} </li>
 		</ul>
 
 		<ul class="contact-informations second">
-			<li><i class="fa fa-phone"></i> <p>+54 9 11 5032-7900</p></li>
-			<li><i class="fa fa-envelope"></i> <p>talentos@4latam.com</p></li>
+			<li><i class="fa fa-phone"></i> <p>{{$organization->phone}}</p></li>
+			<li><i class="fa fa-envelope"></i> <p>{{$organization->email}}</p></li>
 		</ul>
 
 	</div>

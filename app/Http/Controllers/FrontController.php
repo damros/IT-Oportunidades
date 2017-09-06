@@ -8,6 +8,7 @@ use ITOportunidades\JobType;
 use ITOportunidades\Job;
 use ITOportunidades\Candidate;
 use ITOportunidades\ApplicationStatus;
+use ITOportunidades\Organization;
 use Auth;
 use Illuminate\Http\Request;
 use Redirect;
@@ -40,7 +41,8 @@ class FrontController extends Controller {
 	}
 
 	public function contact() {
-		return view('website.contact');
+            $organization = Organization::all()->first();
+		return view('website.contact',compact('organization'));
 	}
 
 	public function resume() {
