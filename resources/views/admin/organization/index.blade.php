@@ -6,6 +6,7 @@
 				<th>Direccion</th>
 				<th>Teléfono</th>
 				<th>Mail</th>
+				<th>Acciones</th>
 			</thead>
 			<tbody>
                             @foreach($organizations as $organization)
