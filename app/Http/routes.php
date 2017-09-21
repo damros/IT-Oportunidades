@@ -93,7 +93,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('jobs/manage','FrontController@manageJobs');	
 	Route::get('jobs/edit/{id}','FrontController@editJob');	
 	Route::get('jobs/candidates/find/{id}','FrontController@candidatesByJob');
-	Route::get('jobs/candidates/detail/{id}','FrontController@candidateDetail');
+	Route::get('jobs/candidates/detail/{jobId}/{candidateId}','FrontController@candidateJobDetail');
 	Route::get('password/change','FrontController@getChange');
 	Route::post('password/change','UserController@changePassword');	
 	
