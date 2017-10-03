@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Description of UserFactory
  *
@@ -15,41 +16,40 @@ use ITOportunidades\UserActivation;
 
 class UserFactory {
 
-	public function createUser ( Request $request, $profileCode ) {
+    public function createUser(Request $request, $profileCode) {
 
-		//perfil
-		$profile = Profile::where('code', $profileCode)->first();
-		$password = $request->password ?: str_random(10);
+        //perfil
+        $profile = Profile::where('code', $profileCode)->first();
+        $password = $request->password ?: str_random(10);
 
-		// crear el usuario
-		$cdata = array( "name" => $request->name,
-						"email" => $request->email,
-						"profile_id" => ( $profile ? $profile->id : "null" ),
-						"password" => bcrypt( $password ),
-						"ppassword" => $password);
+        // crear el usuario
+        $cdata = array("name" => $request->name,
+            "email" => $request->email,
+            "profile_id" => ( $profile ? $profile->id : "null" ),
+            "password" => bcrypt($password),
+            "ppassword" => $password);
 
-		$user = User::create($cdata);
-		
-		$this->sendActivationMail($user, $cdata);	
-		
-		return $user;
-		
-	}
+        $user = User::create($cdata);
 
-	public function sendActivationMail( $user, $cdata )
-    {	
-		
-		$cdata['link'] = str_random(30);
-		$ua = new UserActivation();		
+        $this->sendActivationMail($user, $cdata);
 
-		$ua->user_id = $user->id;
-		$ua->token = $cdata['link'];
+        return $user;
+    }
 
-		$ua->save();
+    public function sendActivationMail($user, $cdata) {
 
-		Mail::later(5,'website.emails.activation', ['cdata'=>$cdata], function($message) use ($cdata) {
-			$message->to($cdata['email']);
-			$message->subject(trans('auth.Account_Activation_Email_Subject'));
-		});
-    }		
+        $cdata['link'] = str_random(30);
+        $ua = new UserActivation();
+
+        $ua->user_id = $user->id;
+        $ua->token = $cdata['link'];
+
+        $ua->save();
+
+        Mail::later(5, 'website.emails.activation', ['cdata' => $cdata], function($message) use ($cdata) {
+            $message->to($cdata['email']);
+            $message->subject(trans('auth.Account_Activation_Email_Subject'));
+        });
+    }
+
 }

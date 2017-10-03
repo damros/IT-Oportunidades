@@ -24,7 +24,7 @@
                     @endif					
                     <div class="skills">
                         @foreach ($candidate->categorys as $candidate_category)
-                        <span <?php echo ((in_array($candidate_category->id, $cats) ? " class='full-time'" : "")) ?> >{{$candidate_category->category->full_name}}</span>
+                        <span <?php echo ((in_array($candidate_category->category_id, $cats) ? " class='full-time'" : "")) ?> >{{$candidate_category->category->full_name}}</span>
                         @endforeach						
                     </div>
                     <div class="clearfix"></div>

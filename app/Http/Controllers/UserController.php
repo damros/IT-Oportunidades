@@ -16,25 +16,23 @@ use Validator;
 use Auth;
 use Hash;
 
-class UserController extends Controller
-{	
+class UserController extends Controller {
+
     protected $userFactory;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->userFactory = new UserFactory();
     }
-	
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         $users = User::all();
 
-        return view('admin.user.index',compact('users'));  
+        return view('admin.user.index', compact('users'));
     }
 
     /**
@@ -42,93 +40,86 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-		$profiles = Profile::lists('name','id');
-				
-        return view('admin.user.create',compact('profiles'));
+    public function create() {
+        $profiles = Profile::lists('name', 'id');
+
+        return view('admin.user.create', compact('profiles'));
     }
-	
-	 /**
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserCreateRequest $request)
-	{
+    public function store(UserCreateRequest $request) {
         User::create($request->all());
-        Session::flash('message','Usuario Creado Correctamente');
-        return Redirect::to('/admin/users'); 		
-	}
-
-	public function candidateRegister(UserCreateRequest $request)
-    {
-	
-		if (!is_null($request->password)) {
-			$this->validate($request, [
-				'password' => 'required|confirmed|min:6'
-			]);	
-        }
-		
-		try {
-			
-			if ( ( $user = $this->userFactory->createUser($request, 'ca') ) ) {
-
-				$cdata = array(	"user_id" => $user->id,
-								"name" => $user->name );
-
-				Candidate::create($cdata);
-								
-
-				return response()->json(array(	"status"=>"success",
-												"message"=>"Registro realizado con éxito. Revise su correo electrónico para activar la cuenta",
-												"redirect"=>"" ));
-
-			} else {
-
-				return response()->json(array(	"status"=>"error",
-												"message"=>"Ha ocurrido un error inesperado, por favor vuelva a intentarlo",
-												"redirect"=>"" ));
-			}
-			
-		} catch (Exception $ex) {
-			
-			return response()->json(array(	"status"=>"error",
-											"message"=>"Ha ocurrido un error inesperado, por favor vuelva a intentarlo",
-											"redirect"=>"" ));
-			
-		}
-		
+        Session::flash('message', 'Usuario Creado Correctamente');
+        return Redirect::to('/admin/users');
     }
-	
-	public function companyRegister(UserCreateRequest $request)
-    {
-		
-		if (!is_null($request->password)) {
-			$this->validate($request, [
-				'password' => 'required|confirmed|min:6'
-			]);	
+
+    public function candidateRegister(UserCreateRequest $request) {
+
+        if (!is_null($request->password)) {
+            $this->validate($request, [
+                'password' => 'required|confirmed|min:6'
+            ]);
         }
-		
-		if ( ( $user = $this->userFactory->createUser($request, 'co') ) ) {		
-		
-			$cdata = array(	"user_id" => $user->id,
-							"name" => $user->name,
-							"email" => $user->email,
-							"identification" => $request->identification );
-		
-			Company::create($cdata);
-			
-			return response()->json(array(	"status"=>"success",
-											"message"=>"Registro realizado con éxito. Revise su correo electrónico para activar la cuenta",
-											"redirect"=>"" ));			
-			
-		} else {
-			return response()->json(array(	"status"=>"error",
-											"message"=>"Ha ocurrido un error inesperado, por favor vuelva a intentarlo",
-											"redirect"=>"" ));
-		}        
+
+        try {
+
+            if (( $user = $this->userFactory->createUser($request, 'ca'))) {
+                
+                $slug = $user->id.$user->email;
+                $slug = sha1($slug);                
+
+                $cdata = array("user_id" => $user->id, "name" => $user->name, "slug" => $slug);
+
+                Candidate::create($cdata);
+
+
+                return response()->json(array("status" => "success",
+                            "message" => "Registro realizado con éxito. Revise su correo electrónico para activar la cuenta",
+                            "redirect" => ""));
+            } else {
+
+                return response()->json(array("status" => "error",
+                            "message" => "Ha ocurrido un error inesperado, por favor vuelva a intentarlo",
+                            "redirect" => ""));
+            }
+        } catch (Exception $ex) {
+
+            return response()->json(array("status" => "error",
+                        "message" => "Ha ocurrido un error inesperado, por favor vuelva a intentarlo",
+                        "redirect" => ""));
+        }
+    }
+
+    public function companyRegister(UserCreateRequest $request) {
+
+        if (!is_null($request->password)) {
+            $this->validate($request, [
+                'password' => 'required|confirmed|min:6'
+            ]);
+        }
+
+        if (( $user = $this->userFactory->createUser($request, 'co'))) {
+
+            $cdata = array("user_id" => $user->id,
+                "name" => $user->name,
+                "email" => $user->email,
+                "identification" => $request->identification);
+
+            Company::create($cdata);
+
+            return response()->json(array("status" => "success",
+                        "message" => "Registro realizado con éxito. Revise su correo electrónico para activar la cuenta",
+                        "redirect" => ""));
+        } else {
+            return response()->json(array("status" => "error",
+                        "message" => "Ha ocurrido un error inesperado, por favor vuelva a intentarlo",
+                        "redirect" => ""));
+        }
     }
 
     /**
@@ -137,11 +128,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
-		$user = User::find($id);
-		$profiles = Profile::lists('name','id');
-        return view('admin.user.edit',['user'=>$user,'profiles'=>$profiles]);
+    public function edit($id) {
+        $user = User::find($id);
+        $profiles = Profile::lists('name', 'id');
+        return view('admin.user.edit', ['user' => $user, 'profiles' => $profiles]);
     }
 
     /**
@@ -151,14 +141,13 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
-		$user = User::find($id);
-		
+    public function update(Request $request, $id) {
+        $user = User::find($id);
+
         $user->fill($request->all());
         $user->save();
-        Session::flash('message','Usuario Actualizado Correctamente');
-        return Redirect::to('/admin/users'); 
+        Session::flash('message', 'Usuario Actualizado Correctamente');
+        return Redirect::to('/admin/users');
     }
 
     /**
@@ -167,79 +156,78 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         $user = User::find($id);
-		$user->delete();
-		Session::flash('message','Usuario Eliminado Correctamente');
+        $user->delete();
+        Session::flash('message', 'Usuario Eliminado Correctamente');
         return Redirect::to('/admin/users');
     }
-	
+
     /**
      * Check for user Activation Code
      *
      * @param  array  $token
      * @return User
-     */	
-    public function userActivation($token)
-    {
-        $check = UserActivation::where('token',$token)->first();
+     */
+    public function userActivation($token) {
+        $check = UserActivation::where('token', $token)->first();
 
-        if( ! is_null($check) ) {
-			
+        if (!is_null($check)) {
+
             $user = User::find($check->user_id);
 
-            if($user->activated == 1){
+            if ($user->activated == 1) {
                 return redirect()->to('my-account')
-                    ->with('success',trans('messages.User_Already_Activated'));                
+                                ->with('success', trans('messages.User_Already_Activated'));
             }
 
             $user->update(['activated' => 1]);
-			
-            UserActivation::where('token',$token)->delete();
+
+            UserActivation::where('token', $token)->delete();
 
             return redirect()->to('my-account')
-                ->with('success',trans('messages.User_Activated_Successfully'));
+                            ->with('success', trans('messages.User_Activated_Successfully'));
         }
 
         return redirect()->to('my-account')
-                ->with('warning',trans('messages.Token_Invalid'));
+                        ->with('warning', trans('messages.Token_Invalid'));
     }
-	
-	public function admin_credential_rules(array $data) {
-		$messages = [
-			'current-password.required' => trans('passwords.current_password_required'),
-			'password.required' => trans('passwords.new_password_required'),
-		];
 
-		$validator = Validator::make($data, [
-							'current-password' => 'required',
-							'password' => 'required|same:password|min:6',
-							'password_confirmation' => 'required|same:password',
-						], $messages);
+    public function admin_credential_rules(array $data) {
+        $messages = [
+            'current-password.required' => trans('passwords.current_password_required'),
+            'password.required' => trans('passwords.new_password_required'),
+        ];
 
-		return $validator;
-	}
+        $validator = Validator::make($data, [
+                    'current-password' => 'required',
+                    'password' => 'required|same:password|min:6',
+                    'password_confirmation' => 'required|same:password',
+                        ], $messages);
 
-	public function changePassword(Request $request) {
+        return $validator;
+    }
 
-		$request_data = $request->All();
-		$validator = $this->admin_credential_rules($request_data);
-		if ($validator->fails()) {			
-			return redirect()->back()->withErrors($validator->errors());
-		} else {
-			$current_password = Auth::User()->password;
-			if (Hash::check($request_data['current-password'], $current_password)) {
-				$user_id = Auth::User()->id;
-				$obj_user = User::find($user_id);
-				$obj_user->password = Hash::make($request_data['password']);
-				$obj_user->save();
-				return redirect()->back()
-						->with('success',trans('passwords.password_changed_successfully'));
-			} else {
-				$error = array('current-password' => trans('passwords.incorrect_current_password'));
-				return redirect()->back()->withErrors($error);				
-			}
-		}
-	}	
+    public function changePassword(Request $request) {
+
+        $request_data = $request->All();
+        $validator = $this->admin_credential_rules($request_data);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors());
+        } else {
+            $current_password = Auth::User()->password;
+            if (Hash::check($request_data['current-password'], $current_password)) {
+                $user_id = Auth::User()->id;
+                $obj_user = User::find($user_id);
+                $obj_user->password = Hash::make($request_data['password']);
+                $obj_user->save();
+                return redirect()->back()
+                                ->with('success', trans('passwords.password_changed_successfully'));
+            } else {
+                $error = array('current-password' => trans('passwords.incorrect_current_password'));
+                return redirect()->back()->withErrors($error);
+            }
+        }
+    }
+
 }

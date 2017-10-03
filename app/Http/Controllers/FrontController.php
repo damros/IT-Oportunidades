@@ -229,7 +229,7 @@ class FrontController extends Controller {
         return view('website.company.jobs.manage.candidates.index', compact('candidates', 'job'));
     }
 
-    public function candidateJobDetail($jobId, $candidateId) {
+    public function candidateJobDetail($jobId, $candidateSlug) {
 
         if (!can('candidate-detail')) {
             return Redirect::to('/');
@@ -239,7 +239,11 @@ class FrontController extends Controller {
             return redirect()->back()->with('error', trans('messages.no_records_found'));
         }        
 
-        $candidate = Candidate::find($candidateId);
+        $candidate = Candidate::where('slug',$candidateSlug)->first();
+
+        if (!( $candidate )) {
+            return redirect()->back()->with('error', trans('messages.no_records_found'));
+        }          
         
         $catj = $job->categorys;
         foreach ($catj as $cat) {

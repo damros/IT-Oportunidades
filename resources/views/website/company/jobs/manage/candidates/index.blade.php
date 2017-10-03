@@ -78,7 +78,7 @@
                     @if ($candidate->resume_file)
                     <a href="/documents/resumes/{{$candidate->resume_file}}" target="_blank"><i class="fa fa-download"></i> {{trans('labels.Donwload_Resume_File')}}</a>
                     @endif
-                    <a href="{!!URL::to('jobs/candidates/detail/'.$job->id.'/'.$candidate->id.'')!!}"><i class="fa fa-user"></i> {{trans('labels.View_Candidate')}}</a>
+                    <a href="{!!URL::to('jobs/candidates/detail/'.$job->id.'/'.$candidate->slug.'')!!}"><i class="fa fa-user"></i> {{trans('labels.View_Candidate')}}</a>
                 </td>
             </tr>
             @endforeach

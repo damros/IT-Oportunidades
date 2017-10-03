@@ -14,6 +14,7 @@ class CreateCandidatesTable extends Migration
     {
         Schema::create('candidates', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('slug', 20)->nullable();
             $table->string('name');
             $table->integer('identification')->unsigned();
             $table->string('phone')->nullable();

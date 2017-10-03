@@ -21,6 +21,7 @@ Route::post('admin/adminlogin', [
 Route::group(['prefix' => 'admin'], function () {
 
 	Route::get('login','LogController@adminIndex');
+	Route::get('update','AdminController@update');
 	
 	Route::group(['middleware'=>'auth'],function(){
 		
@@ -93,7 +94,7 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('jobs/manage','FrontController@manageJobs');	
 	Route::get('jobs/edit/{id}','FrontController@editJob');	
 	Route::get('jobs/candidates/find/{id}','FrontController@candidatesByJob');
-	Route::get('jobs/candidates/detail/{jobId}/{candidateId}','FrontController@candidateJobDetail');
+	Route::get('jobs/candidates/detail/{jobId}/{candidateSlug}','FrontController@candidateJobDetail');
 	Route::get('password/change','FrontController@getChange');
 	Route::post('password/change','UserController@changePassword');	
 	

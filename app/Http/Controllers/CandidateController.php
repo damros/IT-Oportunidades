@@ -156,10 +156,13 @@ class CandidateController extends Controller {
             ]);
 
             $user = $this->userFactory->createUser($request, 'ca');
+            $slug = $user->id.$user->email;
+            $slug = sha1($slug);
 
             $candidate = new Candidate;
 
             $candidate->user_id = $user->id;
+            $candidate->slug = $slug;
         } else {
 
             if (!( $candidate = Candidate::find(( currentUser()->candidate ? currentUser()->candidate->id : 0)) )) {

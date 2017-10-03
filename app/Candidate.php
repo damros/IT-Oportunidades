@@ -16,7 +16,7 @@ class Candidate extends Model
 	
     protected $appends = ['photo_candidate','job_accuracy'];
 	
-    protected $fillable = ['name','identification','phone','address','photo','video','profesional_title','resume_content','resume_file','description','user_id'];
+    protected $fillable = ['slug','name','identification','phone','address','photo','video','profesional_title','resume_content','resume_file','description','user_id'];
     
     
 	/**
