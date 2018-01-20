@@ -110,6 +110,7 @@ return [
     'Company_Tagline_Placeholder' => 'Pequeña descripción de su empresa',	
     'Company_Video_Placeholder' => 'Un link a un video sobre su empresa',	
     'Companys' => 'Empresas',
+    'Confirm_Password' => 'Confirmar Contraseña',
     'Contact' => 'Contacto',		
     'Contact' => 'Contacto',
     'contact' => 'contacto',

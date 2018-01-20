@@ -46,11 +46,11 @@
 
 				<div class="form">
 					<h5>{{ trans('labels.New_Password') }}</h5>
-					<input type="password" name="password">
+					<input type="password" name="new_password">
 				</div>
 
 				<div class="form">
-					<h5>{{ trans('labels.Repeat_Password') }}</h5>
+					<h5>{{ trans('labels.Confirm_Password') }}</h5>
 					<input type="password" name="password_confirmation">
 				</div>
 

@@ -196,13 +196,13 @@ class UserController extends Controller {
     public function admin_credential_rules(array $data) {
         $messages = [
             'current-password.required' => trans('passwords.current_password_required'),
-            'password.required' => trans('passwords.new_password_required'),
+            'new_password.required' => trans('passwords.new_password_required'),
         ];
 
         $validator = Validator::make($data, [
                     'current-password' => 'required',
-                    'password' => 'required|same:password|min:6',
-                    'password_confirmation' => 'required|same:password',
+                    'new_password' => 'required|same:new_password|min:6',
+                    'password_confirmation' => 'required|same:new_password',
                         ], $messages);
 
         return $validator;
@@ -219,7 +219,7 @@ class UserController extends Controller {
             if (Hash::check($request_data['current-password'], $current_password)) {
                 $user_id = Auth::User()->id;
                 $obj_user = User::find($user_id);
-                $obj_user->password = Hash::make($request_data['password']);
+                $obj_user->password = Hash::make($request_data['new_password']);
                 $obj_user->save();
                 return redirect()->back()
                                 ->with('success', trans('passwords.password_changed_successfully'));

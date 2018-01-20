@@ -67,7 +67,7 @@ return [
     'required_with_all'    => 'El campo :attribute es obligatorio cuando :values está presente.',
     'required_without'     => 'El campo :attribute es obligatorio cuando :values no está presente.',
     'required_without_all' => 'El campo :attribute es obligatorio cuando ninguno de :values estén presentes.',
-    'same'                 => ':attribute y :other deben coincidir.',
+    'same'                 => 'El campo :attribute y :other deben coincidir.',
     'size'                 => [
         'numeric' => 'El tamaño de :attribute debe ser :size.',
         'file'    => 'El tamaño de :attribute debe ser :size kilobytes.',
@@ -115,7 +115,8 @@ return [
         'first_name'            => 'nombre',
         'last_name'             => 'apellido',
         'password'              => 'contraseña',
-        'password_confirmation' => 'confirmación de la contraseña',
+        'new_password'              => 'nueva contraseña',
+        'password_confirmation' => 'confirmar contraseña',
         'city'                  => 'ciudad',
         'country'               => 'país',
         'address'               => 'dirección',
