@@ -21,7 +21,6 @@
 
         @yield('head')
         
-        <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
         <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}">
 
         <!--[if lt IE 9]>
