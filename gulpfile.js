@@ -37,7 +37,7 @@ elixir(function(mix) {
         'pikaday.js',
         'pikaday.jquery.js',
         'jquery.sceditor.js',
-        'jquery.sceditor.xhtml.min.js',
+        'jquery.sceditor.xhtml.min.js',        
         'itoportunidades.js'
     ], 'public/js/app.js')
 	.scripts([
@@ -51,7 +51,8 @@ elixir(function(mix) {
         'waypoints.min.js',
         'jquery.tooltipster.min.js',
         'moment.min.js',
-        'jquery.themepunch.showbizpro.min.js'
+        'jquery.themepunch.showbizpro.min.js',
+        'headroom.min.js'        
     ], 'public/js/vendor.js');
 	
 	mix.version(['public/css/all.css','public/js/app.js','public/js/vendor.js'],'public');

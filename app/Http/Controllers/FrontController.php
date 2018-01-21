@@ -134,7 +134,7 @@ class FrontController extends Controller {
             $seljobtypes = array($request->jobtype);
             $jobs = Job::searchJobs($request)->paginate(5)->appends($request->input());
         } else {
-            $seljobtypes[0] = array('-1');
+            $seljobtypes[0] = array('-0');
             $jobs = Job::activeJobs()->paginate(5);
         }
 

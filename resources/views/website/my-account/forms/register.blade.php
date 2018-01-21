@@ -13,23 +13,31 @@
 			
 		<div class="form-container">
 			<p class="form-row form-row-wide">
-				<label for="reg_name">{{trans('labels.NameAndSurname')}}:</label>
+				<label for="ca_reg_name">{{trans('labels.NameAndSurname')}}:
+                                <i class="ln ln-icon-Male"></i>
 				<input type="text" class="input-text" name="name" id="ca_reg_name" value="" />
+                                </label>
 			</p>
 
 			<p class="form-row form-row-wide">
-				<label for="reg_email">{{trans('labels.Email_Address')}}:</label>
+				<label for="ca_reg_email">{{trans('labels.Email_Address')}}:
+                                <i class="ln ln-icon-Mail"></i>
 				<input type="email" class="input-text" name="email" id="ca_reg_email" value="" />
+                                </label>
 			</p>
 
 			<p class="form-row form-row-wide">
-				<label for="reg_password">{{trans('labels.Password')}}:</label>
+				<label for="ca_reg_password">{{trans('labels.Password')}}:
+                                <i class="ln ln-icon-Lock-2"></i>
 				<input type="password" class="input-text" name="password" id="ca_reg_password" />
+                                </label>
 			</p>
 
 			<p class="form-row form-row-wide">
-				<label for="reg_password2">{{trans('labels.Repeat_Password')}}:</label>
+				<label for="ca_reg_password2">{{trans('labels.Repeat_Password')}}:
+                                <i class="ln ln-icon-Lock-2"></i>
 				<input type="password" class="input-text" name="password_confirmation" id="ca_reg_password2" />
+                                </label>
 			</p>
 
 			<p class="form-row">
@@ -44,28 +52,38 @@
 	{!!Form::open(['route'=>'companyRegister', 'method'=>'POST', 'class'=>'register company ajax-submit tooltips', 'style'=>'display:none;'])!!}
 		<div class="form-container">
 			<p class="form-row form-row-wide">
-				<label for="reg_name">{{trans('labels.Company_Name')}}:</label>
+				<label for="co_reg_name">{{trans('labels.Company_Name')}}:
+                                <i class="ln ln-icon-Male"></i>
 				<input type="text" class="input-text" name="name" id="co_reg_name" value="" />
+                                </label>
 			</p>		
 
 			<p class="form-row form-row-wide">
-				<label for="reg_cuit">{{trans('labels.Company_Identification')}}:</label>
+				<label for="reg_cuit">{{trans('labels.Company_Identification')}}:
+                                <i class="ln ln-icon-Notepad-2"></i>
 				<input type="text" class="input-text" name="identification" id="co_reg_cuit" value="" />
+                                </label>
 			</p>		
 
 			<p class="form-row form-row-wide">
-				<label for="reg_email">{{trans('labels.Email_Address')}}:</label>
+				<label for="reg_email">{{trans('labels.Email_Address')}}:
+                                <i class="ln ln-icon-Mail"></i>
 				<input type="email" class="input-text" name="email" id="co_reg_email" value="" />
+                                </label>
 			</p>
 
 			<p class="form-row form-row-wide">
-				<label for="reg_password">{{trans('labels.Password')}}:</label>
+				<label for="reg_password">{{trans('labels.Password')}}:
+                                <i class="ln ln-icon-Lock-2"></i>
 				<input type="password" class="input-text" name="password" id="co_reg_password" />
+                                </label>
 			</p>
 
 			<p class="form-row form-row-wide">
-				<label for="reg_password2">{{trans('labels.Repeat_Password')}}:</label>
+				<label for="reg_password2">{{trans('labels.Repeat_Password')}}:
+                                <i class="ln ln-icon-Lock-2"></i>
 				<input type="password" class="input-text" name="password_confirmation" id="co_reg_password2" />
+                                </label>
 			</p>
 
 			<p class="form-row">

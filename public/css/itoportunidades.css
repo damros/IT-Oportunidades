@@ -1,0 +1,27 @@
+.logo-title{
+	color: #2078d3;
+	display: inline-block;
+	line-height: 45px;
+	margin-top: 24px;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.showbiz .overflowholder ul li img {
+	max-height: 80px;
+}
+
+.form .mid-fields.left {
+	width: 49%;
+	display: inline;
+	float: left;
+}
+.form .mid-fields.right {
+	width: 49%;
+	display: inline;
+    float: right;	
+}
+
+.chosen-container-multi .chosen-choices li.search-choice {
+	background-color: #224589 !important;
+}

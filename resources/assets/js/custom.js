@@ -24,7 +24,7 @@
         } else {
             $('#navigation').addClass('menu');
             if($('header').data('full') === "yes" ) {
-                 $('header').addClass('full-width')
+                 $('header').addClass('full-width');
             }
             $('#navigation').superfish({
                 delay:       300,                               // one second delay on mouseout
@@ -61,7 +61,7 @@
 
 
       // desktop devices
-        $('.menu-trigger').on('click',function(){
+        $('.menu-trigger').click(function(){
           var jpm = $(this);
 
           if( jpm.hasClass('active') )
@@ -117,7 +117,7 @@
           }
         });
 
-        $('#backtotop a').on('click',function(){
+        $('#backtotop a').click(function(){
           $('html, body').animate({scrollTop:0}, scrollSpeed);
           return false;
         });
@@ -156,7 +156,7 @@
         $('.fullwidthbanner').revolution({
             delay: 9000,
             startwidth: 1180,
-            startheight: 585,
+            startheight: 640,
             onHoverStop: "on", // Stop Banner Timet at Hover on Slide on/off
             navigationType: "none", //bullet, none
             navigationArrows: "verticalcentered", //nexttobullets, verticalcentered, none
@@ -212,7 +212,7 @@
     /*----------------------------------------------------*/
     /*  Checkboxes "any" fix
     /*----------------------------------------------------*/   
-        $('.checkboxes').find('input:first').addClass('first')
+        $('.checkboxes').find('input:first').addClass('first');
         $('.checkboxes input').on('change', function() {
             if($(this).hasClass('first')){
                 $(this).parents('.checkboxes').find('input').prop('checked', false);
@@ -293,7 +293,7 @@
      /*---------------------------------------------------*/
     /*  Contact Form
     /*---------------------------------------------------*/
-    $("#contactform .submit").on('click',function(e) {
+    $("#contactform .submit").click(function(e) {
 
 
       e.preventDefault();
@@ -402,6 +402,7 @@
 
             e.preventDefault();
             $(this).parents('div.application').find('.close-tab').fadeOut();
+            var a = $(this).attr("href");
             if($(this).hasClass('opened')) {
                 $(this).parents('div.application').find(".app-tabs div.app-tab-content").slideUp('fast');
                 $(this).parents('div.application').find('.close-tab').fadeOut(10);
@@ -409,7 +410,6 @@
             } else {
                 $(this).parents('div.application').find(".app-link").removeClass('opened');
                 $(this).addClass('opened');
-                var a = $(this).attr("href");
                 $(this).parents('div.application').find(a).slideDown('fast').removeClass('closed').addClass('opened');
                 $(this).parents('div.application').find('.close-tab').fadeIn(10);
             }
@@ -423,9 +423,12 @@
             e.preventDefault();
             $(this).parents('div.application').find(".app-link").removeClass('opened');
             $(this).parents('div.application').find(".app-tabs div.app-tab-content").slideUp('fast').addClass('closed').removeClass('opened');
-        })
+        });
 
 
+    /*----------------------------------------------------*/
+    /*  Add Resume 
+    /*----------------------------------------------------*/   
     /*----------------------------------------------------*/
     /*  Add Resume 
     /*----------------------------------------------------*/   
@@ -493,8 +496,163 @@
         $(".tabs-nav li:first").addClass("active").show(); //Activate first tab
         $(".tab-content:first").show(); //Show first tab content
     } else {
-        anchor.parent('li').trigger( "click" );
+        console.log(anchor);
+        anchor.parent('li').click();
     }
+
+
+
+    /*----------------------------------------------------*/
+    /*  Sliding In-Out Content
+    /*----------------------------------------------------*/
+
+    $(window).bind("load resize scroll",function(e){
+        var headerElem = $('.search-container');
+
+        // flying out and fading for header content
+        $(headerElem).css({  'transform': 'translateY(' + (  $(window).scrollTop() / -9 ) + 'px)', });
+        // $(headerElem).css({ 'opacity': 1 - $(window).scrollTop() / 600 });  
+    });
+
+
+
+    /*----------------------------------------------------*/
+    /*  Parallax
+    /*----------------------------------------------------*/
+    /* detect touch */
+    if("ontouchstart" in window){
+        document.documentElement.className = document.documentElement.className + " touch";
+    }
+    if(!$("html").hasClass("touch")){
+        /* background fix */
+        $(".parallax").css("background-attachment", "fixed");
+    }
+
+    /* fix vertical when not overflow
+    call fullscreenFix() if .fullscreen content changes */
+    function fullscreenFix(){
+        var h = $('body').height();
+        // set .fullscreen height
+        $(".parallax-content").each(function(i){
+            if($(this).innerHeight() > h){ $(this).closest(".fullscreen").addClass("overflow");
+            }
+        });
+    }
+    $(window).resize(fullscreenFix);
+    fullscreenFix();
+
+
+
+    /* resize background images */
+    function backgroundResize(){
+        var windowH = $(window).height();
+        $(".background").each(function(i){
+            var path = $(this);
+            // variables
+            var contW = path.width();
+            var contH = path.height();
+            var imgW = path.attr("data-img-width");
+            var imgH = path.attr("data-img-height");
+            var ratio = imgW / imgH;
+            // overflowing difference
+            var diff = parseFloat(path.attr("data-diff"));
+            diff = diff ? diff : 0;
+            // remaining height to have fullscreen image only on parallax
+            var remainingH = 0;
+            if(path.hasClass("parallax") && !$("html").hasClass("touch")){
+                var maxH = contH > windowH ? contH : windowH;
+                remainingH = windowH - contH;
+            }
+            // set img values depending on cont
+            imgH = contH + remainingH + diff;
+            imgW = imgH * ratio;
+            // fix when too large
+            if(contW > imgW){
+                imgW = contW;
+                imgH = imgW / ratio;
+            }
+            //
+            path.data("resized-imgW", imgW);
+            path.data("resized-imgH", imgH);
+            path.css("background-size", imgW + "px " + imgH + "px");
+        });
+    }
+    $(window).resize(backgroundResize);
+    $(window).focus(backgroundResize);
+    backgroundResize();
+
+
+
+    /* set parallax background-position */
+    function parallaxPosition(e){
+        var heightWindow = $(window).height();
+        var topWindow = $(window).scrollTop();
+        var bottomWindow = topWindow + heightWindow;
+        var currentWindow = (topWindow + bottomWindow) / 2;
+        $(".parallax").each(function(i){
+            var path = $(this);
+            var height = path.height();
+            var top = path.offset().top;
+            var bottom = top + height;
+            // only when in range
+            if(bottomWindow > top && topWindow < bottom){
+                var imgW = path.data("resized-imgW");
+                var imgH = path.data("resized-imgH");
+                // min when image touch top of window
+                var min = 0;
+                // max when image touch bottom of window
+                var max = - imgH + heightWindow;
+                // overflow changes parallax
+                var overflowH = height < heightWindow ? imgH - height : imgH - heightWindow; // fix height on overflow
+                top = top - overflowH;
+                bottom = bottom + overflowH;
+                // value with linear interpolation
+                var value = -100 + min + (max - min) * (currentWindow - top) / (bottom - top);
+                // set background-position
+                var orizontalPosition = path.attr("data-oriz-pos");
+                orizontalPosition = orizontalPosition ? orizontalPosition : "50%";
+                $(this).css("background-position", orizontalPosition + " " + value + "px");
+
+            }
+        });
+    }
+    if(!$("html").hasClass("touch")){
+        $(window).resize(parallaxPosition);
+        //$(window).focus(parallaxPosition);
+        $(window).scroll(parallaxPosition);
+        parallaxPosition();
+    }
+
+
+    /*----------------------------------------------------*/
+    /*  Sticky Header 
+    /*----------------------------------------------------*/
+    $( ".sticky-header" ).clone(true).addClass('cloned').insertAfter(".sticky-header");
+    $(".sticky-header.cloned.transparent #logo a img").attr("src", "images/logo.png");
+    $(".sticky-header.cloned.alternative").removeClass('alternative');
+
+    var stickyHeader = document.querySelector(".sticky-header.cloned");
+
+    var headroom = new Headroom(stickyHeader, {
+      "offset": $(".sticky-header").height(),
+      "tolerance": 0
+    });
+
+    // disabling on mobile
+    $(window).bind("load resize",function(e){
+        $( ".sticky-header.cloned" ).removeClass('transparent alternative');
+
+        var winWidth = $(window).width();
+
+        if(winWidth>1290) {
+            headroom.init();
+            }
+
+            else if(winWidth<1290) {
+                headroom.destroy();
+                $(".sticky-header.cloned").remove();
+            }
+    });
 
 // ------------------ End Document ------------------ //
 });

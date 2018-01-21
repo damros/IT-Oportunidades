@@ -8,13 +8,17 @@
 		
 		<div class="form-container">
 			<p class="form-row form-row-wide">
-				<label for="login">{{ trans('labels.Email_Address') }}:</label>
+				<label for="email">{{ trans('labels.Email_Address') }}:
+                                <i class="ln ln-icon-Male"></i>
 				<input type="email" class="input-text" name="email" id="email" value="" />
+                                </label>
 			</p>
 
 			<p class="form-row form-row-wide">
-				<label for="password">{{ trans('labels.Password') }}:</label>
+				<label for="password">{{ trans('labels.Password') }}:
+                                <i class="ln ln-icon-Lock-2"></i>
 				<input class="input-text" type="password" name="password" id="password" />
+                                </label>
 			</p>
 
 			<input type="hidden" name="_token" value="{{ csrf_token() }}" id="token" />

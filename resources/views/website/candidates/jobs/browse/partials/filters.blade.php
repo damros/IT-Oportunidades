@@ -36,8 +36,8 @@
 
 		<ul class="checkboxes">
 			<li>
-				<input id="check-1" type="checkbox" name="jobtype[]" value="-1" <?php echo ((in_array('-1', $seljobtypes[0]) ? " checked='checked'" : "")) ?>>
-				<label for="check-1">{{trans('labels.Any_Type')}}</label>
+				<input id="check-0" type="checkbox" name="jobtype[]" value="-0" <?php echo ((in_array('-0', $seljobtypes[0]) ? " checked='checked'" : "")) ?>>
+				<label for="check-0">{{trans('labels.Any_Type')}}</label>
 			</li>
 			@foreach ($jobtypes as $jobtype)
 			<li>

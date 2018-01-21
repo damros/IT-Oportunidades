@@ -14,10 +14,15 @@
 
         <!-- CSS
         ================================================== -->
-
-        <link rel="stylesheet" href="{{ elixir('css/all.css', null) }}">
+        {!!Html::style('css/style.css')!!}
+        {!!Html::style('css/colors/green.css')!!}
+        {!!Html::style('css/tooltipster.css')!!}
+        {!!Html::style('css/pikaday.css')!!}        
 
         @yield('head')
+        
+        <link rel="icon" type="image/x-icon" href="https://assets-cdn.github.com/favicon.ico">
+        <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}">
 
         <!--[if lt IE 9]>
                 <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -31,7 +36,7 @@
 
             <!-- Header
             ================================================== -->
-            <header>
+            <header class="sticky-header">
                 <div class="container">
                     <div class="sixteen columns">
 
@@ -193,12 +198,34 @@
         </div>
         <!-- Wrapper / End -->
 
-
         <!-- Scripts
         ================================================== -->
-        <script src="{{ elixir('js/vendor.js', null) }}"></script>
-        <script src="{{ elixir('js/app.js', null) }}"></script>
+        {!!Html::script('scripts/jquery-2.1.3.min.js')!!}
+        {!!Html::script('scripts/custom.js')!!}
+        {!!Html::script('scripts/jquery.superfish.js')!!}
+        {!!Html::script('scripts/jquery.themepunch.tools.min.js')!!}
+        {!!Html::script('scripts/jquery.themepunch.revolution.min.js')!!}
+        {!!Html::script('scripts/jquery.themepunch.showbizpro.min.js')!!}
+        {!!Html::script('scripts/jquery.flexslider-min.js')!!}
+        {!!Html::script('scripts/chosen.jquery.min.js')!!}
+        {!!Html::script('scripts/jquery.magnific-popup.min.js')!!}
+        {!!Html::script('scripts/waypoints.min.js')!!}
+        {!!Html::script('scripts/jquery.counterup.min.js')!!}
+        {!!Html::script('scripts/jquery.jpanelmenu.js')!!}
+        {!!Html::script('scripts/stacktable.js')!!}
+        {!!Html::script('scripts/headroom.min.js')!!}        
+        {!!Html::script('scripts/hoverIntent.js')!!}        
+        {!!Html::script('scripts/jquery.blockUI.js')!!}
+        {!!Html::script('scripts/jquery.gmaps.min.js')!!}
+        {!!Html::script('scripts/jquery.tooltipster.min.js')!!}
+        {!!Html::script('scripts/moment.min.js')!!}
+        {!!Html::script('scripts/pikaday.js')!!}
+        {!!Html::script('scripts/pikaday.jquery.js')!!}
+        {!!Html::script('scripts/jquery.sceditor.js')!!}
+        {!!Html::script('scripts/jquery.sceditor.xhtml.min.js')!!}
 
+        {!!Html::script('scripts/itoportunidades.js')!!}
+        
         @yield('scripts')
 
     </body>

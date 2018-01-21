@@ -175,7 +175,7 @@ class Job extends Model {
                 ->select('jobs.*')
                 ->orderBy($sortB, $sortD);
 
-        if ($jobtype[0][0] != '-1') {
+        if ($jobtype[0][0] != '-0') {
             $jobs->whereIn('jobs.job_type_id', $jobtype[0]);
         }
 
