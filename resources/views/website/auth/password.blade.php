@@ -42,7 +42,7 @@
 						 {!!Form::open(['url' => '/password','method' => 'POST'])!!}
 						 
 							<div class="col-md-6 contact-left">
-								{!!Form::text('email')!!}
+								{!!Form::email('email')!!}
 							</div>
 						 
 							<div class="divider margin-top-10"></div>
