@@ -16,7 +16,6 @@
 	</div>
 </div>
 
-
 <!-- Content
 ================================================== -->
 <div class="container">
@@ -87,9 +86,16 @@
 				</ul>
 
 				@if ( Auth::guest() || (! Auth::guest() && currentUser()->profile->code == 'ca' ))
-				<a href="#small-dialog" class="popup-with-zoom-anim button">{{trans('labels.Apply_For_This_Job')}}</a>
+                                
+                                    @if ( ! $application )
+                                        <a href="#small-dialog" class="popup-with-zoom-anim button">{{trans('labels.Apply_For_This_Job')}}</a>
+                                    @else
+                                        <div class="notification success" style="text-align: center;">
+                                            <p><span>{{trans('labels.Application_Already_Sent')}}</span></p>
+                                        </div>                                
+                                    @endif
 
-				@include('website.candidates.jobs.detail.partials.apply')
+                                    @include('website.candidates.jobs.detail.partials.apply')
 				@endif
 			</div>
 

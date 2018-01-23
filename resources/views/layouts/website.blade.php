@@ -17,7 +17,8 @@
         {!!Html::style('css/style.css')!!}
         {!!Html::style('css/colors/green.css')!!}
         {!!Html::style('css/tooltipster.css')!!}
-        {!!Html::style('css/pikaday.css')!!}        
+        {!!Html::style('css/pikaday.css')!!}
+        {!!Html::style('css/itoportunidades.css')!!}
 
         @yield('head')
         

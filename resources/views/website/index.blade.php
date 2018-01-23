@@ -67,9 +67,9 @@
 
 			<li><a href="{!!URL::to('jobs/'.$job->id.'')!!}">
 				@if ( $job->company->logo )
-					<img src="/images/companylogo/{{$job->company->logo}}" title="{{$job->company->name}}" style="width: 90px; height: 90px; margin-right: 10px;"/>
+					<img src="/images/companylogo/{{$job->company->logo}}" title="{{$job->company->name}}" />
 				@else
-					<img src="/images/job-list-logo-01.png" alt="" style="width: 90px; height: 90px; margin-right: 10px;"/>
+					<img src="/images/job-list-logo-01.png" alt="" />
 				@endif				
 				<div class="job-list-content">
 					<h4>{{$job->title}}</h4>
@@ -123,6 +123,7 @@
 	</div>
 </div>
 
+@if ( $logos->count() )
 <!-- Clients Carousel -->
 <h3 class="centered-headline">{!! trans('labels.Clients_Who_Have_Trusted_Us') !!}</h3>
 <div class="clearfix"></div>
@@ -145,7 +146,7 @@
 					<!-- Item -->
 					@foreach ($logos as $logo)
 					<li><img src="images/companylogo/{{$logo->logo}}" alt="{{$logo->name}}" title="{{$logo->name}}" /></li>
-					@endforeach	
+					@endforeach
 				</ul>
 				<div class="clearfix"></div>
 
@@ -161,5 +162,5 @@
 	</div>
 
 </div>
-
+@endif
 @endsection

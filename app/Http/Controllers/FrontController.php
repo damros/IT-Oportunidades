@@ -9,6 +9,7 @@ use ITOportunidades\Job;
 use ITOportunidades\Candidate;
 use ITOportunidades\ApplicationStatus;
 use ITOportunidades\Organization;
+use ITOportunidades\CandidateApplication;
 use Auth;
 use Illuminate\Http\Request;
 use Redirect;
@@ -167,8 +168,13 @@ class FrontController extends Controller {
     public function viewJob($id) {
 
         $job = Job::find($id);
+        $application = null;
+        
+        if (Auth::check()) {
+            $application = CandidateApplication::where('candidate_id', currentUser()->candidate->id)->where('job_id',$id)->first(); 
+        }
 
-        return view('website.candidates.jobs.detail.index', compact('job'));
+        return view('website.candidates.jobs.detail.index', compact('job','application'));
     }
 
     public function editCompany() {
