@@ -4,15 +4,17 @@
 
 	<li><a href="{!!URL::to('jobs/'.$job->id.'')!!}">
 		@if ( $job->company->logo )
-			<img src="/images/companylogo/{{$job->company->logo}}" title="{{$job->company->name}}" style="width: 90px; height: 90px; margin-right: 10px;"/>
+			<img src="/images/companylogo/{{$job->company->logo}}" title="{{$job->company->name}}"/>
 		@else
-			<img src="/images/job-list-logo-01.png" alt="" style="width: 90px; height: 90px; margin-right: 10px;"/>
+			<img src="/images/job-list-logo-01.png" alt=""/>
 		@endif		
 		<div class="job-list-content">
 			<h4>{{$job->title}}</h4>
 			<div class="job-icons">
 				<span><i class="fa fa-briefcase"></i> {{$job->company->name}}</span>
+                                @if ($job->location)
 				<span><i class="fa fa-map-marker"></i> {{$job->location}}</span>
+                                @endif
 				<span><i class="fa fa-hourglass-half"></i> {{$job->type->name}}</span>
 				@if ($job->end_date)
 				<span><i class="fa fa-calendar-times-o"></i> {{$job->end_date}}</span>
