@@ -127,8 +127,7 @@ class Job extends Model {
                     $query->where('end_date', '>', Carbon::now())
                     ->orWhereNull('end_date');
                 })
-                ->orderBy('created_at')
-                ->groupBy('company_id')
+                ->orderBy('created_at', 'desc')
                 ->take(5)
                 ->get();
 
