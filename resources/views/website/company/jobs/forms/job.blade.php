@@ -17,6 +17,16 @@
     <input name="title" class="search-field" type="text" placeholder="{{trans('labels.Job_Title_Placeholder')}}" value="{{ ( $job->id ? $job->title : "" ) }}"/>
 </div>
 
+<!-- Address Zone -->
+<div class="form">
+    <h5>{{ trans('labels.AddressZone') }}</h5>
+    <select name="address_zone_id" class="chosen-select-no-single">							
+        @foreach ($addresszones as $addresszone)
+        <option value="{{$addresszone->id}}" <?php echo (($job->address_zone_id == $addresszone->id) ? " selected='selected'" : "") ?> >{{$addresszone->name}}</option>
+        @endforeach							
+    </select>    
+</div>
+
 <!-- Location -->
 <div class="form">
     <h5>{{ trans('labels.Location') }} <span>({{ trans('labels.optional') }})</span></h5>

@@ -54,7 +54,7 @@
 ================================================== */
 	body {
 		background-color: #fff;
-		font-size: 16px;
+		font-size: 14px;
 		line-height: 27px;
 		color: #666;
 		-webkit-font-smoothing: antialiased; /* Fix for webkit rendering */
@@ -80,12 +80,7 @@
 	textarea,
 	.widget-text h5,
 	h3.centered-headline span,
-	select {
-		font-family: "Lato", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
-	}
-
-	/* Secondary Font */
-	h1, h2, h3, h4, h5, h6, 
+	select,
 	.button, 
 	input[type="button"], 
 	input[type="submit"],
@@ -99,7 +94,9 @@
 	.ui-accordion .ui-accordion-header,
 	.trigger a, .caption.title, .caption .slider-button,
 	.counter, .counter-box i, a.menu-trigger,
-	#style-switcher h2, .resume-table strong
+	#style-switcher h2, .resume-table strong, .listing-badge, 
+	.listing-type, .listing-date, .category-small-box span,
+	.testimonial, .testimonial p
 	{ font-family: "Montserrat", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
 
@@ -247,7 +244,7 @@
 	select {
 		padding: 14px 18px;
 		outline: none;
-		font-size: 15px;
+		font-size: 14px;
 		color: #909090;
 		margin: 0;
 		max-width: 100%;
@@ -301,7 +298,7 @@
 	legend {
 		display: block;
 		font-weight: bold;
-		font-size: 16px; 
+		font-size: 14px; 
 		font-weight: normal;
 		margin-bottom: 8px;
 	}
@@ -319,7 +316,7 @@
 		-moz-transition: 0;
 		-o-transition: 0;
 		-ms-transition: 0;
-		transition: 0;
+		transition: 0; }
 
 	input[type="checkbox"] { display: inline; }
 
@@ -329,7 +326,3 @@
 		font-size: 14px;
 		color: #444;
 	}
-		
-
-
-

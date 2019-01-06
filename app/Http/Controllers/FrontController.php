@@ -10,6 +10,7 @@ use ITOportunidades\Candidate;
 use ITOportunidades\ApplicationStatus;
 use ITOportunidades\Organization;
 use ITOportunidades\CandidateApplication;
+use ITOportunidades\AddressZone;
 use Auth;
 use Illuminate\Http\Request;
 use Redirect;
@@ -53,6 +54,7 @@ class FrontController extends Controller {
         }
 
         $categorys = Category::all()->sortBy("full_name");
+        $addresszones = AddressZone::all();
 
         $pref_cats = array();
         $cats = array();
@@ -68,7 +70,7 @@ class FrontController extends Controller {
             }
         }
 
-        return view('website.candidates.resume.index', compact('categorys', 'cats', 'pref_cats'));
+        return view('website.candidates.resume.index', compact('categorys', 'cats', 'pref_cats','addresszones'));
     }
 
     public function addJob() {
@@ -79,12 +81,13 @@ class FrontController extends Controller {
 
         $job = new Job;
         $jobtypes = JobType::all();
+        $addresszones = AddressZone::all();
         $categorys = Category::all()->sortBy("full_name");
 
         $cats = array();
         $princ_cat = null;
 
-        return view('website.company.jobs.add', compact('job', 'jobtypes', 'categorys', 'cats', 'princ_cat'));
+        return view('website.company.jobs.add', compact('job', 'jobtypes', 'categorys', 'cats', 'princ_cat','addresszones'));
     }
 
     public function manageJobs() {
@@ -110,6 +113,7 @@ class FrontController extends Controller {
         }
 
         $jobtypes = JobType::all();
+        $addresszones = AddressZone::all();
         $categorys = Category::all()->sortBy("full_name");
 
         $cats = array();
@@ -124,12 +128,13 @@ class FrontController extends Controller {
             }
         }
 
-        return view('website.company.jobs.edit', compact('job', 'jobtypes', 'categorys', 'cats', 'princ_cat'));
+        return view('website.company.jobs.edit', compact('job', 'jobtypes', 'categorys', 'cats', 'princ_cat','addresszones'));
     }
 
     public function browseJobs(Request $request) {
 
         $jobtypes = JobType::all();
+        $addresszones = AddressZone::all();
 
         if ($request->has("sort")) {
             $seljobtypes = array($request->jobtype);
@@ -139,7 +144,7 @@ class FrontController extends Controller {
             $jobs = Job::activeJobs()->paginate(5);
         }
 
-        return view('website.candidates.jobs.browse.index', compact('jobs', 'jobtypes', 'seljobtypes'));
+        return view('website.candidates.jobs.browse.index', compact('jobs', 'jobtypes', 'seljobtypes','addresszones'));
     }
 
     public function applicationManage($id, Request $request) {

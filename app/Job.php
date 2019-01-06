@@ -11,7 +11,7 @@ Carbon::setLocale('es');
 class Job extends Model {
 
     protected $table = "jobs";
-    protected $fillable = ['company_id', 'title', 'location', 'job_type_id', 'tags', 'description', 'salary', 'start_date', 'end_date', 'fill_date'];
+    protected $fillable = ['company_id', 'title', 'location', 'job_type_id', 'tags', 'description', 'salary', 'start_date', 'end_date', 'fill_date','address_zone_id'];
 
     public function company() {
         return $this->belongsTo('ITOportunidades\Company');
@@ -27,6 +27,10 @@ class Job extends Model {
 
     public function applications() {
         return $this->hasMany('ITOportunidades\CandidateApplication');
+    }
+    
+    public function zone() {
+        return $this->belongsTo('ITOportunidades\AddressZone','address_zone_id');
     }
 
     public function setStartDateAttribute($valor) {
@@ -135,6 +139,7 @@ class Job extends Model {
 
         $q = $request->q;
         $loc = $request->loc;
+        $addresszone = $request->addresszone;
         $jobtype = array($request->jobtype);
 
         switch ($request->sort) {
@@ -172,6 +177,7 @@ class Job extends Model {
                     ->orWhereNull('end_date');
                 })
                 ->where('jobs.location', 'like', '%' . $loc . '%')
+                ->where('jobs.address_zone_id', '=', $addresszone)
                 ->select('jobs.*')
                 ->orderBy($sortB, $sortD);
 

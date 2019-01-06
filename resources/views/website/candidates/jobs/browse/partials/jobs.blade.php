@@ -12,6 +12,7 @@
 			<h4>{{$job->title}}</h4>
 			<div class="job-icons">
 				<span><i class="fa fa-briefcase"></i> {{$job->company->name}}</span>
+				<span><i class="fa fa-globe"></i> {{$job->zone->name}}</span>
                                 @if ($job->location)
 				<span><i class="fa fa-map-marker"></i> {{$job->location}}</span>
                                 @endif

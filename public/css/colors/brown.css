@@ -101,3 +101,7 @@ table.manage-table tr:hover td,
 .resumes-list li a:after,
 .job-list li.highlighted a:after,
 .job-list li a:after { background-color: #784e3d }
+
+.resumes-list.alternative li:before,
+.category-small-box:hover { background-color: #784e3d }
+.category-small-box i { color: #784e3d }

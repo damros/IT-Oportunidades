@@ -21,6 +21,7 @@ return [
     'Add_URL' => 'Agregar URL',
     'Additional_Categorys' => 'Categorías Adicionales',
     'Additional_Categorys_Placeholder' => 'Seleccione las Categorías Adicionales',
+    'AddressZone' => 'Zona',
     'Any_Type' => 'Cualquier Tipo',
     'Application_Already_Sent' => 'Ya te has postulado a este requerimiento',
     'Applications' => 'Postulaciones',

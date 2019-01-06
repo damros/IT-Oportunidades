@@ -40,6 +40,7 @@ Route::group(['prefix' => 'admin'], function () {
 		Route::resource('candidates','CandidateController');
                 Route::resource('companies','CompanyController');
                 Route::resource('organization','OrganizationController');
+                Route::resource('address-zones','AddressZoneController');
 	});		
 	
 });

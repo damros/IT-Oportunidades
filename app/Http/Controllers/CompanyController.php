@@ -8,25 +8,23 @@ use ITOportunidades\Company;
 use ITOportunidades\Factories\UserFactory;
 use Auth;
 
-class CompanyController extends Controller
-{	
+class CompanyController extends Controller {
+
     protected $userFactory;
 
-    public function __construct()
-    {
+    public function __construct() {
         $this->userFactory = new UserFactory();
     }
-	
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-          $companies = Company::all();
+    public function index() {
+        $companies = Company::all();
 
-        return view('admin.company.index',compact('companies'));  
+        return view('admin.company.index', compact('companies'));
     }
 
     /**
@@ -34,8 +32,7 @@ class CompanyController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
+    public function create() {
         //
     }
 
@@ -45,9 +42,8 @@ class CompanyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-		//
+    public function store(Request $request) {
+        //
     }
 
     /**
@@ -56,8 +52,7 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         //
     }
 
@@ -67,10 +62,9 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         $company = Company::find($id);
-        return view('admin.company.detail',['company'=>$company]);
+        return view('admin.company.detail', ['company' => $company]);
     }
 
     /**
@@ -80,21 +74,20 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
-    {
-		$id = $request->id;
-		
-		if ( ! ( $company = Company::find( $id ) ) ) {
-			return response()->json(array(	"status" =>	"error",
-											"message"=> trans("messages.save_error") ) );			
-		}
-		
-		$company->fill($request->all());
-		
-		$company->save();
-		
-		return response()->json(array(	"status"=>	"success",
-										"message"=> trans("messages.save_success") ) );			
+    public function update(Request $request) {
+        $id = $request->id;
+
+        if (!( $company = Company::find($id) )) {
+            return response()->json(array("status" => "error",
+                        "message" => trans("messages.save_error")));
+        }
+
+        $company->fill($request->all());
+
+        $company->save();
+
+        return response()->json(array("status" => "success",
+                    "message" => trans("messages.save_success")));
     }
 
     /**
@@ -103,75 +96,71 @@ class CompanyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
-	
-	public function addJob( Request $request ) {
-		
-		$this->validate($request, [
-			'title' => 'required|max:255',
-			'start_date' => 'required',
-                        'principal_category' => 'select_without_repeat:' . implode(',',($request->category?: array()))
-		]);
-               
-		
-		if ( ! Auth::check() ) {
-			
-			$this->validate($request, [
-				'name' => 'required|max:255',
-				'email' => 'required|email|unique:users'
-			]);
-			
-			$user = $this->userFactory->createUser($request, 'co');	
-			
-			$company = new Company;						
-			$company->fill($request->all());
-			$company->user_id = $user->id;
-			$company->save();
-	
-			
-		} else {
-					
-			if ( ! ( $company = Company::find( ( currentUser()->company ? currentUser()->company->id : 0 ) ) ) ) {
-				return response()->json(array(	"status" =>	"error",
-												"message"=> trans("messages.save_error") ) );			
-			}
-			
-		}		
-		
-		$job = New Job;
-		
-		$job->company_id = $company->id;
-		$job->fill($request->all());
-		$job->save();
-		
-		$job->save_categories( $request );
-		$job->save_principal_category( $request );
-		
-		return response()->json(array(	"status"=>	"success",
-										"message"=> trans("messages.save_success") ) );
-		
-	}
-	
-	public function editJob( Request $request ) {
-		
-		$this->validate($request, [
-                    'title' => 'required|max:255',
-                    'start_date' => 'required',
-                    'principal_category' => 'select_without_repeat:' . implode(',',($request->category?: array()))
-		]);		
-		//
-		$job = Job::find($request->id);
-		
-		$job->fill($request->all());
-		$job->save();
-		
-		$job->save_categories( $request );
-		$job->save_principal_category( $request );		
-		
-		return response()->json(array(	"status"=>	"success",
-										"message"=> trans("messages.save_success") ) );		
-	}
+
+    public function addJob(Request $request) {
+
+        $this->validate($request, [
+            'title' => 'required|max:255',
+            'start_date' => 'required',
+            'principal_category' => 'select_without_repeat:' . implode(',', ($request->category ?: array()))
+        ]);
+
+
+        if (!Auth::check()) {
+
+            $this->validate($request, [
+                'name' => 'required|max:255',
+                'email' => 'required|email|unique:users'
+            ]);
+
+            $user = $this->userFactory->createUser($request, 'co');
+
+            $company = new Company;
+            $company->fill($request->all());
+            $company->user_id = $user->id;
+            $company->save();
+        } else {
+
+            if (!( $company = Company::find(( currentUser()->company ? currentUser()->company->id : 0)) )) {
+                return response()->json(array("status" => "error",
+                            "message" => trans("messages.save_error")));
+            }
+        }
+
+        $job = New Job;
+
+        $job->company_id = $company->id;
+        $job->fill($request->all());
+        $job->save();
+
+        $job->save_categories($request);
+        $job->save_principal_category($request);
+
+        return response()->json(array("status" => "success",
+                    "message" => trans("messages.save_success")));
+    }
+
+    public function editJob(Request $request) {
+
+        $this->validate($request, [
+            'title' => 'required|max:255',
+            'start_date' => 'required',
+            'principal_category' => 'select_without_repeat:' . implode(',', ($request->category ?: array()))
+        ]);
+        //
+        $job = Job::find($request->id);
+
+        $job->fill($request->all());
+        $job->save();
+
+        $job->save_categories($request);
+        $job->save_principal_category($request);
+
+        return response()->json(array("status" => "success",
+                    "message" => trans("messages.save_success")));
+    }
+
 }

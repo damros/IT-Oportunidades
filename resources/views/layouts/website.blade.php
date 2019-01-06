@@ -223,6 +223,7 @@
         {!!Html::script('scripts/pikaday.jquery.js')!!}
         {!!Html::script('scripts/jquery.sceditor.js')!!}
         {!!Html::script('scripts/jquery.sceditor.xhtml.min.js')!!}
+        {!!Html::script('scripts/slick.min.js')!!}
 
         {!!Html::script('scripts/itoportunidades.js')!!}
         

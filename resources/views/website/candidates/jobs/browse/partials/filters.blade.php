@@ -24,7 +24,17 @@
 
 	</div>
 
-	<!-- Location -->
+	<!-- Address Zone -->
+	<div class="widget">
+		<h4>{{trans('labels.AddressZone')}}</h4>
+                <select name="addresszone" class="chosen-select-no-single">							
+                    @foreach ($addresszones as $addresszone)
+                    <option value="{{$addresszone->id}}" <?php echo ((app('request')->input('addresszone') == $addresszone->id) ? " selected='selected'" : "") ?> >{{$addresszone->name}}</option>
+                    @endforeach							
+                </select>
+	</div>
+
+        <!-- Location -->
 	<div class="widget">
 		<h4>{{trans('labels.Location')}}</h4>
 		<input type="text" name="loc" placeholder="{{trans('labels.Location_Search_Placeholder')}}" value="{{ app('request')->input('loc') }}"/>
