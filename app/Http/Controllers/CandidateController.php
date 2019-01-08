@@ -97,6 +97,7 @@ class CandidateController extends Controller {
     public function resume(Request $request) {
         $this->validate($request, [
             'name' => 'required|max:255',
+            'address_zone_id' => 'required',            
             'preferred_category' => 'select_without_repeat:' . implode(',', ($request->category?: array()))
         ]);
 

@@ -3,41 +3,41 @@
 <title>Agregar Requerimiento - IT Oportunidades</title>
 @endsection
 @section('content')
-	
+
 
 <!-- Titlebar
 ================================================== -->
 <div id="titlebar" class="single submit-page">
-	<div class="container">
+    <div class="container">
 
-		<div class="sixteen columns">
-			<h2><i class="fa fa-plus-circle"></i> {{trans('labels.Add_Job')}}</h2>
-		</div>
+        <div class="sixteen columns">
+            <h2><i class="fa fa-plus-circle"></i> {{trans('labels.Add_Job')}}</h2>
+        </div>
 
-	</div>
+    </div>
 </div>
 
 
 <!-- Content
 ================================================== -->
 <div class="container">
-	
-	<!-- Submit Page -->
-	<div class="sixteen columns">
-		
-		<div class="submit-page form-company-job">
-			
-			{!!Form::open(['route'=>'jobs/add', 'method'=>'POST', 'class'=>'tooltips','files'=>'true'])!!}			
 
-				@include('website.company.jobs.forms.job')
-			
-			{!!Form::close()!!}
-			
-		</div>
+    <!-- Submit Page -->
+    <div class="sixteen columns">
 
-		<div class="notification closeable success" id="form-messages" style="display: none;"></div>
-		
-	</div>
+        <div class="submit-page form-company-job">
+
+            {!!Form::open(['route'=>'jobs/add', 'method'=>'POST', 'class'=>'tooltips','files'=>'true'])!!}			
+
+            @include('website.company.jobs.forms.job')
+
+            {!!Form::close()!!}
+
+        </div>
+
+        <div class="notification closeable success" id="form-messages" style="display: none;"></div>
+
+    </div>
 
 </div>
 

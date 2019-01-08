@@ -175,8 +175,12 @@ class Job extends Model {
                     $query->where('end_date', '>', Carbon::now())
                     ->orWhereNull('end_date');
                 })
+                ->where(function ($query) use ($addresszone) {
+                    if ($addresszone) {
+                        $query->where('jobs.address_zone_id', $addresszone);
+                    }
+                })
                 ->where('jobs.location', 'like', '%' . $loc . '%')
-                ->where('jobs.address_zone_id', '=', $addresszone)
                 ->select('jobs.*')
                 ->orderBy($sortB, $sortD);
 

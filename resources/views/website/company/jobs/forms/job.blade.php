@@ -1,3 +1,5 @@
+<input type="hidden" name="_token" value="{{ csrf_token() }}" id="token" />	
+
 @if ( ! Auth::check() )
 <!-- Notice -->
 <div class="notification notice closeable margin-bottom-40">
@@ -20,7 +22,8 @@
 <!-- Address Zone -->
 <div class="form">
     <h5>{{ trans('labels.AddressZone') }}</h5>
-    <select name="address_zone_id" class="chosen-select-no-single">							
+    <select name="address_zone_id" class="chosen-select-no-single">
+        <option value="">{{trans('labels.Address_Zone_Placeholder')}}</option>
         @foreach ($addresszones as $addresszone)
         <option value="{{$addresszone->id}}" <?php echo (($job->address_zone_id == $addresszone->id) ? " selected='selected'" : "") ?> >{{$addresszone->name}}</option>
         @endforeach							
@@ -170,9 +173,7 @@
     <textarea class="WYSIWYG" name="profile_detail" cols="40" rows="3" id="summary" spellcheck="true"></textarea>
 </div>			
 
-@endif
-
-<input type="hidden" value="{{ csrf_token() }}" id="token" />			
+@endif		
 
 <div class="divider margin-top-0"></div>
 

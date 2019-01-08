@@ -95,7 +95,8 @@
             <!-- Address Zone -->
             <div class="form">
                 <h5>{{ trans('labels.AddressZone') }}</h5>
-                <select name="address_zone_id" class="chosen-select-no-single">							
+                <select name="address_zone_id" class="chosen-select-no-single">
+                    <option value="">{{trans('labels.Address_Zone_Placeholder')}}</option>
                     @foreach ($addresszones as $addresszone)
                     <option value="{{$addresszone->id}}" <?php echo (((currentUser() ? currentUser()->candidate->address_zone_id : null) == $addresszone->id) ? " selected='selected'" : "") ?> >{{$addresszone->name}}</option>
                     @endforeach							

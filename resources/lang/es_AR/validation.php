@@ -142,6 +142,8 @@ return [
         'candidate_name'        => 'nombre',
         'candidate_email'       => 'email',
         'start_date'            => 'fecha de inicio',
+        'address_zone_id'       => 'zona',
+        'principal_category'       => 'categoría principal',
     ],
 
 ];

@@ -27,7 +27,8 @@
 	<!-- Address Zone -->
 	<div class="widget">
 		<h4>{{trans('labels.AddressZone')}}</h4>
-                <select name="addresszone" class="chosen-select-no-single">							
+                <select name="addresszone" class="chosen-select-no-single">
+                    <option value="">{{trans('labels.Address_Zone_Filter_Placeholder')}}</option>
                     @foreach ($addresszones as $addresszone)
                     <option value="{{$addresszone->id}}" <?php echo ((app('request')->input('addresszone') == $addresszone->id) ? " selected='selected'" : "") ?> >{{$addresszone->name}}</option>
                     @endforeach							

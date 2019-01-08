@@ -104,8 +104,9 @@ class CompanyController extends Controller {
 
         $this->validate($request, [
             'title' => 'required|max:255',
+            'address_zone_id' => 'required',
             'start_date' => 'required',
-            'principal_category' => 'select_without_repeat:' . implode(',', ($request->category ?: array()))
+            'principal_category' => 'required|select_without_repeat:' . implode(',', ($request->category ?: array()))
         ]);
 
 

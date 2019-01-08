@@ -9,10 +9,10 @@ return [
     |
     */
 
-	'About' => 'Acerca De',
-	'About_Us' => 'Acerca De Nosotros',
-	'Actions' => 'Acciones',
-	'add' => 'agregar',
+    'About' => 'Acerca De',
+    'About_Us' => 'Acerca De Nosotros',
+    'Actions' => 'Acciones',
+    'add' => 'agregar',
     'Add' => 'Agregar',
     'Add_Education' => 'Agregar Educación',
     'Add_Experience' => 'Agregar Experiencia',
@@ -22,6 +22,8 @@ return [
     'Additional_Categorys' => 'Categorías Adicionales',
     'Additional_Categorys_Placeholder' => 'Seleccione las Categorías Adicionales',
     'AddressZone' => 'Zona',
+    'Address_Zone_Placeholder' => 'Seleccione la Zona',
+    'Address_Zone_Filter_Placeholder' => 'Todas las Zonas',
     'Any_Type' => 'Cualquier Tipo',
     'Application_Already_Sent' => 'Ya te has postulado a este requerimiento',
     'Applications' => 'Postulaciones',
