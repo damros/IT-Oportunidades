@@ -61,12 +61,13 @@
 
                 <ul>
                     <li>
-                        <i class="fa fa-map-marker"></i>
+                        <i class="fa fa-globe"></i>
                         <div>
                             <strong>{{trans('labels.AddressZone')}}:</strong>
                             <span>{{$job->zone->name}}</span>
                         </div>
                     </li>
+                    @if ($job->location)
                     <li>
                         <i class="fa fa-map-marker"></i>
                         <div>
@@ -74,6 +75,7 @@
                             <span>{{$job->location}}</span>
                         </div>
                     </li>
+                    @endif
                     @if ($job->salary)
                     <li>
                         <i class="fa fa-money"></i>
@@ -84,7 +86,7 @@
                     </li>
                     @endif
                     <li>
-                        <i class="fa fa-calendar"></i>
+                        <i class="fa fa-calendar-o"></i>
                         <div>
                             <strong>{{trans('labels.Start_Date')}}:</strong>
                             <span>{{$job->start_date}}</span>
