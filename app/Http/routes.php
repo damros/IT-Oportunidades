@@ -120,4 +120,9 @@ Route::post('password','Auth\WebsitePasswordController@postEmail');
 Route::get('password/reset/{token}','Auth\WebsitePasswordController@getReset');
 Route::post('password/reset','Auth\WebsitePasswordController@postReset');
 
+Route::get("sitemap.xml", array(
+    "as"   => "sitemap",
+    "uses" => "FrontController@sitemap", // or any other controller you want to use
+));
+
 /**** END WEBSITE ****/

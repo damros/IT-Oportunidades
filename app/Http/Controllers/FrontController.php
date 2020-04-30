@@ -14,6 +14,7 @@ use ITOportunidades\AddressZone;
 use Auth;
 use Illuminate\Http\Request;
 use Redirect;
+use Carbon\Carbon;
 
 class FrontController extends Controller {
 
@@ -267,6 +268,26 @@ class FrontController extends Controller {
     public function getChange() {
 
         return view('website.auth.change');
+    }
+    
+    public function sitemap()
+    {
+        $jobs = Job::whereNull('fill_date')
+                ->where(function ($query) {
+                    $query->where('end_date', '>', Carbon::now())
+                    ->orWhereNull('end_date');
+                })
+            ->select(["id", "updated_at"]) 
+            // you may want to add where clauses here according to your needs
+            ->orderBy("id", "desc")
+            ->take(50000) // each Sitemap file must have no more than 50,000 URLs and must be no larger than 10MB
+            ->get();
+
+                
+        return response()
+            ->view('website.sitemap', ['jobs' => $jobs])
+            ->header('Content-Type', 'text/xml;charset=utf-8');
+
     }
 
 }
